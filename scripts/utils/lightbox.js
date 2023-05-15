@@ -2,7 +2,7 @@
 
 const Body = document.querySelector("#main-photographer");
 const lightboxBG = document.querySelector(".lightbox-Bg");
-const lightboxopen = lightboxBG.getElementsByClassName("visible") ;
+const lightboxopen = lightboxBG.getElementsByClassName("visible");
 const lightbox = document.querySelector(".lightbox")//;
 const lightboxMediaContainer = document.querySelector(".lightbox_media-Container");
 const lightboxMediaSlider = document.querySelector(".lightbox_media-slider");
@@ -12,82 +12,17 @@ const lightboxArrowRight = document.querySelector(".prev-Btn");
 const mediaArray = Array.from(document.querySelectorAll(".lightbox_media-card"));
 
 
-///////////////////////Event listener///////////////////////////
-
-// Écouteur d'événement pour fermer la lightbox
-lightbox_Close_btn.addEventListener("click", closeLightBox)
-
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" || e.key === 27) {
-      if (lightboxopen) {
-        closeLightBox();
-      }
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if (e.target == lightboxBG && e.target !== lightbox) {
-        closeLightBox();
-    }
-  });
-
-// Écouteurs d'événements pour les flèches gauche et droite
-lightboxArrowLeft.addEventListener("click", () => {
-    switchToPreviousMedia();
-});
-
-lightboxArrowRight.addEventListener("click", () => {
-    switchToNextMedia();
-});
 
 
 let currentIndex = 0; // Cet index pointera vers l'élément média actuellement affiché
 
 function switchToNextMedia() {
-    // Incrémente l'index courant et boucle s'il dépasse la fin du tableau
-    currentIndex = (currentIndex + 1) % mediaArray.length;
-    // Obtient le nouveau média
-    const newMedia = mediaArray[currentIndex];
-    // Met à jour l'affichage du média
-    lightboxMediaSlider.innerHTML = newMedia.outerHTML;
+    console.log("next");
 
-    if (currentIndex === mediaArray.length - 1) {
-        lightboxArrowRight.classList.add("hidden");
-    } else {
-        lightboxArrowRight.classList.remove("hidden");
-    }
-
-    if (currentIndex === 0) {
-        lightboxArrowLeft.classList.add("hidden");
-    } else {
-        lightboxArrowLeft.classList.remove("hidden");
-    }
 }
 
 function switchToPreviousMedia() {
-    // Décrémente l'index courant et boucle s'il dépasse le début du tableau
-    if (currentIndex > 0) {
-        currentIndex--;
-    } else {
-        currentIndex = mediaArray.length - 1;
-    }
-
-    // Obtient le nouveau média
-    const newMedia = mediaArray[currentIndex];
-    // Met à jour l'affichage du média
-    lightboxMediaSlider.innerHTML = newMedia.outerHTML;
-
-    if (currentIndex === 0) {
-        lightboxArrowLeft.classList.add("hidden");
-    } else {
-        lightboxArrowLeft.classList.remove("hidden");
-    }
-
-    if (currentIndex === mediaArray.length - 1) {
-        lightboxArrowRight.classList.add("hidden");
-    } else {
-        lightboxArrowRight.classList.remove("hidden");
-    }
+    console.log("previous");
 }
 
 
@@ -99,8 +34,44 @@ function openLightBox() {
     lightboxBG.classList.remove("hidden"); // Affiche la lightbox
     lightboxBG.classList.add("visible");
     lightboxBG.setAttribute("aria-hidden", "false");
-    
-}
+
+
+    ///////////////////////Event listener///////////////////////////
+
+    // Écouteur d'événement pour fermer la lightbox
+    lightbox_Close_btn.addEventListener("click", closeLightBox)
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" || e.key === 27) {
+                closeLightBox();
+        }
+    });
+            
+
+    document.addEventListener("click", (e) => {
+        if (e.target == lightboxBG && e.target !== lightbox) {
+            closeLightBox();
+        }
+    });
+
+    // Écouteurs d'événements pour les flèches gauche et droite
+    lightboxArrowLeft.addEventListener("click", () => {
+        switchToPreviousMedia();
+    });
+
+    lightboxArrowRight.addEventListener("click", () => {
+        switchToNextMedia();
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" || e.key === 37) {
+            switchToPreviousMedia();
+        }
+        if (e.key === "ArrowRight" || e.key === 39) {
+            switchToNextMedia();
+        }
+    });
+    }
 
 //Fonction clos lightbox
 function closeLightBox() {

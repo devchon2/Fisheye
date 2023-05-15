@@ -86,7 +86,7 @@ function displayData(photograph, medias) {
       const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
       MediasContainer.appendChild(mediamodelDOM);
       const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
-      console.log(lightboxMediaContainer);
+     // console.log(lightboxMediaContainer);
       lightboxMediaSlider.appendChild(mediaLightdom);
       mediamodelDOM.onclick = () => {
         openLightBox();
