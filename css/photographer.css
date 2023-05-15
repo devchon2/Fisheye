@@ -108,48 +108,45 @@
 }
 
 .filterField_select {
-  line-height:1;
-  display: flex;
-  flex-direction: column;
-  justify-items:start;
-  align-items: center;
-  position:relative;
-  background-color: #901C1C;
-  color:white;
-  width:100px;
-  font-size:1.1rem
-}
-
-.filterField_select-list{
-  display:flex;
-  flex-direction:column;
-  list-style:none;
   position: relative;
-  top: 0;
-  left: 0;
-  margin: 0 10px;
-  width:100px;
-  height:0;
-  font-size:1.1rem;
-}
-
-.filterField_select-label{
-  
-  
-  padding:10px 20px;
-  background-color: #901C1C;
-  cursor:pointer;
+  cursor: pointer;
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color:#901c1c;
+  color:white;
+  border:1px solid white;
+  margin:0 20px;
   width:100px;
 }
 
-.filterField_select-list-item{
-  display:flex;
-  justify-content:center;
-  padding:10px 20px;
-  background-color: #901C1C;
-  height:220px;
-  width:100px;
+.filterField_select-list {
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  top:0;
+  left:0;
+  list-style-type: none;
+  background-color: #fff;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.filterField_select-list-item {
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color:#901c1c;
+  color:white;
+  border:1px solid white;
+  width:100px;
+}
+
+.filterField_select-list-item:hover {
+  background-color: #f2f2f2;
+
 }
 
 .MediasContainer {

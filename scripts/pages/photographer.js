@@ -36,9 +36,9 @@ let Usermedias = fullmedias.filter((media) => media.photographerId == id);
 const photographerModel = photographerFactory(photographer);
 const photographerPageDOM = photographerModel.getUserPageDOM();
 const Resume = document.querySelector(".resumeContainer");
-const filterBtn = document.querySelector(".filterField_select");
-const filters = document.querySelectorAll(".filterField_select-list.hidden");
-const _filters = Array.from(filters);
+
+const filters = document.querySelectorAll(".filterField_select-list");
+
 const selectLabel = document.getElementById("filterField_select-label");
 const popularity = document.getElementById("pop");
 
@@ -46,14 +46,7 @@ const date = document.getElementById("date");
 
 const titre = document.getElementById("titre");
 
-filterBtn.addEventListener("click", () => {
-  filterBtn.setAttribute("aria-expanded", "true");
 
-  filters.forEach((filter) => {
-    filter.classList.remove("hidden");
-    filter.classList.add("visible");
-  });
-});
 
 // Affichage des éléments de la page
 function displayData(photograph, medias) {
@@ -77,12 +70,40 @@ function displayData(photograph, medias) {
   TotalLikes.classList.add("TotalLikes");
   TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
 
-  // Affichage des filtres
-  filterBtn.addEventListener("click", () => {
-    for (let filter in _filters) {
-      filter.classList.remove("hidden");
+  const selectButton = document.querySelector('.filterField_select');
+  const selectList = document.querySelector('.filterField_select-list');
+  const selectItems = Array.from(document.querySelectorAll('.filterField_select-list-item'));
 
-      selectLabel.classList.add("hidden");
+// Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
+  selectButton.addEventListener('click', function () {
+     selectButton.setAttribute('aria-expanded', 'true');
+    selectList.classList.remove('hidden');
+  });
+
+
+  
+
+  // Ajoutez un écouteur d'événement à chaque élément de la liste déroulante
+  selectItems.forEach((item) =>{
+    item.addEventListener('click', function (){
+      
+      const selectedOption = item.textContent;
+      selectLabel.textContent = selectedOption;
+      selectList.classList.add('hidden');
+      
+      selectButton.setAttribute('aria-expanded', 'false');
+      
+      
+      // Effectuez l'action souhaitée en fonction de l'option sélectionnée
+    });
+});
+
+  // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
+  document.addEventListener('click', function (event) {
+    const isClickInside = selectButton.contains(event.target);
+    if (!isClickInside) {
+      selectButton.setAttribute('aria-expanded', 'false');
+      selectList.classList.add('hidden');
     }
   });
 
@@ -116,6 +137,7 @@ function init() {
   // Fonction pour afficher les données du photographe dans la page
   if (popularity.querySelector(":active")) {
     Usermedias = sortbyPops(Usermedias);
+    
   } else if (date.querySelector(":active")) {
     Usermedias = sortbyDate(Usermedias);
   } else {
