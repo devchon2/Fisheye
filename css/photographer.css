@@ -129,6 +129,8 @@
   left: 0;
   margin: 0 10px;
   width:100px;
+  height:0;
+  font-size:1.1rem;
 }
 
 .filterField_select-label{
@@ -141,9 +143,12 @@
 }
 
 .filterField_select-list-item{
-  display:none;
+  display:flex;
+  justify-content:center;
   padding:10px 20px;
   background-color: #901C1C;
+  height:220px;
+  width:100px;
   
 }
 
