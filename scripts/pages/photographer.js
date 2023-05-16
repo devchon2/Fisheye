@@ -46,6 +46,30 @@ const date = document.getElementById("date");
 
 const titre = document.getElementById("titre");
 
+//Fonction de tri globale
+function sortMedia(sortBy) {
+  //Vider le DOM
+  MediasContainer.innerHTML = "";
+  //Trier les médias
+  switch (sortBy) {
+    case "pop":
+      Usermedias = sortbyPops(Usermedias);
+      break;
+    case "date":
+      Usermedias = sortbyDate(Usermedias);
+      break;
+    case "titre":
+      Usermedias = sortbyTitle(Usermedias);
+      break;
+  }
+  //Afficher les médias triés
+  Usermedias.forEach((media) => {
+    const mediaModel = MediaFactory(media);
+    const mediaDOM = mediaModel.get_Media_DOM();
+    MediasContainer.appendChild(mediaDOM);
+  });
+}
+
 
 
 // Affichage des éléments de la page
@@ -85,18 +109,15 @@ function displayData(photograph, medias) {
 
   // Ajoutez un écouteur d'événement à chaque élément de la liste déroulante
   selectItems.forEach((item) =>{
-    item.addEventListener('click', function (){
-      
+    item.addEventListener('click', function (event){
+      event.stopPropagation();
       const selectedOption = item.textContent;
       selectLabel.textContent = selectedOption;
+      console.log(selectList)
       selectList.classList.add('hidden');
-      
       selectButton.setAttribute('aria-expanded', 'false');
-      
-      
-      // Effectuez l'action souhaitée en fonction de l'option sélectionnée
     });
-});
+  });
 
   // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
   document.addEventListener('click', function (event) {
@@ -134,15 +155,8 @@ function displayData(photograph, medias) {
 }
 
 function init() {
-  // Fonction pour afficher les données du photographe dans la page
-  if (popularity.querySelector(":active")) {
-    Usermedias = sortbyPops(Usermedias);
-    
-  } else if (date.querySelector(":active")) {
-    Usermedias = sortbyDate(Usermedias);
-  } else {
-    Usermedias = sortbyTitle(Usermedias);
-  }
+  
+ 
   displayData(photographer, Usermedias);
 }
 
