@@ -1,8 +1,12 @@
 // Importer la fonction photographerFactory() du fichier photographerFactory.js
-import { photographerFactory } from "./../factories/photographerFactory.js";
+import {
+  photographerFactory
+} from "./../factories/photographerFactory.js";
 
 // Importer la fonction MediaFactory() du fichier mediaFactory.js
-import { MediaFactory } from "./../factories/mediaFactory.js";
+import {
+  MediaFactory
+} from "./../factories/mediaFactory.js";
 
 // Importer les fonctions utilitaires du fichier utils.js
 import {
@@ -11,13 +15,13 @@ import {
   photographer,
   get_ID_from_url,
   get_name_by_id,
-  sortbyPops,
-  sortbyDate,
-  sortbyTitle,
+  sortMedia,
 } from "../utils/utils.js";
 
 // Importer la fonction displayModal depuis le fichier "utils.js
-import { displayModal } from "./../utils/contactForm.js";
+import {
+  displayModal
+} from "./../utils/contactForm.js";
 
 //Import lightbox.js
 import {
@@ -36,130 +40,116 @@ let Usermedias = fullmedias.filter((media) => media.photographerId == id);
 const photographerModel = photographerFactory(photographer);
 const photographerPageDOM = photographerModel.getUserPageDOM();
 const Resume = document.querySelector(".resumeContainer");
-
+const selectButton = document.querySelector('.filterField_select');
+const selectList = document.querySelector('.filterField_select-list');
+const selectItems = Array.from(document.querySelectorAll('.filterField_select-list-item'));
 const filters = document.querySelectorAll(".filterField_select-list");
-
+// Création du corps pour les médias
+const MediasContainer = document.createElement("section");
+MediasContainer.classList.add("MediasContainer");
 const selectLabel = document.getElementById("filterField_select-label");
 const popularity = document.getElementById("pop");
-
+const nameShortened = get_name_by_id().split(" ")[0];
 const date = document.getElementById("date");
-
+// Récupération des éléments du DOM
+const Pheader = document.querySelector(".photograph-header");
+const Pbody = document.querySelector(".photograph-body");
 const titre = document.getElementById("titre");
 
-//Fonction de tri globale
-function sortMedia(sortBy) {
-  //Vider le DOM
-  MediasContainer.innerHTML = "";
-  //Trier les médias
-  switch (sortBy) {
-    case "pop":
-      Usermedias = sortbyPops(Usermedias);
-      break;
-    case "date":
-      Usermedias = sortbyDate(Usermedias);
-      break;
-    case "titre":
-      Usermedias = sortbyTitle(Usermedias);
-      break;
-  }
-  //Afficher les médias triés
-  Usermedias.forEach((media) => {
-    const mediaModel = MediaFactory(media);
-    const mediaDOM = mediaModel.get_Media_DOM();
-    MediasContainer.appendChild(mediaDOM);
-  });
-}
+// Récupération des données
 
+
+const TotalLikes = document.createElement("div");
+TotalLikes.classList.add("TotalLikes");
+
+Pbody.appendChild(MediasContainer);
+Resume.appendChild(TotalLikes);
 
 
 // Affichage des éléments de la page
-function displayData(photograph, medias) {
-  const nameShortened = get_name_by_id().split(" ")[0];
-  // Récupération des éléments du DOM
-  const Pheader = document.querySelector(".photograph-header");
-  const Pbody = document.querySelector(".photograph-body");
-  const carrouselDOM = document.createElement("div");
-  carrouselDOM.classList.add("MediasContainer");
-
-  // Création du corps pour les médias
-  const MediasContainer = document.createElement("section");
-  MediasContainer.classList.add("MediasContainer");
-  Pbody.appendChild(MediasContainer);
-
-  // Récupération des données
+function displayData(photograph, medias=Usermedias) {
   const rawMedias = MediaFactory(medias);
   const mediaModels = rawMedias.mediaElements;
   const Totalizer = rawMedias.TotalizeLikes;
-  const TotalLikes = document.createElement("div");
-  TotalLikes.classList.add("TotalLikes");
-  TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
+   TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
+   
+   ////////////////////Gestion Du Bouton de tri////////////////////////
+  //écouteur d'événement à chaque élément de la liste déroulante
+  selectItems.forEach((item) => {
+      item.addEventListener('click', function(event) {
+          event.stopPropagation();
+          const selectedOption = item.textContent;
+          selectLabel.textContent = selectedOption;
+          selectList.classList.add('hidden');
+          selectButton.setAttribute('aria-expanded', 'false');
 
-  const selectButton = document.querySelector('.filterField_select');
-  const selectList = document.querySelector('.filterField_select-list');
-  const selectItems = Array.from(document.querySelectorAll('.filterField_select-list-item'));
-
-// Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
-  selectButton.addEventListener('click', function () {
-     selectButton.setAttribute('aria-expanded', 'true');
-    selectList.classList.remove('hidden');
+          // Tri des médias en fonction de l'option sélectionnée
+          
+          MediasContainer.innerHTML = "";
+          
+          const sortedMedias = sortMedia(selectedOption);
+          
+            
+          
+          console.log(selectedOption,sortedMedias);
+          displayData(photograph, Usermedias);
+      });
   });
 
 
-  
+ 
 
-  // Ajoutez un écouteur d'événement à chaque élément de la liste déroulante
-  selectItems.forEach((item) =>{
-    item.addEventListener('click', function (event){
-      event.stopPropagation();
-      const selectedOption = item.textContent;
-      selectLabel.textContent = selectedOption;
-      console.log(selectList)
-      selectList.classList.add('hidden');
-      selectButton.setAttribute('aria-expanded', 'false');
-    });
+  // Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
+  selectButton.addEventListener('click', function() {
+      selectButton.setAttribute('aria-expanded', 'true');
+      selectList.classList.remove('hidden');
   });
+
+ 
 
   // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
-  document.addEventListener('click', function (event) {
-    const isClickInside = selectButton.contains(event.target);
-    if (!isClickInside) {
-      selectButton.setAttribute('aria-expanded', 'false');
-      selectList.classList.add('hidden');
-    }
+  document.addEventListener('click', function(event) {
+      const isClickInside = selectButton.contains(event.target);
+      if (!isClickInside) {
+          selectButton.setAttribute('aria-expanded', 'false');
+          selectList.classList.add('hidden');
+      }
   });
 
   // Affichage des médias
   if (medias) {
-    for (let i = 0; i < mediaModels.length; i++) {
-      const mediaModel = mediaModels[i];
-      const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
-      MediasContainer.appendChild(mediamodelDOM);
-      const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
-      // console.log(lightboxMediaContainer);
-      lightboxMediaSlider.appendChild(mediaLightdom);
-      mediamodelDOM.onclick = () => {
-        openLightBox();
-        mediaLightdom.classList.add("currentMedia");
-      };
-      lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
-    }
+      for (let i = 0; i < mediaModels.length; i++) {
+          const mediaModel = mediaModels[i];
+          const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
+          MediasContainer.appendChild(mediamodelDOM);
+          const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
+          // console.log(lightboxMediaContainer);
+          lightboxMediaSlider.appendChild(mediaLightdom);
+          mediamodelDOM.onclick = () => {
+              openLightBox();
+              mediaLightdom.classList.add("currentMedia");
+          };
+          lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
+      }
   }
   if (photograph) {
-    Pheader.appendChild(photographerPageDOM); // Affiche les données du photographe dans la page
-    const contactbtn = document.querySelector(
-      ".photographContainer .contact_button"
-    );
-    contactbtn.addEventListener("click", displayModal); // Affiche le formulaire de contact
-    Resume.appendChild(TotalLikes);
+      Pheader.appendChild(photographerPageDOM); // Affiche les données du photographe dans la page
+      const contactbtn = document.querySelector(
+          ".photographContainer .contact_button"
+      );
+      contactbtn.addEventListener("click", displayModal); // Affiche le formulaire de contact
+      Resume.appendChild(TotalLikes);
   }
 }
 
 function init() {
-  
- 
+
   displayData(photographer, Usermedias);
 }
 
 init();
 
-export { get_ID_from_url };
+export {
+  get_ID_from_url,
+  MediasContainer,Usermedias,displayData
+};

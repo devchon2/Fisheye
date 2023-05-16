@@ -1,18 +1,13 @@
-
-
 const Body = document.querySelector("#main-photographer");
 const lightboxBG = document.querySelector(".lightbox-Bg");
 const lightboxopen = lightboxBG.getElementsByClassName("visible");
-const lightbox = document.querySelector(".lightbox")//;
+const lightbox = document.querySelector(".lightbox") //;
 const lightboxMediaContainer = document.querySelector(".lightbox_media-Container");
 const lightboxMediaSlider = document.querySelector(".lightbox_media-slider");
 const lightbox_Close_btn = document.querySelector(".lightbox_Close-btn");
 const lightboxArrowLeft = document.querySelector(".next-Btn");
 const lightboxArrowRight = document.querySelector(".prev-Btn");
 const mediaArray = Array.from(document.querySelectorAll(".lightbox_media-card"));
-
-
-
 
 let currentIndex = 0; // Cet index pointera vers l'élément média actuellement affiché
 
@@ -25,16 +20,12 @@ function switchToPreviousMedia() {
     console.log("previous");
 }
 
-
-
-
 // Fonction pour ouvrir la lightbox
 function openLightBox() {
     Body.setAttribute("aria-hidden", "true"); // Cache le body
     lightboxBG.classList.remove("hidden"); // Affiche la lightbox
     lightboxBG.classList.add("visible");
     lightboxBG.setAttribute("aria-hidden", "false");
-
 
     ///////////////////////Event listener///////////////////////////
 
@@ -43,10 +34,9 @@ function openLightBox() {
 
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" || e.key === 27) {
-                closeLightBox();
+            closeLightBox();
         }
     });
-            
 
     document.addEventListener("click", (e) => {
         if (e.target == lightboxBG && e.target !== lightbox) {
@@ -71,7 +61,7 @@ function openLightBox() {
             switchToNextMedia();
         }
     });
-    }
+}
 
 //Fonction clos lightbox
 function closeLightBox() {

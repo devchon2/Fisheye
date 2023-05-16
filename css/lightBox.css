@@ -34,7 +34,7 @@
   width: 30px;
 }
 
-.lightbox_Close-btn:hover{
+.lightbox_Close-btn:hover {
   transform: scale(1.2)
 }
 
@@ -49,12 +49,12 @@
 .next-Btn,
 .prev-Btn {
   position: relative;
-  margin:0 auto;
-  padding:15px;
+  margin: 0 auto;
+  padding: 15px;
   font-size: 2rem;
-  width:80px;
-  height:80px;
-  top:-70px;
+  width: 80px;
+  height: 80px;
+  top: -70px;
 }
 
 .next-Btn {
@@ -106,10 +106,11 @@
   position: relative;
   //top: 70px;
 }
+
 .lightbox_media-card figcaption .media-title {
   width: 100%;
   height: 100%;
   color: #911c1c;
   padding: 10px;
-  font-size:1rem
+  font-size: 1rem
 }
