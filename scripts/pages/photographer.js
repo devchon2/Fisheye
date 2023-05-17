@@ -33,8 +33,6 @@ import {
 // Récupération des médias
 const fullmedias = datas.media;
 
-// Récupération des médias du photographe
-let Usermedias = fullmedias.filter((media) => media.photographerId == id);
 
 // Récupération des données des éléments du DOM du photographe
 const photographerModel = photographerFactory(photographer);
@@ -48,83 +46,88 @@ const filters = document.querySelectorAll(".filterField_select-list");
 const MediasContainer = document.createElement("section");
 MediasContainer.classList.add("MediasContainer");
 const selectLabel = document.getElementById("filterField_select-label");
-const popularity = document.getElementById("pop");
+
 const nameShortened = get_name_by_id().split(" ")[0];
-const date = document.getElementById("date");
 // Récupération des éléments du DOM
 const Pheader = document.querySelector(".photograph-header");
 const Pbody = document.querySelector(".photograph-body");
-const titre = document.getElementById("titre");
+// Récupération des médias du photographe
+const Usermedias = fullmedias.filter(
+  (media) => media.photographerId == id
+)
 
-// Récupération des données
+// Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
+selectButton.addEventListener('click', function() {
+  selectButton.setAttribute('aria-expanded', 'true');
+  selectList.classList.remove('hidden');
+});
 
+
+// Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
+document.addEventListener('click', function(event) {
+  const isClickInside = selectButton.contains(event.target);
+  if (!isClickInside) {
+      selectButton.setAttribute('aria-expanded', 'false');
+      selectList.classList.add('hidden');
+  }
+});
 
 const TotalLikes = document.createElement("div");
 TotalLikes.classList.add("TotalLikes");
 
+// Récupération des données
+
+
+
+
 Pbody.appendChild(MediasContainer);
 Resume.appendChild(TotalLikes);
 
-
 // Affichage des éléments de la page
-function displayData(photograph, medias=Usermedias) {
+function displayData(photograph, medias) {
+  
   const rawMedias = MediaFactory(medias);
   const mediaModels = rawMedias.mediaElements;
   const Totalizer = rawMedias.TotalizeLikes;
-   TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
-   
-   ////////////////////Gestion Du Bouton de tri////////////////////////
-  //écouteur d'événement à chaque élément de la liste déroulante
-  selectItems.forEach((item) => {
+
+  TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
+   selectItems.forEach((item) => {
       item.addEventListener('click', function(event) {
           event.stopPropagation();
+          const selectedID = item.id;
           const selectedOption = item.textContent;
+          console.log("test",selectedOption);
+          
+          // Tri des médias en fonction de l'option sélectionnée
+          const sortedMedias = sortMedia(selectedID, Usermedias);
+                                                                                                console.log("ligne 92 photog.js", sortedMedias);
           selectLabel.textContent = selectedOption;
           selectList.classList.add('hidden');
           selectButton.setAttribute('aria-expanded', 'false');
-
-          // Tri des médias en fonction de l'option sélectionnée
           
+          // Clear the MediasContainer
           MediasContainer.innerHTML = "";
           
-          const sortedMedias = sortMedia(selectedOption);
-          
-            
-          
-          console.log(selectedOption,sortedMedias);
-          displayData(photograph, Usermedias);
+          // Use the sorted medias
+          displayData(photographer, sortedMedias);
       });
-  });
-
-
- 
-
-  // Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
-  selectButton.addEventListener('click', function() {
-      selectButton.setAttribute('aria-expanded', 'true');
-      selectList.classList.remove('hidden');
-  });
-
- 
-
-  // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
-  document.addEventListener('click', function(event) {
-      const isClickInside = selectButton.contains(event.target);
-      if (!isClickInside) {
-          selectButton.setAttribute('aria-expanded', 'false');
-          selectList.classList.add('hidden');
-      }
-  });
-
+    });
   // Affichage des médias
   if (medias) {
+
+    
+    
+
       for (let i = 0; i < mediaModels.length; i++) {
           const mediaModel = mediaModels[i];
           const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
+          
           MediasContainer.appendChild(mediamodelDOM);
+          
           const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
-          // console.log(lightboxMediaContainer);
+          
           lightboxMediaSlider.appendChild(mediaLightdom);
+          
           mediamodelDOM.onclick = () => {
               openLightBox();
               mediaLightdom.classList.add("currentMedia");
@@ -132,24 +135,29 @@ function displayData(photograph, medias=Usermedias) {
           lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
       }
   }
+
   if (photograph) {
       Pheader.appendChild(photographerPageDOM); // Affiche les données du photographe dans la page
-      const contactbtn = document.querySelector(
-          ".photographContainer .contact_button"
-      );
+      const contactbtn = document.querySelector(".photographContainer .contact_button");
       contactbtn.addEventListener("click", displayModal); // Affiche le formulaire de contact
       Resume.appendChild(TotalLikes);
   }
 }
 
-function init() {
 
+
+function init() {
+  
+
+ 
+  
   displayData(photographer, Usermedias);
+
 }
 
 init();
 
 export {
   get_ID_from_url,
-  MediasContainer,Usermedias,displayData
+  MediasContainer,displayData
 };

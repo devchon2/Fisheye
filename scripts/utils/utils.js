@@ -1,4 +1,4 @@
-import { MediasContainer ,Usermedias,displayData} from "./../pages/photographer.js";
+
 
 
 // Récupération des données brutes
@@ -38,48 +38,52 @@ function get_name_by_id() { // Fonction pour récupérer le nom du photographe p
     return Pname;
 }
 
-function sortbyPops(Usermedias) {
-    const medias = Usermedias;
+function sortbyPops(mediaToSort) {
+    const medias = mediaToSort;
     medias.sort((a, b) => {
         return b.likes - a.likes;
     });
+    console.log("utils sorted pop", medias);
     return medias;
 }
 
-function sortbyDate(Usermedias) {
-    const medias = Usermedias;
+function sortbyDate(mediaToSort) {
+    const medias = mediaToSort;
     medias.sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
     });
+    console.log("utils sorted date", medias);
     return medias;
 }
 
-function sortbyTitle(Usermedias) {
-    const medias = Usermedias;
+function sortbyTitle(mediaToSort) {
+    const medias = mediaToSort;
     medias.sort((a, b) => {
         return a.title.localeCompare(b.title);
     });
+    console.log("utils sorted title", medias);
     return medias;
 }
 
-function sortMedia(sortBy) {
-    let sortedmedias;
+function sortMedia(sortBy,medias) {
+    console.log("utils sort", sortBy);
+    console.log("utils sort", medias);
     
-    //Trier les médias
+    let SortedUsermedias;
     switch (sortBy) {
         
         case "pop":
-            [sortedmedias] = sortbyPops(Usermedias);
+             SortedUsermedias = sortbyPops(medias);
             break;
         case "date":
-             //sortedmedias = sortbyDate(Usermedias);
+             SortedUsermedias = sortbyDate(medias);
             break;
         case "titre":
-             //sortedmedias = sortbyTitle(Usermedias);
+             SortedUsermedias = sortbyTitle(medias);
             break;
     };
-    console.log(sortedmedias);
-    return sortedmedias;
+    console.log("utils sorted", SortedUsermedias);
+    return SortedUsermedias
 }
 
 export {

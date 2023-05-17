@@ -61,6 +61,7 @@ function displayModal() {
     // Lancement de la modale
     modal.setAttribute("aria-hidden", "false"); // Affichage de la modale
     Body.setAttribute("aria-hidden", "true"); // Masquage du body
+    
     if (alreadyValidate) {
         // Si le formulaire a été validé alors il raffiche le message de confirmation sinon il affiche la modale vierge
         modal.classList.add("visible"); // Affichage de la modale
@@ -69,7 +70,6 @@ function displayModal() {
         modal.setAttribute("aria-hidden", "false"); // Affichage de la modale
         Body.setAttribute("aria-hidden", "true"); // Masquage du body
         closeModalBtn.focus(); // Focus sur le bouton de fermeture de la modale
-
         modal.classList.add("visible"); // Affichage de la modale // apparition progressive via l'opacity
     }
 }
@@ -79,13 +79,19 @@ function displayModal() {
 // Événement de fermeture de la modale
 closeModalBtn.addEventListener("click", closeForm); // Fermeture de la modale au clic sur la X
 
-window.addEventListener("keydown", (e) => {
+modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape" || e.key === 27) {
-        if (modal) {
             closeForm();
-        }
     }
-}); // Fermeture de la modale au clic sur la touche Echap
+    
+      if (e.key === "Enter" || e.key === 13) {
+            confirmValidation();
+    }
+    }
+); // Fermeture de la modale au clic sur la touche Echap
+
+
+
 document.addEventListener("click", (e) => {
     if (e.target == modal) closeForm();
 }); // Fermeture de la modale au clic en dehors de la modale

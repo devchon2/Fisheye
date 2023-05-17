@@ -31,7 +31,12 @@ function openLightBox() {
 
     // Écouteur d'événement pour fermer la lightbox
     lightbox_Close_btn.addEventListener("click", closeLightBox)
-
+    lightbox_Close_btn.setAttribute("tabindex", "0")
+    lightbox_Close_btn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === 13) {
+            closeLightBox();
+        }
+    });
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" || e.key === 27) {
             closeLightBox();
