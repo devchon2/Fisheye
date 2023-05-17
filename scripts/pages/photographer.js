@@ -1,12 +1,9 @@
 // Importer la fonction photographerFactory() du fichier photographerFactory.js
-import {
-  photographerFactory
-} from "./../factories/photographerFactory.js";
+
+import { photographerFactory } from './../factories/photographerFactory.js';
 
 // Importer la fonction MediaFactory() du fichier mediaFactory.js
-import {
-  MediaFactory
-} from "./../factories/mediaFactory.js";
+import { MediaFactory } from "./../factories/mediaFactory.js";
 
 // Importer les fonctions utilitaires du fichier utils.js
 import {
@@ -54,17 +51,17 @@ const Usermedias = fullmedias.filter(
 )
 
 // Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
-selectButton.addEventListener('click', function() {
+selectButton.addEventListener('click', function () {
   selectButton.setAttribute('aria-expanded', 'true');
   selectList.classList.remove('hidden');
 });
 
 // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
   const isClickInside = selectButton.contains(event.target);
   if (!isClickInside) {
-      selectButton.setAttribute('aria-expanded', 'false');
-      selectList.classList.add('hidden');
+    selectButton.setAttribute('aria-expanded', 'false');
+    selectList.classList.add('hidden');
   }
 });
 
@@ -85,52 +82,52 @@ function displayData(photograph, medias) {
 
   TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
   selectItems.forEach((item) => {
-      item.addEventListener('click', function(event) {
-          event.stopPropagation();
-          const selectedID = item.id;
-          const selectedOption = item.textContent;
-          console.log("test", selectedOption);
+    item.addEventListener('click', function (event) {
+      event.stopPropagation();
+      const selectedID = item.id;
+      const selectedOption = item.textContent;
+      console.log("test", selectedOption);
 
-          // Tri des médias en fonction de l'option sélectionnée
-          const sortedMedias = sortMedia(selectedID, Usermedias);
-          console.log("ligne 92 photog.js", sortedMedias);
-          selectLabel.textContent = selectedOption;
-          selectList.classList.add('hidden');
-          selectButton.setAttribute('aria-expanded', 'false');
+      // Tri des médias en fonction de l'option sélectionnée
+      const sortedMedias = sortMedia(selectedID, Usermedias);
+      console.log("ligne 92 photog.js", sortedMedias);
+      selectLabel.textContent = selectedOption;
+      selectList.classList.add('hidden');
+      selectButton.setAttribute('aria-expanded', 'false');
 
-          // Clear the MediasContainer
-          MediasContainer.innerHTML = "";
+      // Clear the MediasContainer
+      MediasContainer.innerHTML = "";
 
-          // Use the sorted medias
-          displayData(photographer, sortedMedias);
-      });
+      // Use the sorted medias
+      displayData(photographer, sortedMedias);
+    });
   });
   // Affichage des médias
   if (medias) {
 
-      for (let i = 0; i < mediaModels.length; i++) {
-          const mediaModel = mediaModels[i];
-          const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
+    for (let i = 0; i < mediaModels.length; i++) {
+      const mediaModel = mediaModels[i];
+      const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
 
-          MediasContainer.appendChild(mediamodelDOM);
+      MediasContainer.appendChild(mediamodelDOM);
 
-          const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
+      const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
 
-          lightboxMediaSlider.appendChild(mediaLightdom);
+      lightboxMediaSlider.appendChild(mediaLightdom);
 
-          mediamodelDOM.onclick = () => {
-              openLightBox();
-              mediaLightdom.classList.add("currentMedia");
-          };
-          lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
-      }
+      mediamodelDOM.onclick = () => {
+        openLightBox();
+        mediaLightdom.classList.add("currentMedia");
+      };
+      lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
+    }
   }
 
   if (photograph) {
-      Pheader.appendChild(photographerPageDOM); // Affiche les données du photographe dans la page
-      const contactbtn = document.querySelector(".photographContainer .contact_button");
-      contactbtn.addEventListener("click", displayModal); // Affiche le formulaire de contact
-      Resume.appendChild(TotalLikes);
+    Pheader.appendChild(photographerPageDOM); // Affiche les données du photographe dans la page
+    const contactbtn = document.querySelector(".photographContainer .contact_button");
+    contactbtn.addEventListener("click", displayModal); // Affiche le formulaire de contact
+    Resume.appendChild(TotalLikes);
   }
 }
 
