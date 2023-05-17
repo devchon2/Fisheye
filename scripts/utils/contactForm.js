@@ -3,11 +3,9 @@
 //Récupération de la modale
 const modal = document.querySelector(".contact_modal");
 const Body = document.getElementById("main-photographer"); // Ajout de la lightbox au body
-const contentmodal = document.querySelector(".content");
 //Récupération  des boutons de la modale
-const openModalBtn = document.querySelector(".contact_button"); // Bouton d'ouverture de la modale
 const closeModalBtn = document.querySelector(".close"); // Bouton de fermeture de la modale
-const btn_submit = document.querySelector(".submit-form-btn"); // Bouton d'envoi du formulaire
+
 
 //////////////////////////////////////////////// ELEMENTS A VERIFIER //////////////////////////////////////////
 
@@ -61,7 +59,7 @@ function displayModal() {
     // Lancement de la modale
     modal.setAttribute("aria-hidden", "false"); // Affichage de la modale
     Body.setAttribute("aria-hidden", "true"); // Masquage du body
-    
+
     if (alreadyValidate) {
         // Si le formulaire a été validé alors il raffiche le message de confirmation sinon il affiche la modale vierge
         modal.classList.add("visible"); // Affichage de la modale
@@ -81,16 +79,13 @@ closeModalBtn.addEventListener("click", closeForm); // Fermeture de la modale au
 
 modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape" || e.key === 27) {
-            closeForm();
+        closeForm();
     }
-    
-      if (e.key === "Enter" || e.key === 13) {
-            confirmValidation();
-    }
-    }
-); // Fermeture de la modale au clic sur la touche Echap
 
-
+    if (e.key === "Enter" || e.key === 13) {
+        confirmValidation();
+    }
+}); // Fermeture de la modale au clic sur la touche Echap
 
 document.addEventListener("click", (e) => {
     if (e.target == modal) closeForm();

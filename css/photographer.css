@@ -213,6 +213,9 @@
     font-weight: bold;
 }
 
+.media-link{
+    cursor: pointer;
+}
 .totalLikes {
     display: flex;
     justify-content: center;

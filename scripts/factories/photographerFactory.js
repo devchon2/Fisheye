@@ -10,7 +10,7 @@ function photographerFactory(data) {
       portrait
   } = data;
   const picture = `./assets/photographers/${portrait}`;
-  const user = id;
+  
 
   function getUserCardDOM() {
       // Création des cartes
@@ -147,12 +147,7 @@ function photographerFactory(data) {
       return UserInfosContainer;
   }
 
-  function handleClick(e) {
-      //Récupération de l'id du photographe lors du click
-      e.preventDefault();
-      window.location.href = `photographer.html?id=${id}`;
-      return id;
-  }
+ 
 
   return {
       getUserCardDOM,

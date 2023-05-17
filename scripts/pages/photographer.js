@@ -26,13 +26,11 @@ import {
 //Import lightbox.js
 import {
   openLightBox,
-  lightboxMediaContainer,
   lightboxMediaSlider,
 } from "./../utils/lightbox.js";
 
 // Récupération des médias
 const fullmedias = datas.media;
-
 
 // Récupération des données des éléments du DOM du photographe
 const photographerModel = photographerFactory(photographer);
@@ -41,7 +39,6 @@ const Resume = document.querySelector(".resumeContainer");
 const selectButton = document.querySelector('.filterField_select');
 const selectList = document.querySelector('.filterField_select-list');
 const selectItems = Array.from(document.querySelectorAll('.filterField_select-list-item'));
-const filters = document.querySelectorAll(".filterField_select-list");
 // Création du corps pour les médias
 const MediasContainer = document.createElement("section");
 MediasContainer.classList.add("MediasContainer");
@@ -62,7 +59,6 @@ selectButton.addEventListener('click', function() {
   selectList.classList.remove('hidden');
 });
 
-
 // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
 document.addEventListener('click', function(event) {
   const isClickInside = selectButton.contains(event.target);
@@ -77,57 +73,51 @@ TotalLikes.classList.add("TotalLikes");
 
 // Récupération des données
 
-
-
-
 Pbody.appendChild(MediasContainer);
 Resume.appendChild(TotalLikes);
 
 // Affichage des éléments de la page
 function displayData(photograph, medias) {
-  
+
   const rawMedias = MediaFactory(medias);
   const mediaModels = rawMedias.mediaElements;
   const Totalizer = rawMedias.TotalizeLikes;
 
   TotalLikes.innerHTML = `${Totalizer} <i aria-label="likes" class="fas fa-heart"></i>`;
-   selectItems.forEach((item) => {
+  selectItems.forEach((item) => {
       item.addEventListener('click', function(event) {
           event.stopPropagation();
           const selectedID = item.id;
           const selectedOption = item.textContent;
-          console.log("test",selectedOption);
-          
+          console.log("test", selectedOption);
+
           // Tri des médias en fonction de l'option sélectionnée
           const sortedMedias = sortMedia(selectedID, Usermedias);
-                                                                                                console.log("ligne 92 photog.js", sortedMedias);
+          console.log("ligne 92 photog.js", sortedMedias);
           selectLabel.textContent = selectedOption;
           selectList.classList.add('hidden');
           selectButton.setAttribute('aria-expanded', 'false');
-          
+
           // Clear the MediasContainer
           MediasContainer.innerHTML = "";
-          
+
           // Use the sorted medias
           displayData(photographer, sortedMedias);
       });
-    });
+  });
   // Affichage des médias
   if (medias) {
-
-    
-    
 
       for (let i = 0; i < mediaModels.length; i++) {
           const mediaModel = mediaModels[i];
           const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
-          
+
           MediasContainer.appendChild(mediamodelDOM);
-          
+
           const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
-          
+
           lightboxMediaSlider.appendChild(mediaLightdom);
-          
+
           mediamodelDOM.onclick = () => {
               openLightBox();
               mediaLightdom.classList.add("currentMedia");
@@ -144,13 +134,8 @@ function displayData(photograph, medias) {
   }
 }
 
-
-
 function init() {
-  
 
- 
-  
   displayData(photographer, Usermedias);
 
 }
@@ -159,5 +144,6 @@ init();
 
 export {
   get_ID_from_url,
-  MediasContainer,displayData
+  MediasContainer,
+  displayData
 };

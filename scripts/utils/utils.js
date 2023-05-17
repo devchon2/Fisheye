@@ -1,6 +1,3 @@
-
-
-
 // Récupération des données brutes
 const datas = await get_Datas();
 // Récupération de l'id du photographe dans l'url
@@ -11,8 +8,6 @@ const photographers = datas.photographers;
 const photographer = photographers.find(
     (photographer) => photographer.id == id
 );
-
-
 
 async function get_Datas() {
     let response = await fetch("./data/photographers.json");
@@ -65,23 +60,23 @@ function sortbyTitle(mediaToSort) {
     return medias;
 }
 
-function sortMedia(sortBy,medias) {
+function sortMedia(sortBy, medias) {
     console.log("utils sort", sortBy);
     console.log("utils sort", medias);
-    
+
     let SortedUsermedias;
     switch (sortBy) {
-        
+
         case "pop":
-             SortedUsermedias = sortbyPops(medias);
+            SortedUsermedias = sortbyPops(medias);
             break;
         case "date":
-             SortedUsermedias = sortbyDate(medias);
+            SortedUsermedias = sortbyDate(medias);
             break;
         case "titre":
-             SortedUsermedias = sortbyTitle(medias);
+            SortedUsermedias = sortbyTitle(medias);
             break;
-    };
+    }
     console.log("utils sorted", SortedUsermedias);
     return SortedUsermedias
 }
