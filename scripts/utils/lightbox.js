@@ -40,7 +40,7 @@ function openLightBox () {
     if (e.key === 'Escape' || e.key === 27) {
       closeLightBox()
     }
-  })
+  }, { passive: true })
 
   document.addEventListener('click', (e) => {
     if (e.target === lightboxBG && e.target !== lightbox) {
@@ -51,11 +51,11 @@ function openLightBox () {
   // Écouteurs d'événements pour les flèches gauche et droite
   lightboxArrowLeft.addEventListener('click', () => {
     switchToPreviousMedia()
-  })
+  }, { passive: true })
 
   lightboxArrowRight.addEventListener('click', () => {
     switchToNextMedia()
-  })
+  }, { passive: true })
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 37) {

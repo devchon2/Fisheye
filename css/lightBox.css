@@ -1,96 +1,125 @@
 .lightbox-Bg {
+  /* Positionnement et dimensionnement de la lightbox */
   justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  /* Effet de flou de l'arrière-plan */
   backdrop-filter: blur(10px);
+  /* Couleur de fond semi-transparente */
   background-color: rgba(0, 0, 0, 0.5);
+  /* Z-index pour la superposition */
   z-index: 0;
 }
 
 .lightbox {
+  
+  /* Positionnement et dimensionnement de la lightbox */
   flex-direction: column;
   position: relative;
-  height: 90%;
+  height: 80%;
   width: 70%;
   background-color: white;
+  /* Centrage du contenu de la lightbox */
   align-items: center;
   justify-content: center;
+  /* Marge intérieure */
   padding: 10px;
+  /* Gestion du débordement */
   overflow: hidden;
+  /* Z-index pour la superposition */
   z-index: 1;
 }
 
 .lightbox_close_btn-div {
+  /* Positionnement du bouton de fermeture */
   display: flex;
   justify-content: flex-end;
 }
 
 .lightbox_Close-btn {
+  /* Marge et dimension du bouton de fermeture */
   margin: 20px;
   width: 30px;
 }
 
 .lightbox_Close-btn:hover {
+  /* Effet d'agrandissement au survol */
   transform: scale(1.2);
 }
 
 .lightbox_controls-Div {
+  /* Positionnement et dimensionnement des contrôles */
+  position: relative;
+  top: -20px;
   height: 100%;
   width: 100%;
+  /* Alignement des contrôles */
   display: flex;
   align-items: center;
+  /* Gestion du débordement */
   overflow: hidden;
 }
 
 .next-Btn,
 .prev-Btn {
+  /* Positionnement des boutons de navigation */
   position: relative;
   margin: 0 auto;
   padding: 15px;
   font-size: 2rem;
   width: 80px;
   height: 80px;
+  /* Ajustement vertical */
   top: -70px;
 }
 
 .next-Btn {
+  /* Ordre d'affichage et rotation du bouton suivant */
   order: 2;
   transform: rotate(0);
 }
 
 .next-Btn:hover {
+  /* Effet d'agrandissement et rotation au survol */
   transform: scale(1.1) rotate(0);
 }
 
 .prev-Btn {
+  /* Ordre d'affichage et rotation du bouton précédent */
   order: 0;
   transform: rotate(180deg);
 }
 
 .prev-Btn:hover {
+  /* Effet d'agrandissement et rotation au survol */
   transform: scale(1.1) rotate(180deg);
 }
 
 .lightbox_media-Container {
+  /* Positionnement et dimensionnement du conteneur des médias */
   display: flex;
   flex-direction: row;
   position: relative;
   top: -80px;
   height: 100%;
   width: 100%;
+  /* Gestion du débordement */
   overflow: hidden;
+  /* Ordre d'affichage */
   order: 1;
 }
 
 .lightbox_media-slider {
+  /* Dimensionnement du slider des médias */
   height: 100%;
 }
 
 .lightbox_media-card {
+  /* Positionnement et dimensionnement de la carte des médias */
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -99,6 +128,7 @@
 }
 
 .lightbox_media-card .media {
+  /* Dimensionnement et positionnement de l'image du média */
   width: 100%;
   object-fit: cover;
   object-position: center;
@@ -106,9 +136,11 @@
 }
 
 .lightbox_media-card figcaption .media-title {
+  /* Dimensionnement et mise en forme du titre du média */
   width: 100%;
   height: 100%;
   color: #911c1c;
+  /* Marge intérieure */
   padding: 10px;
   font-size: 1rem;
 }

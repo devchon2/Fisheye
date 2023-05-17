@@ -90,6 +90,7 @@ function displayData (photograph, medias) {
       // Clear the MediasContainer
       MediasContainer.innerHTML = '';
       lightboxMediaSlider.innerHTML = '';
+      console.log(selectLabel, sortedMedias);
       // Utiliser les médias triés
       displayData(photographer, sortedMedias);
     });
