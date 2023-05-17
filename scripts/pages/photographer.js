@@ -82,14 +82,14 @@ function displayData (photograph, medias) {
       const selectedOption = item.textContent;
 
       // Tri des médias en fonction de l'option sélectionnée
-      const sortedMedias = sortMedia(selectedID, Usermedias);
+      const sortedMedias = sortMedia(selectedID, medias);
       selectLabel.textContent = selectedOption;
       selectList.classList.add('hidden');
       selectButton.setAttribute('aria-expanded', 'false');
 
       // Clear the MediasContainer
       MediasContainer.innerHTML = '';
-
+      lightboxMediaSlider.innerHTML = '';
       // Utiliser les médias triés
       displayData(photographer, sortedMedias);
     });
