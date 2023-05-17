@@ -8,7 +8,7 @@
   height: 100%;
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0
+  z-index: 0;
 }
 
 .lightbox {
@@ -35,7 +35,7 @@
 }
 
 .lightbox_Close-btn:hover {
-  transform: scale(1.2)
+  transform: scale(1.2);
 }
 
 .lightbox_controls-Div {
@@ -103,7 +103,6 @@
   object-fit: cover;
   object-position: center;
   height: 95%;
-  ;
 }
 
 .lightbox_media-card figcaption .media-title {
@@ -111,5 +110,5 @@
   height: 100%;
   color: #911c1c;
   padding: 10px;
-  font-size: 1rem
+  font-size: 1rem;
 }
