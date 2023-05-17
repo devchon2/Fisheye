@@ -103,8 +103,7 @@
   object-fit: cover;
   object-position: center;
   height: 95%;
-  position: relative;
-  //top: 70px;
+  ;
 }
 
 .lightbox_media-card figcaption .media-title {
