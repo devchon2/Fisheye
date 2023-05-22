@@ -46,11 +46,15 @@
   /* Marge et dimension du bouton de fermeture */
   margin: 20px;
   width: 30px;
+  opacity:0.4;
+  transition: opacity 0.5s ease;
+
 }
 
 .lightbox_Close-btn:hover {
   /* Effet d'agrandissement au survol */
   transform: scale(1.2);
+  opacity:1;
 }
 
 
@@ -67,11 +71,16 @@
   /* Ordre d'affichage et rotation du bouton suivant */
   right:25px;
   transform:translateY(-50%) rotate(0);
+  opacity:0.4;
+  transition: opacity 0.5s ease;
+
 }
 
 .next:hover {
   /* Effet d'agrandissement et rotation au survol */
   transform: translateY(-50%) scale(1.1) rotate(0);
+  opacity:1;
+  transition:
 }
 
 .prev {
@@ -79,11 +88,15 @@
   left:25px;
   top:50%;
   transform:  translateY(-50%) rotate(180deg);
+  opacity:0.4;
+  transition: opacity 0.5s ease;
+
 }
 
 .prev:hover {
   /* Effet d'agrandissement et rotation au survol */
   transform: translateY(-50%) scale(1.1) rotate(180deg);
+  opacity:1;
 }
 
 .lightbox_media-Container {
@@ -106,7 +119,7 @@
   display: flex;
   object-fit:cover;
   object-position:center;
-  box-shadow: inset 0 1% 0 2px gray;
+  
 
   width: 99%;
   height: 95%;
