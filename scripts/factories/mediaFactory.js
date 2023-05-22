@@ -41,6 +41,7 @@ class Image extends Media {
     const img = document.createElement('img')
     img.classList.add('media')
     img.setAttribute('src', path)
+    img.setAttribute('alt',`${this.title}`)
 
     // Création des infos du media
     const MediasInfos = document.createElement('div')
@@ -125,6 +126,7 @@ class Video extends Media {
     const video = document.createElement('video')
     video.classList.add('media')
     video.setAttribute('src', path)
+    video.setAttribute('alt',`${this.title}`)
 
     // Création des infos du media
     const MediasInfos = document.createElement('div')
