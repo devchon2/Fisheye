@@ -1,5 +1,5 @@
 .lightbox-Bg {
-  /* Positionnement et dimensionnement de la lightbox */
+  /* Position et dimensionnement de la lightbox */
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -16,17 +16,16 @@
 }
 
 .lightbox {
-  display:flex;
-  /* Positionnement et dimensionnement de la lightbox */
+  /* Conteneur de la lightbox */
+  display: flex;
   flex-direction: column;
   position: relative;
   height: 95%;
   width: 70%;
-  max-width:125vh;
+  max-width: 125vh;
   background-color: white;
   /* Centrage du contenu de la lightbox */
-  
-  
+  margin: auto;
   /* Marge intérieure */
   padding: 10px;
   /* Gestion du débordement */
@@ -37,70 +36,64 @@
 
 .lightbox_close_btn-div {
   /* Positionnement du bouton de fermeture */
-  top:10px;
-  right:10px;
-  position :absolute;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 }
 
 .lightbox_Close-btn {
-  /* Marge et dimension du bouton de fermeture */
+  /* Style du bouton de fermeture */
   margin: 20px;
   width: 30px;
-  opacity:0.4;
+  opacity: 0.4;
   transition: opacity 0.5s ease;
-
 }
 
 .lightbox_Close-btn:hover {
   /* Effet d'agrandissement au survol */
   transform: scale(1.2);
-  opacity:1;
+  opacity: 1;
 }
 
-
-
-
 .prev,
-.next{
-  position:absolute;
-  top:50%;
-  height:80px;
+.next {
+  /* Boutons précédent et suivant */
+  position: absolute;
+  top: 50%;
+  height: 80px;
 }
 
 .next {
-  /* Ordre d'affichage et rotation du bouton suivant */
-  right:25px;
-  transform:translateY(-50%) rotate(0);
-  opacity:0.4;
+  /* Style du bouton suivant */
+  right: 25px;
+  transform: translateY(-50%) rotate(0);
+  opacity: 0.4;
   transition: opacity 0.5s ease;
-
 }
 
 .next:hover {
   /* Effet d'agrandissement et rotation au survol */
   transform: translateY(-50%) scale(1.1) rotate(0);
-  opacity:1;
-  transition:
+  opacity: 1;
 }
 
 .prev {
-  /* Ordre d'affichage et rotation du bouton précédent */
-  left:25px;
-  top:50%;
-  transform:  translateY(-50%) rotate(180deg);
-  opacity:0.4;
+  /* Style du bouton précédent */
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  opacity: 0.4;
   transition: opacity 0.5s ease;
-
 }
 
 .prev:hover {
   /* Effet d'agrandissement et rotation au survol */
   transform: translateY(-50%) scale(1.1) rotate(180deg);
-  opacity:1;
+  opacity: 1;
 }
 
 .lightbox_media-Container {
-  /* Positionnement et dimensionnement du conteneur des médias */
+  /* Conteneur des médias */
   display: flex;
   flex-direction: column;
   height: 90vh;
@@ -109,27 +102,23 @@
   overflow: hidden;
   /* Ordre d'affichage */
   order: 1;
-  margin:auto auto;
+  margin: auto;
 }
 
-
-
 .LightboxIn {
-  /* Positionnement et dimensionnement de la carte des médias */
+  /* Carte des médias */
   display: flex;
-  object-fit:cover;
-  object-position:center;
-  
-
+  object-fit: cover;
+  object-position: center;
   width: 99%;
   height: 95%;
 }
 
-.LightboxInTitle{
-height:5%;
-font-size:125%;
-font-weight: bold;
-color: #901c1c;
-padding-top:10px;
-
+.LightboxInTitle {
+  /* Titre de la carte des médias */
+  height: 5%;
+  font-size: 125%;
+  font-weight: bold;
+  color: #901c1c;
+  padding-top: 10px;
 }

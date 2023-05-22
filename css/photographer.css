@@ -1,3 +1,7 @@
+/*======================
+        GÉNÉRAL
+========================*/
+
 /* Réinitialisation du style */
 *,
 *::before,
@@ -28,16 +32,9 @@
   margin: 0 100px;
 }
 
-#photographerName {
-  display: flex;
-  margin-top: 5px;
-}
-
-#txtMsg {
-  height: 100px;
-}
-
-/* En-tête du photographe */
+/*======================
+        EN-TÊTE
+========================*/
 .photograph-header {
   background-color: #fafafa;
   height: 300px;
@@ -64,15 +61,9 @@
   width: 33%;
 }
 
-.UserInfosText .artisteName {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #d3573c;
-  font-size: 2.5rem;
-  font-weight: 500;
-}
-
+/*======================
+        PORTRAIT
+========================*/
 .portraitContainer {
   display: flex;
   flex-direction: column;
@@ -93,6 +84,9 @@
   scale: 1.25;
 }
 
+/*======================
+        CORPS
+========================*/
 .photograph-body {
   display: flex;
   flex-direction: column;
@@ -109,45 +103,9 @@
   padding: 20px;
 }
 
-.filterField_select {
-  position: relative;
-  cursor: pointer;
-  padding: 4px 8px;
-  background-color: #901c1c;
-  color: white;
-  border: 1px solid white;
-  margin: 0 20px;
-  width: 100px;
-}
-
-.filterField_select-list {
-  flex-direction: column;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  list-style-type: none;
-  background-color: #fff;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.filterField_select-list-item {
-  padding: 4px 8px;
-  cursor: pointer;
-  background-color: #901c1c;
-  color: white;
-  border: 1px solid white;
-  width: 100px;
-}
-
-.filterField_select-list-item:hover {
-  background-color: #f2f2f2;
-}
-
+/*======================
+        MÉDIAS
+========================*/
 .MediasContainer {
   display: flex;
   flex-wrap: wrap;
@@ -227,6 +185,9 @@
   padding-left: 5px;
 }
 
+/*======================
+        FORMULAIRE DE CONTACT
+========================*/
 .submit-form-btn,
 .contact_button {
   display: flex;
@@ -361,6 +322,9 @@ form input {
   border: 2px solid #760a15;
 }
 
+/*======================
+        PIED DE PAGE
+========================*/
 .resumeContainer {
   display: flex;
   justify-content: space-around;

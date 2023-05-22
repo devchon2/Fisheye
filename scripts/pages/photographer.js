@@ -1,4 +1,3 @@
-
 // Importer la fonction photographerFactory() du fichier photographerFactory.js
 import { photographerFactory } from '../factories/photographerFactory.js';
 
@@ -56,12 +55,12 @@ document.addEventListener('click', (event) => {
 const TotalLikes = document.createElement('div');
 TotalLikes.classList.add('TotalLikes');
 
-// Récupération des données
-Pbody.appendChild(MediasContainer);
-Resume.appendChild(TotalLikes);
-
-// Affichage des éléments de la page
-function displayData (photograph, medias) {
+/**
+ * Affiche les données du photographe et les médias sur la page.
+ * @param {object} photograph - Les données du photographe.
+ * @param {array} medias - Les médias du photographe.
+ */
+function displayData(photograph, medias) {
   const rawMedias = MediaFactory(medias);
   const mediaModels = rawMedias.mediaElements;
   const Totalizer = rawMedias.TotalizeLikes;
@@ -78,7 +77,7 @@ function displayData (photograph, medias) {
       selectList.classList.add('hidden');
       selectButton.setAttribute('aria-expanded', 'false');
 
-      // vide le container des médias et le slider de la lightbox
+      // Vide le container des médias et le slider de la lightbox
       MediasContainer.innerHTML = '';
       // Utiliser les médias triés pour afficher les médias
       displayData(photographer, sortedMedias);
@@ -91,15 +90,12 @@ function displayData (photograph, medias) {
       const mediaModel = mediaModels[i];
       const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
       MediasContainer.appendChild(mediamodelDOM);
-      
-      
+
       mediamodelDOM.onclick = () => {
-        
         mediamodelDOM.classList.add('currentMedia');
-        const lightboxDOM = new lightBox(medias,nameShortened)
-        lightboxDOM.open()
+        const lightboxDOM = new lightBox(medias, nameShortened);
+        lightboxDOM.open();
       };
-      
     }
   }
 
@@ -111,7 +107,10 @@ function displayData (photograph, medias) {
   }
 }
 
-function init () {
+/**
+ * Initialise l'affichage des données du photographe et des médias.
+ */
+function init() {
   displayData(photographer, Usermedias);
 }
 
