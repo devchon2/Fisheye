@@ -16,7 +16,7 @@
 }
 
 .lightbox {
-  
+  display:flex;
   /* Positionnement et dimensionnement de la lightbox */
   flex-direction: column;
   position: relative;
@@ -24,8 +24,8 @@
   width: 70%;
   background-color: white;
   /* Centrage du contenu de la lightbox */
-  align-items: center;
-  justify-content: center;
+  
+  
   /* Marge intérieure */
   padding: 10px;
   /* Gestion du débordement */
@@ -36,8 +36,9 @@
 
 .lightbox_close_btn-div {
   /* Positionnement du bouton de fermeture */
-  display: flex;
-  justify-content: flex-end;
+  top:10px;
+  right:10px;
+  position :absolute;
 }
 
 .lightbox_Close-btn {
@@ -51,77 +52,59 @@
   transform: scale(1.2);
 }
 
-.lightbox_controls-Div {
-  /* Positionnement et dimensionnement des contrôles */
-  position: relative;
-  top: -20px;
-  height: 100%;
-  width: 100%;
-  /* Alignement des contrôles */
-  display: flex;
-  align-items: center;
-  /* Gestion du débordement */
-  overflow: hidden;
+
+
+
+.prev,
+.next{
+  position:absolute;
+  top:50%;
+  height:80px;
 }
 
-.next-Btn,
-.prev-Btn {
-  /* Positionnement des boutons de navigation */
-  position: relative;
-  margin: 0 auto;
-  padding: 15px;
-  font-size: 2rem;
-  width: 80px;
-  height: 80px;
-  /* Ajustement vertical */
-  top: -70px;
-}
-
-.next-Btn {
+.next {
   /* Ordre d'affichage et rotation du bouton suivant */
-  order: 2;
-  transform: rotate(0);
+  right:0px;
+  transform:translateY(-50%) rotate(0);
 }
 
-.next-Btn:hover {
+.next:hover {
   /* Effet d'agrandissement et rotation au survol */
-  transform: scale(1.1) rotate(0);
+  transform: translateY(-50%) scale(1.1) rotate(0);
 }
 
-.prev-Btn {
+.prev {
   /* Ordre d'affichage et rotation du bouton précédent */
-  order: 0;
-  transform: rotate(180deg);
+  left:0px;
+  top:50%;
+  transform:  translateY(-50%) rotate(180deg);
 }
 
-.prev-Btn:hover {
+.prev:hover {
   /* Effet d'agrandissement et rotation au survol */
-  transform: scale(1.1) rotate(180deg);
+  transform: translateY(-50%) scale(1.1) rotate(180deg);
 }
 
 .lightbox_media-Container {
   /* Positionnement et dimensionnement du conteneur des médias */
   display: flex;
   flex-direction: row;
-  position: relative;
-  top: -80px;
-  height: 100%;
-  width: 100%;
+  background-color:black;
+  height: 80%;
+  width: 80%;
   /* Gestion du débordement */
   overflow: hidden;
   /* Ordre d'affichage */
   order: 1;
+  margin:auto auto;
 }
 
-.lightbox_media-slider {
-  /* Dimensionnement du slider des médias */
-  height: 100%;
-}
 
-.lightbox_media-card {
+
+.lightboxMedia {
   /* Positionnement et dimensionnement de la carte des médias */
   display: flex;
-  flex-direction: column;
+  
   justify-self: center;
   width: 100%;
   height: 100%;

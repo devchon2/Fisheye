@@ -114,6 +114,8 @@ class Video extends Media {
     const mediaLink = document.createElement('a')
     mediaLink.classList.add('media-link')
     mediaLink.setAttribute('aria-label', `${this.title}, vue rapprochée`)
+    mediaLink.id = this.id
+
 
     // Création du container du media
     const imgContainer = document.createElement('div')

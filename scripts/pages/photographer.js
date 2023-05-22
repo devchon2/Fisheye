@@ -1,12 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-plusplus */
-/* eslint-disable linebreak-style */
-
-/* eslint-disable linebreak-style */
-/* eslint-disable import/extensions */
-
-/* eslint-disable eqeqeq */
-/* eslint-disable semi */
 
 // Importer la fonction photographerFactory() du fichier photographerFactory.js
 import { photographerFactory } from '../factories/photographerFactory.js';
@@ -21,7 +12,7 @@ import { datas, id, photographer, getIdFromUrl, getNameByID, sortMedia } from '.
 import { displayModal } from '../utils/contactForm.js';
 
 // Import lightbox.js
-import { openLightBox, lightboxMediaSlider } from '../utils/lightbox.js';
+import { lightBox } from '../utils/lightbox.js';
 
 // Récupération des médias
 const fullmedias = datas.media;
@@ -87,11 +78,9 @@ function displayData (photograph, medias) {
       selectList.classList.add('hidden');
       selectButton.setAttribute('aria-expanded', 'false');
 
-      // Clear the MediasContainer
+      // vide le container des médias et le slider de la lightbox
       MediasContainer.innerHTML = '';
-      lightboxMediaSlider.innerHTML = '';
-      console.log(selectLabel, sortedMedias);
-      // Utiliser les médias triés
+      // Utiliser les médias triés pour afficher les médias
       displayData(photographer, sortedMedias);
     });
   });
@@ -102,13 +91,15 @@ function displayData (photograph, medias) {
       const mediaModel = mediaModels[i];
       const mediamodelDOM = mediaModel.get_Media_Card_DOM(nameShortened);
       MediasContainer.appendChild(mediamodelDOM);
-      const mediaLightdom = mediaModel.get_Media_Lightbox_DOM(nameShortened);
-      lightboxMediaSlider.appendChild(mediaLightdom);
+      
+      
       mediamodelDOM.onclick = () => {
-        openLightBox();
-        mediaLightdom.classList.add('currentMedia');
+        
+        mediamodelDOM.classList.add('currentMedia');
+        const lightboxDOM = new lightBox(medias)
+        lightboxDOM.open()
       };
-      lightboxMediaSlider.style.width = `${mediaModels.length * 100}%`;
+      
     }
   }
 

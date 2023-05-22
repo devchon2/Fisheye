@@ -1,86 +1,119 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-console */
-/* eslint-disable linebreak-style */
-const Body = document.querySelector('#main-photographer')
-const lightboxBG = document.querySelector('.lightbox-Bg')
+/**
+ * @param {number} - Id du media courant
+ * @param {Array} - Tableaux des médias
+ */
 
-const lightbox = document.querySelector('.lightbox') // ;
-const lightboxMediaContainer = document.querySelector('.lightbox_media-Container')
-const lightboxMediaSlider = document.querySelector('.lightbox_media-slider')
-const lightboxCloseBtn = document.querySelector('.lightbox_Close-btn')
-const lightboxArrowLeft = document.querySelector('.next-Btn')
-const lightboxArrowRight = document.querySelector('.prev-Btn')
+class lightBox {
+  constructor(mediaArray) {
 
-function switchToNextMedia () {
-  console.log('next')
+
+    this.mediaArray = mediaArray
+    this.lightboxBG = document.querySelector('.lightbox-Bg')
+    this.lightbox = document.querySelector('.lightbox')
+    this.lightboxMediaContainer = document.querySelector('.lightbox_media-Container')
+    this.lightboxCloseBtn = document.querySelector('.lightbox_Close-btn')
+    this.nextMedia = document.createElement('img')
+    this.nextMedia.classList.add('next')
+    this.nextMedia.setAttribute("src", "/assets/icons/LightboxArrow.svg")
+    this.prevMedia = document.createElement('img')
+    this.prevMedia.classList.add('prev')
+    this.prevMedia.setAttribute("src", "/assets/icons/LightboxArrow.svg")
+    this.lightbox.appendChild(this.prevMedia)
+    this.lightbox.appendChild(this.nextMedia)
+  }
+
+
+
+
+  open() {
+
+    /// ////////////////////Event listener///////////////////////////
+    if (this.lightboxBG) {
+      // Écouteur d'événement pour fermer la lightbox
+      this.lightboxCloseBtn.addEventListener('click', this.close.bind(this))
+      this.lightboxCloseBtn.setAttribute('tabindex', '0')
+      this.lightboxCloseBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === 13) {
+          this.close.bind(this)
+        }
+      })
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' || e.key === 27) {
+          this.close()
+        }
+      }, { passive: true })
+
+      document.addEventListener('click', (e) => {
+        if (e.target === this.lightboxBG && e.target !== this.lightbox) {
+          this.close()
+        }
+      })
+
+      //Écouteurs d'événements pour les flèches gauche et droite
+      this.prevMedia.addEventListener('click', this.switchToPreviousMedia.bind(this))
+      this.nextMedia.addEventListener('click', this.switchToNextMedia.bind(this))
+
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 37) {
+          this.switchToNextMedia()
+        }
+        if (e.key === 'ArrowRight' || e.key === 39) {
+          this.switchToPreviousMedia()
+        }
+      })
+    }
+    function getMediaID() {
+
+      const currentMedia = document.querySelector('.media-link.currentMedia')
+      const mediaId = currentMedia.id
+      console.log("test mediaID", mediaId)
+      return mediaId
+    }
+
+
+    //Index du media
+    const currentMediaId = getMediaID()
+    console.log("test mediaArray", this.mediaArray)
+    const MediaIndex = this.mediaArray.findIndex(media => media.id == currentMediaId)
+    console.log("test mediaIndex", MediaIndex)
+    const body = document.getElementById('main-photographer')
+
+
+
+    body.setAttribute('aria-hidden', 'true') // Cache le body
+    this.lightboxBG.classList.remove('hidden') // Affiche la lightbox
+    this.lightboxBG.classList.add('visible')
+    this.lightboxBG.setAttribute('aria-hidden', 'false')
+
+  }
+
+  close() {
+    const body = document.getElementById('main-photographer')
+    const currentMedia = document.querySelector('.media-link.currentMedia')
+
+
+
+    this.lightboxBG.classList.remove('visible') // Affiche la lightbox
+    this.lightboxBG.classList.add('hidden')
+    this.lightboxBG.setAttribute('aria-hidden', 'true')
+    body.setAttribute('aria-hidden', 'false') // Cache le body
+    currentMedia.classList.remove('currentMedia')
+
+  }
+
+  switchToNextMedia() {
+    console.log('next')
+  }
+
+  switchToPreviousMedia() {
+    console.log('previous')
+  }
+
+
+
+
+
 }
 
-function switchToPreviousMedia () {
-  console.log('previous')
-}
-
-// Fonction pour ouvrir la lightbox
-function openLightBox () {
-  Body.setAttribute('aria-hidden', 'true') // Cache le body
-  lightboxBG.classList.remove('hidden') // Affiche la lightbox
-  lightboxBG.classList.add('visible')
-  lightboxBG.setAttribute('aria-hidden', 'false')
-
-  /// ////////////////////Event listener///////////////////////////
-
-  // Écouteur d'événement pour fermer la lightbox
-  lightboxCloseBtn.addEventListener('click', closeLightBox)
-  lightboxCloseBtn.setAttribute('tabindex', '0')
-  lightboxCloseBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === 13) {
-      closeLightBox()
-    }
-  })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === 27) {
-      closeLightBox()
-    }
-  }, { passive: true })
-
-  document.addEventListener('click', (e) => {
-    if (e.target === lightboxBG && e.target !== lightbox) {
-      closeLightBox()
-    }
-  })
-
-  // Écouteurs d'événements pour les flèches gauche et droite
-  lightboxArrowLeft.addEventListener('click', () => {
-    switchToPreviousMedia()
-  }, { passive: true })
-
-  lightboxArrowRight.addEventListener('click', () => {
-    switchToNextMedia()
-  }, { passive: true })
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' || e.key === 37) {
-      switchToPreviousMedia()
-    }
-    if (e.key === 'ArrowRight' || e.key === 39) {
-      switchToNextMedia()
-    }
-  })
-}
-
-// Fonction clos lightbox
-function closeLightBox () {
-  Body.setAttribute('aria-hidden', 'false') // Cache le body
-  lightboxBG.classList.remove('visible') // Affiche la lightbox
-  lightboxBG.classList.add('hidden')
-  lightboxBG.setAttribute('aria-hidden', 'true')
-}
-
-export {
-  openLightBox,
-  closeLightBox,
-  lightboxCloseBtn,
-  lightboxBG,
-  lightbox,
-  lightboxMediaContainer,
-  lightboxMediaSlider
-}
+export { lightBox }

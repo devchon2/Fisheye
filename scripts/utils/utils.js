@@ -96,6 +96,7 @@ export {
   datas,
   id,
   photographer,
+  photographers,
   getDatas,
   getIdFromUrl,
   getNameByID,

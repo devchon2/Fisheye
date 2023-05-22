@@ -6,7 +6,7 @@ function photographerFactory (data) {
   // Récupérer les données du photographe
   const { name, id, city, country, tagline, price, portrait } = data
   let picture = `./assets/photographers/${portrait}`
-
+  
   function getUserCardDOM () {
     // Création des cartes
     const article = document.createElement('article')
