@@ -1,12 +1,14 @@
+
+
 /**
  * @param {number} - Id du media courant
  * @param {Array} - Tableaux des médias
  */
 
 class lightBox {
-  constructor(mediaArray) {
+  constructor(mediaArray,photographer) {
 
-
+    this.photographer = photographer
     this.mediaArray = mediaArray
     this.lightboxBG = document.querySelector('.lightbox-Bg')
     this.lightbox = document.querySelector('.lightbox')
@@ -74,18 +76,61 @@ class lightBox {
 
     //Index du media
     const currentMediaId = getMediaID()
-    console.log("test mediaArray", this.mediaArray)
+    
     const MediaIndex = this.mediaArray.findIndex(media => media.id == currentMediaId)
-    console.log("test mediaIndex", MediaIndex)
+    const MediaSrc = this.mediaArray[MediaIndex].image || this.mediaArray[MediaIndex].video
+    const MediaTitle = this.mediaArray[MediaIndex].title
+    const MediaLikes = this.mediaArray[MediaIndex].likes
+   
+
+
+
+
+   
     const body = document.getElementById('main-photographer')
 
+    const TitleBlock=document.createElement('figcaption')
+    TitleBlock.classList.add('LightboxInTitle')
+    TitleBlock.innerHTML = MediaTitle
+    
+   
+
+    
+    
+
+
+
+
+
+
+
+    if (MediaSrc === this.mediaArray[MediaIndex].image){
+      const balise = document.createElement('img')
+      balise.classList.add('LightboxIn')
+      balise.setAttribute('src', `./assets/images/${this.photographer}/${MediaSrc}`)
+      balise.setAttribute('alt', `${MediaTitle}`)
+      this.lightboxMediaContainer.appendChild(balise)
+      this.lightboxMediaContainer.appendChild(TitleBlock)
+      
+    } else{
+      
+        const balise = document.createElement('video')
+        balise.classList.add('LightboxIn')
+        balise.setAttribute('src', `./assets/images/${this.photographer}/${MediaSrc}`)
+        balise.setAttribute('alt', `${MediaTitle}`)
+        balise.setAttribute('controls', 'true')
+        this.lightboxMediaContainer.appendChild(balise)
+        this.lightboxMediaContainer.appendChild(TitleBlock)
+
+    }
 
 
     body.setAttribute('aria-hidden', 'true') // Cache le body
     this.lightboxBG.classList.remove('hidden') // Affiche la lightbox
     this.lightboxBG.classList.add('visible')
     this.lightboxBG.setAttribute('aria-hidden', 'false')
-
+    
+    
   }
 
   close() {
@@ -93,7 +138,7 @@ class lightBox {
     const currentMedia = document.querySelector('.media-link.currentMedia')
 
 
-
+    this.lightboxMediaContainer.innerHTML =""
     this.lightboxBG.classList.remove('visible') // Affiche la lightbox
     this.lightboxBG.classList.add('hidden')
     this.lightboxBG.setAttribute('aria-hidden', 'true')

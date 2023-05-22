@@ -96,7 +96,7 @@ function displayData (photograph, medias) {
       mediamodelDOM.onclick = () => {
         
         mediamodelDOM.classList.add('currentMedia');
-        const lightboxDOM = new lightBox(medias)
+        const lightboxDOM = new lightBox(medias,nameShortened)
         lightboxDOM.open()
       };
       
