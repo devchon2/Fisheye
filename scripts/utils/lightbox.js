@@ -13,10 +13,10 @@ class lightBox {
     this.lightboxCloseBtn = document.querySelector(".lightbox_Close-btn");
     this.nextMedia = document.createElement("img");
     this.nextMedia.classList.add("next");
-    this.nextMedia.setAttribute("src", "./assets/icons/LightboxArrow.svg");
+    this.nextMedia.setAttribute("src", "assets/icons/LightboxArrow.svg");
     this.prevMedia = document.createElement("img");
     this.prevMedia.classList.add("prev");
-    this.prevMedia.setAttribute("src", "./assets/icons/LightboxArrow.svg");
+    this.prevMedia.setAttribute("src", "assets/icons/LightboxArrow.svg");
     this.lightbox.appendChild(this.prevMedia);
     this.lightbox.appendChild(this.nextMedia);
   }
