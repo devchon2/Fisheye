@@ -97,7 +97,8 @@
   display: flex;
   flex-direction: column;
   height: 90vh;
-  width: 90vh;
+  width: 80vh;
+  max-width: 95;
   /* Gestion du débordement */
   overflow: hidden;
   /* Ordre d'affichage */
@@ -110,10 +111,13 @@
   display: flex;
   object-fit: cover;
   object-position: center;
+  repeat: no-repeat;
   width: 99%;
   height: 95%;
-  box-shadow:3px 0 0 0px lightgrey;
+  box-shadow: 2px 0 0 0px lightgrey;
+  box-sizing:content-box;
   border-radius:5px;
+  right:-1px;
 }
 
 .LightboxInTitle {

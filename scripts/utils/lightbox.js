@@ -59,25 +59,29 @@ class lightBox {
 
     this.lightbox.appendChild(this.prevMedia);
     this.lightbox.appendChild(this.nextMedia);
+
   }
 
   /**
    * Obtient l'indice du média courant dans le tableau des médias.
    * @returns {number} L'indice du média courant.
    */
+
+  getMediaID() {
+    const currentMedia = document.querySelector(".media-link.currentMedia");
+    const mediaId = currentMedia.id;
+    console.log("test mediaID", mediaId);
+    return mediaId;
+  }
+
   GetMediaIndex() {
     /**
      * Fonction interne pour obtenir l'ID du média courant.
      * @returns {string} L'ID du média courant.
      */
-    function getMediaID() {
-      const currentMedia = document.querySelector(".media-link.currentMedia");
-      const mediaId = currentMedia.id;
-      console.log("test mediaID", mediaId);
-      return mediaId;
-    }
 
-    const currentMediaId = getMediaID();
+
+    const currentMediaId = this.getMediaID();
     let MediaIndex = this.mediaArray.findIndex((media) => media.id == currentMediaId);
     return MediaIndex;
   }
@@ -124,71 +128,110 @@ class lightBox {
           this.switchToNextMedia();
         }
       });
-    }
+    
 
-    const MediaIndex = this.GetMediaIndex();
-    const MediaSrc = this.mediaArray[MediaIndex].image || this.mediaArray[MediaIndex].video;
-    const MediaTitle = this.mediaArray[MediaIndex].title;
 
     const body = document.getElementById("main-photographer");
-
-    const TitleBlock = document.createElement("figcaption");
-    TitleBlock.classList.add("LightboxInTitle");
-    TitleBlock.innerHTML = MediaTitle;
-
-    const balise = document.createElement("img");
-    balise.classList.add("LightboxIn");
-
-    if (MediaSrc === this.mediaArray[MediaIndex].image) {
-      balise.setAttribute("src", `./assets/images/${this.photographer}/${MediaSrc}`);
-      balise.setAttribute("alt", `${MediaTitle}`);
-      this.lightboxMediaContainer.appendChild(balise);
-      this.lightboxMediaContainer.appendChild(TitleBlock);
-    } else {
-      const balise = document.createElement("video");
-      balise.classList.add("LightboxIn");
-      balise.setAttribute("src", `./assets/images/${this.photographer}/${MediaSrc}`);
-      balise.setAttribute("alt", `${MediaTitle}`);
-      balise.setAttribute("controls", "true");
-      this.lightboxMediaContainer.appendChild(balise);
-      this.lightboxMediaContainer.appendChild(TitleBlock);
-    }
-
     body.setAttribute("aria-hidden", "true"); // Cache le body
     this.lightboxBG.classList.remove("hidden"); // Affiche la lightbox
     this.lightboxBG.classList.add("visible");
     this.lightboxBG.setAttribute("aria-hidden", "false");
-  }
+    this.GetMedia()
+
+
+
+  }}
 
   /**
    * Ferme la lightbox.
    */
   close() {
     const body = document.getElementById("main-photographer");
-
+    const lightboxMedia = document.getElementsByClassName('LightboxIn')
+    const currentMedia = document.querySelector(".media-link.currentMedia");
     this.lightboxMediaContainer.innerHTML = "";
     this.lightboxBG.classList.remove("visible"); // Affiche la lightbox
     this.lightboxBG.classList.add("hidden");
     this.lightboxBG.setAttribute("aria-hidden", "true");
     body.setAttribute("aria-hidden", "false"); // Cache le body
+    lightboxMedia.innerHTML = '';
     currentMedia.classList.remove("currentMedia");
   }
 
-  /**
-   * Passe au média suivant.
-   */
-  switchToNextMedia() {
-    let position = this.GetMediaIndex();
-    console.log("next", position);
+
+  GetMedia() {
+    const MediaIndex = this.GetMediaIndex();
+
+    const MediaTitle = this.mediaArray[MediaIndex].title;
+    const TitleBlock = document.createElement("figcaption");
+    TitleBlock.classList.add("LightboxInTitle");
+    TitleBlock.innerHTML = MediaTitle;
+   
+   
+    const MediaSrc = this.getMediaSrc();
+    const balise = this.getMediaType()
+    console.log(balise)
+    balise.classList.add("LightboxIn");
+    balise.setAttribute("src", `./assets/images/${this.photographer}/${MediaSrc}`);
+    balise.setAttribute("alt", `${MediaTitle}`);
+    balise.setAttribute("controls", "true")
+    this.lightboxMediaContainer.appendChild(balise)
+    this.lightboxMediaContainer.appendChild(TitleBlock)
   }
 
-  /**
-   * Passe au média précédent.
-   */
-  switchToPreviousMedia() {
-    let position = this.GetMediaIndex();
-    console.log("Prev", position);
+  getMediaSrc() {
+    const MediaIndex = this.GetMediaIndex();
+
+    if (this.mediaArray[MediaIndex].image) {
+      const MediaSrc = this.mediaArray[MediaIndex].image;
+      return MediaSrc
+    } 
+    if (this.mediaArray[MediaIndex].video){
+      const MediaSrc = this.mediaArray[MediaIndex].video;
+      return MediaSrc
+    }
   }
-}
+
+
+    getMediaType(){
+      
+
+      if (this.GetMediaIndex())
+        if (this.getMediaSrc() === this.mediaArray[this.GetMediaIndex()].image) {
+          const balise = document.createElement('img')
+          
+          return balise
+        } else {
+          const balise = document.createElement('video')
+
+          return balise
+        }
+    }
+
+    UpdateMedia(){
+
+    }
+    /**
+     * Passe au média suivant.
+     */
+    switchToNextMedia() {
+      let position = this.GetMediaIndex();
+      position += 1
+      if (position >= this.mediaArray.lenght) {
+        this.nextMedia.classList.add('hidden')
+      } else {
+        balise
+        console.log("next", position);
+      }
+    }
+
+    /**
+     * Passe au média précédent.
+     */
+    switchToPreviousMedia() {
+      let position = this.GetMediaIndex();
+      console.log("Prev", position);
+    }
+  }
 
 export { lightBox };
