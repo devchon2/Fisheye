@@ -22,7 +22,7 @@
   position: relative;
   height: 95%;
   width: 70%;
-  max-width: 125vh;
+  max-width: 110vh;
   background-color: white;
   /* Centrage du contenu de la lightbox */
   margin: auto;
@@ -98,12 +98,13 @@
   flex-direction: column;
   height: 90vh;
   width: 80vh;
-  max-width: 95;
+  max-width: 80%;
   /* Gestion du débordement */
   overflow: hidden;
   /* Ordre d'affichage */
   order: 1;
   margin: auto;
+  
 }
 
 .LightboxIn {

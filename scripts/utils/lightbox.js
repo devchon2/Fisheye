@@ -148,7 +148,7 @@ class lightBox {
   close() {
     const body = document.getElementById("main-photographer");
     const lightboxMedia = document.getElementsByClassName('LightboxIn')
-    const currentMedia = document.querySelector(".media-link.currentMedia");
+    const currentMedia = document.querySelector(".currentMedia");
     this.lightboxMediaContainer.innerHTML = "";
     this.lightboxBG.classList.remove("visible"); // Affiche la lightbox
     this.lightboxBG.classList.add("hidden");
@@ -174,7 +174,6 @@ class lightBox {
     balise.classList.add("LightboxIn");
     balise.setAttribute("src", `./assets/images/${this.photographer}/${MediaSrc}`);
     balise.setAttribute("alt", `${MediaTitle}`);
-    balise.setAttribute("controls", "true")
     this.lightboxMediaContainer.appendChild(balise)
     this.lightboxMediaContainer.appendChild(TitleBlock)
   }
@@ -196,13 +195,14 @@ class lightBox {
     getMediaType(){
       
 
-      if (this.GetMediaIndex())
+      if (this.GetMediaIndex)
         if (this.getMediaSrc() === this.mediaArray[this.GetMediaIndex()].image) {
           const balise = document.createElement('img')
           
           return balise
         } else {
           const balise = document.createElement('video')
+          balise.setAttribute("controls", "true")
 
           return balise
         }
