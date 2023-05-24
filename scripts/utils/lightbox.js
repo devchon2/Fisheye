@@ -122,7 +122,13 @@ class LightBox {
   }
 
   close() {
-    this.currentMediaIndex = ""
+
+    this.currentMediaIndex = this.getCurrentMediaPosition()
+    const currentMedia = document.querySelector(".media-link.currentMedia");
+    if(currentMedia){
+      currentMedia.classList.remove('currentMedia')
+    }
+    this.lightboxMediaContainer.innerHTML=""
     const body = document.getElementById("main-photographer");
     this.lightboxMediaContainer.innerHTML = "";
     this.lightboxBG.classList.remove("visible");
@@ -134,33 +140,34 @@ class LightBox {
   switchToNextMedia() {
     const currentMediaPosition = this.currentMediaIndex
     const Nextposition = currentMediaPosition + 1;
-    if (Nextposition> this.mediaArray.length){
-      this.nextMedia.classList.add('hidden')
-    }
-    if (currentMediaPosition < this.mediaArray.length) {
-      this.nextMedia.classList.remove('hidden')
-        this.getMediaUpdate(this.currentMediaIndex)
-        this.currentMediaIndex = Nextposition
-    } else {
-      return null;
-    }
-  }
-
-    switchToPreviousMedia() {
-      const currentMediaPosition = this.currentMediaIndex
-      const Prevposition = currentMediaPosition - 1;
-
-      if (Prevposition < 0) {
-        this.prevMedia.style.display = "none"
-        return null;
-      } else {
-        
-        this.getMediaUpdate(this.currentMediaIndex)
-        this.currentMediaIndex = Prevposition
-
-        
+    
+    if (Nextposition < this.mediaArray.length) {
+      this.prevMedia.classList.remove('hidden')
+      this.currentMediaIndex = Nextposition
+      this.getMediaUpdate(this.currentMediaIndex)
+  
+      if (this.currentMediaIndex == this.mediaArray.length - 1) {
+        this.nextMedia.classList.add('hidden')
       }
     }
   }
+  
+
+  switchToPreviousMedia() {
+    const currentMediaPosition = this.currentMediaIndex
+    const Prevposition = currentMediaPosition - 1;
+  
+    if (Prevposition >= 0) {
+      this.nextMedia.classList.remove('hidden')
+      this.currentMediaIndex = Prevposition
+      this.getMediaUpdate(this.currentMediaIndex)
+  
+      if (this.currentMediaIndex == 0) {
+        this.prevMedia.classList.add('hidden') 
+      }
+    }
+  }
+}
+
 
     export { LightBox };
