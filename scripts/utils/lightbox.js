@@ -14,7 +14,10 @@ class LightBox {
     this.prevMedia.setAttribute("src", "assets/icons/LightboxArrow.svg");
     this.lightbox.appendChild(this.prevMedia);
     this.lightbox.appendChild(this.nextMedia);
-    this.currentMediaIndex = this.getCurrentMediaPosition()
+    this.currentMediaIndex = this.getCurrentMediaindex()
+    this.prevMediaIndex = this.currentMediaIndex - 1
+    this.nextMediaIndex = this.currentMediaIndex + 1
+    
   }
 
   getCurrentMediaId() {
@@ -22,45 +25,43 @@ class LightBox {
     return currentMedia ? currentMedia.id : null;
   }
 
-  getCurrentMediaPosition() {
+  getCurrentMediaindex() {
     const currentMediaId = this.getCurrentMediaId();
     return this.mediaArray.findIndex((media) => media.id == currentMediaId);
   }
 
   getMedia(index) {
-    const position = index;
     this.lightboxMediaContainer.innerHTML = "";
 
-    if (position >= 0 && position < this.mediaArray.length) {
-      const mediaTitle = this.mediaArray[position].title;
+    if (index >= 0 && index < this.mediaArray.length) {
+      const mediaTitle = this.mediaArray[index].title;
       const titleBlock = document.createElement("figcaption");
       titleBlock.classList.add("LightboxInTitle");
       titleBlock.innerHTML = mediaTitle;
 
-      const mediaSrc = this.getMediaSrc(position);
-      const mediaElement = this.getMediaType(position);
+      const mediaSrc = this.getMediaSrc(index);
+      const mediaElement = this.getMediaType(index);
       mediaElement.classList.add("LightboxIn");
       mediaElement.setAttribute("src", `./assets/images/${this.photographer}/${mediaSrc}`);
       mediaElement.setAttribute("alt", mediaTitle);
-
+      
       this.lightboxMediaContainer.appendChild(mediaElement);
       this.lightboxMediaContainer.appendChild(titleBlock);
+
     }
   }
 
   getMediaSrc(index) {
-    const position = index;
-    if (this.mediaArray[position].image) {
-      return this.mediaArray[position].image;
-    } else if (this.mediaArray[position].video) {
-      return this.mediaArray[position].video;
+    if (this.mediaArray[index].image) {
+      return this.mediaArray[index].image;
+    } else if (this.mediaArray[index].video) {
+      return this.mediaArray[index].video;
     }
     return "";
   }
 
   getMediaType(index) {
-    const position = index;
-    if (this.getMediaSrc(position) === this.mediaArray[position].image) {
+    if (this.getMediaSrc(index) === this.mediaArray[index].image) {
       return document.createElement("img");
     } else {
       const videoElement = document.createElement("video");
@@ -72,6 +73,8 @@ class LightBox {
   getMediaUpdate(index) {
     this.lightboxMediaContainer.innerHTML = ""
     this.getMedia(index)
+    
+    
   }
 
   open() {
@@ -111,7 +114,14 @@ class LightBox {
         }
       });
     }
-
+    
+    if (this.currentMediaIndex < 0){
+      this.prevMedia.style.display = "none"
+    }
+      if (this.currentMediaIndex > this.mediaArray.length -1){
+        this.nextMedia.style.display = "none"
+      }
+    
     const body = document.getElementById("main-photographer");
     body.setAttribute("aria-hidden", "true");
     this.lightboxBG.classList.remove("hidden");
@@ -119,16 +129,71 @@ class LightBox {
     this.lightboxBG.setAttribute("aria-hidden", "false");
     this.getMedia(this.currentMediaIndex);
 
+
   }
 
   close() {
+    if (this.lightboxBG) {
+      this.lightboxCloseBtn.removeEventListener("click", this.close.bind(this));
+      
+      this.lightboxCloseBtn.removeEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === 13) {
+          this.close.bind(this);
+        }
+      });
+      document.removeEventListener(
+        "keydown",
+        (e) => {
+          if (e.key === "Escape" || e.key === 27) {
+            this.close();
+          }
+        },
+        { passive: true }
+      );
 
-    this.currentMediaIndex = this.getCurrentMediaPosition()
-    const currentMedia = document.querySelector(".media-link.currentMedia");
-    if(currentMedia){
-      currentMedia.classList.remove('currentMedia')
+      document.removeEventListener("click", (e) => {
+        if (e.target === this.lightboxBG && e.target !== this.lightbox) {
+          this.close();
+        }
+      });
+
+      this.prevMedia.removeEventListener("click", this.switchToPreviousMedia.bind(this));
+      this.nextMedia.removeEventListener("click", this.switchToNextMedia.bind(this));
+
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" || e.key === 37) {
+          this.switchToPreviousMedia();
+        }
+        if (e.key === "ArrowRight" || e.key === 39) {
+          this.switchToNextMedia();
+        }
+      });
     }
-    this.lightboxMediaContainer.innerHTML=""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const currentMedia = document.querySelector(".media-link.currentMedia");
+    currentMedia.classList.remove('currentMedia')
+      this.currentMediaIndex = "none"
+    console.log(this.currentMediaIndex )
+    
+    
+    this.lightboxMediaContainer.innerHTML = ""
     const body = document.getElementById("main-photographer");
     this.lightboxMediaContainer.innerHTML = "";
     this.lightboxBG.classList.remove("visible");
@@ -138,36 +203,34 @@ class LightBox {
   }
 
   switchToNextMedia() {
-    const currentMediaPosition = this.currentMediaIndex
-    const Nextposition = currentMediaPosition + 1;
-    
-    if (Nextposition < this.mediaArray.length) {
-      this.prevMedia.classList.remove('hidden')
-      this.currentMediaIndex = Nextposition
-      this.getMediaUpdate(this.currentMediaIndex)
-  
-      if (this.currentMediaIndex == this.mediaArray.length - 1) {
-        this.nextMedia.classList.add('hidden')
-      }
+    const currentMediaindex = this.currentMediaIndex
+    const Nextindex = currentMediaindex + 1;
+    if (this.prevMedia.style.display == "none"){
+      this.prevMedia.style.display = "flex"
+    }
+    this.currentMediaIndex = Nextindex
+    this.getMediaUpdate(this.currentMediaIndex)
+    if (this.currentMediaIndex > this.mediaArray.length -2){
+      this.nextMedia.style.display = "none"
     }
   }
-  
+
 
   switchToPreviousMedia() {
-    const currentMediaPosition = this.currentMediaIndex
-    const Prevposition = currentMediaPosition - 1;
-  
-    if (Prevposition >= 0) {
-      this.nextMedia.classList.remove('hidden')
-      this.currentMediaIndex = Prevposition
-      this.getMediaUpdate(this.currentMediaIndex)
-  
-      if (this.currentMediaIndex == 0) {
-        this.prevMedia.classList.add('hidden') 
-      }
+    const currentMediaindex = this.currentMediaIndex
+    const Previndex = currentMediaindex - 1;
+    if (this.nextMedia.style.display == "none"){
+      this.nextMedia.style.display = "flex"
+    }
+    this.currentMediaIndex = Previndex;
+
+    this.getMediaUpdate(this.currentMediaIndex)
+    if (this.currentMediaIndex < 1){
+      this.prevMedia.style.display = "none"
     }
   }
+
+
 }
 
-
-    export { LightBox };
+export { LightBox };

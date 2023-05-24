@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <header role="banner">
+    <header>
         <!-- Lien vers la page d'accueil -->
         <a href="./index.html">
             <!-- Logo du site -->
@@ -36,21 +36,21 @@
                 Trier par :
                 <div role="listbox" tabindex="0" class="filterField_select" aria-expanded="false">
                     <span id="filterField_select-label">
-                        <p id="sortType">Popularité </p> 
-                        <img id='select-arrow' src='./assets/icons/LightboxArrowlist.svg' alt="Descendant">  
+                        <span id="sortType">Popularité </span>
+                        <img id='select-arrow' src='./assets/icons/LightboxArrow.svg' alt="Descendant">
                     </span>
-                        <ul class="filterField_select-list hidden">
-                            <!-- Options de tri -->
-                            <li role="option" id="pop" class="filterField_select-list-item">
-                                Popularité
-                            </li>
-                            <li role="option" id="date" class="filterField_select-list-item">
-                                Date
-                            </li>
-                            <li role="option" id="titre" class="filterField_select-list-item">
-                                Titre
-                            </li>
-                        </ul>
+                    <ul class="filterField_select-list hidden">
+                        <!-- Options de tri -->
+                        <li role="option" id="pop" class="filterField_select-list-item">
+                            Popularité
+                        </li>
+                        <li role="option" id="date" class="filterField_select-list-item">
+                            Date
+                        </li>
+                        <li role="option" id="titre" class="filterField_select-list-item">
+                            Titre
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
