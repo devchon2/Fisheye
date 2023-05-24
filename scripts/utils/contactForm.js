@@ -1,165 +1,211 @@
-// Récupération de la modale
-const modal = document.querySelector('.contact_modal')
-const Body = document.getElementById('main-photographer') // Ajout de la lightbox au body
-// Récupération  des boutons de la modale
-const closeModalBtn = document.querySelector('.close') // Bouton de fermeture de la modale
+/* eslint-disable linebreak-style, no-console, import/prefer-default-export, max-len, no-plusplus */
 
 /**
- * Affiche la modale de contact.
+ * @fileOverview Ce fichier contient le code pour la gestion d'une modale de contact avec validation de formulaire.
+ */
+
+// Récupération des éléments du DOM
+const modal = document.querySelector(".contact_modal");
+const Body = document.getElementById("main-photographer");
+const closeModalBtn = document.querySelector(".close");
+
+// Récupération des valeurs des éléments du formulaire
+const inputFirstName = document.forms.reserve.first;
+const inputLastName = document.forms.reserve.last;
+const inputEmail = document.forms.reserve.email;
+const inputText = document.forms.reserve.txtMsg;
+
+// Régex pour la validation des champs texte
+const regexpEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+const regexpFirstName = /^[a-zA-Z\s]+$/;
+const regexpLastName = /^[a-zA-Z\s]+$/;
+
+// Liste des objets à vérifier + conditions + messages de retour en cas d'erreur
+const formfieldsObjects = [
+  {
+    formfield: inputFirstName,
+    condition: () => !validateFirstName(),
+    message: "",
+  },
+  {
+    formfield: inputLastName,
+    condition: () => !validateLastname(),
+    message: "",
+  },
+  {
+    formfield: inputEmail,
+    condition: () => !validateEmail(),
+    message: "Veuillez entrer une adresse e-mail valide.",
+  },
+  {
+    formfield: inputText,
+    condition: () => !validateText(),
+    message: "Veuillez entrer une adresse e-mail valide.",
+  },
+];
+
+// État de soumission du formulaire
+let alreadyValidate = false;
+
+/**
+ * Affiche la modale.
  */
 function displayModal() {
-  modal.setAttribute('aria-hidden', 'false') // Affichage de la modale
-  Body.setAttribute('aria-hidden', 'true') // Masquage du body
+  modal.setAttribute("aria-hidden", "false");
+  Body.setAttribute("aria-hidden", "true");
 
   if (alreadyValidate) {
-    modal.classList.add('visible') // Affichage de la modale
+    modal.classList.add("visible");
   } else {
-    modal.classList.remove('hidden')
-    modal.setAttribute('aria-hidden', 'false') // Affichage de la modale
-    Body.setAttribute('aria-hidden', 'true') // Masquage du body
-    closeModalBtn.focus() // Focus sur le bouton de fermeture de la modale
-    modal.classList.add('visible') // Affichage de la modale
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    Body.setAttribute("aria-hidden", "true");
+    closeModalBtn.focus();
+    modal.classList.add("visible");
   }
 }
 
 /**
- * Ferme la modale de contact.
+ * Ferme la modale.
  */
 function closeForm() {
   setTimeout(() => {
-    modal.classList.remove('visible') // Disparition progressive via l'opacity
-    modal.classList.add('hidden') // Disparition de la modale
-  }, 100) // Fermeture de la modale au bout de 500ms
+    modal.classList.remove("visible");
+    modal.classList.add("hidden");
+  }, 100);
 }
 
-// Événement de fermeture de la modale
-closeModalBtn.addEventListener('click', closeForm) // Fermeture de la modale au clic sur la X
-
-modal.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' || e.key === 27) {
-    closeForm()
+// Événements de fermeture de la modale
+closeModalBtn.addEventListener("click", closeForm);
+modal.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" || e.key === 27) {
+    closeForm();
   }
 
-  if (e.key === 'Enter' || e.key === 13) {
-    confirmValidation()
+  if (e.key === "Enter" || e.key === 13) {
+    confirmValidation();
   }
-}) // Fermeture de la modale au clic sur la touche Echap
+});
+document.addEventListener("click", (e) => {
+  if (e.target === modal) closeForm();
+});
 
-document.addEventListener('click', (e) => {
-  if (e.target === modal) closeForm()
-}) // Fermeture de la modale au clic en dehors de la modale
+// Événements de validation du formulaire
+document.forms.reserve.addEventListener("submit", confirmValidation);
+document.forms.reserve.addEventListener("submit", (e) => {
+  e.preventDefault();
+  validate();
+});
 
 /**
- * Valide les données du formulaire de contact.
+ * Confirme la validation du formulaire.
  */
 function confirmValidation() {
   if (validate()) {
-    console.log(inputFirstName.value)
-    console.log(inputLastName.value)
-    console.log(inputEmail.value)
-    console.log(inputText.value)
-    alreadyValidate = true // Le formulaire est validé
+    console.log(inputFirstName.value);
+    console.log(inputLastName.value);
+    console.log(inputEmail.value);
+    console.log(inputText.value);
+    alreadyValidate = true;
   }
 }
 
 /**
- * Valide le champ du prénom.
- * @returns {boolean} - True si le prénom est valide, sinon False.
+ * Valide le prénom.
+ * @return {boolean} - Retourne vrai si le prénom est valide, faux sinon.
  */
 function validateFirstName() {
   if (inputFirstName.value.trim().length < 2) {
     formfieldsObjects[0].message =
-      'Veuillez entrer 2 lettres ou plus pour le prénom.'
-    return false
+      "Veuillez entrer 2 lettres ou plus pour le prénom.";
+    return false;
   }
   if (!regexpFirstName.test(inputFirstName.value.trim())) {
     formfieldsObjects[0].message =
-      'Veuillez entrer uniquement des lettres pour le prénom.'
-    return false
+      "Veuillez entrer uniquement des lettres pour le prénom.";
+    return false;
   }
-  return true
+  return true;
 }
 
 /**
- * Valide le champ du nom de famille.
- * @returns {boolean} - True si le nom de famille est valide, sinon False.
+ * Valide le nom.
+ * @return {boolean} - Retourne vrai si le nom est valide, faux sinon.
  */
 function validateLastname() {
   if (
     inputLastName.value.trim().length < 2 ||
-    inputLastName.value.trim() === ''
+    inputLastName.value.trim() === ""
   ) {
     formfieldsObjects[1].message =
-      'Veuillez entrer au minimum 2 lettres ou plus pour le nom.'
-    return false
+      "Veuillez entrer au minimum 2 lettres ou plus pour le nom.";
+    return false;
   }
   if (!regexpLastName.test(inputLastName.value.trim())) {
     formfieldsObjects[1].message =
-      'Veuillez entrer uniquement des lettres pour le nom.'
-    return false
+      "Veuillez entrer uniquement des lettres pour le nom.";
+    return false;
   }
-  return true
+  return true;
 }
 
 /**
- * Valide le champ de l'e-mail.
- * @returns {boolean} - True si l'e-mail est valide, sinon False.
+ * Valide l'email.
+ * @return {boolean} - Retourne vrai si l'email est valide, faux sinon.
  */
 function validateEmail() {
   if (!regexpEmail.test(inputEmail.value.trim())) {
-    formfieldsObjects[2].message = 'Veuillez entrer une adresse mail valide.'
-    return false
+    formfieldsObjects[2].message = "Veuillez entrer une adresse mail valide.";
+    return false;
   }
-  return true
+  return true;
 }
 
 /**
- * Valide le champ du texte de contact.
- * @returns {boolean} - True si le texte de contact est valide, sinon False.
+ * Valide le texte.
+ * @return {boolean} - Retourne vrai si le texte est valide, faux sinon.
  */
 function validateText() {
   if (inputText.value.trim().length < 10) {
-    formfieldsObjects[3].message = 'Veuillez entrer au minimum 50 caractères.'
-    return false
+    formfieldsObjects[3].message = "Veuillez entrer au minimum 50 caractères.";
+    return false;
   }
-  return true
+  return true;
 }
 
 /**
- * Valide les données du formulaire.
- * @returns {boolean} - True si le formulaire est valide, sinon False.
+ * Valide globalement les données des champs input.
+ * @return {boolean} - Retourne vrai si toutes les données sont valides, faux sinon.
  */
 function validate() {
-  let formIsTrue = true
+  let formIsTrue = true;
   for (let i = 0; i < formfieldsObjects.length; i++) {
-    const condition = formfieldsObjects[i].condition()
-    const { message } = formfieldsObjects[i]
+    const condition = formfieldsObjects[i].condition();
+    const { message } = formfieldsObjects[i];
     if (condition) {
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        'data-error',
+        "data-error",
         message
-      )
+      );
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        'data-error-visible',
-        'true'
-      )
-      formfieldsObjects[i].formfield.parentElement.classList.add('error')
-      formfieldsObjects[i].formfield.focus()
-      formIsTrue = false
+        "data-error-visible",
+        "true"
+      );
+      formfieldsObjects[i].formfield.parentElement.classList.add("error");
+      formfieldsObjects[i].formfield.focus();
+      formIsTrue = false;
     } else {
       formfieldsObjects[i].formfield.parentElement.removeAttribute(
-        'data-error'
-      )
+        "data-error"
+      );
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        'data-error-visible',
-        'false'
-      )
-      formfieldsObjects[i].formfield.parentElement.classList.remove('error')
+        "data-error-visible",
+        "false"
+      );
+      formfieldsObjects[i].formfield.parentElement.classList.remove("error");
     }
   }
-  return formIsTrue
+  return formIsTrue;
 }
 
-export {
-  displayModal
-}
+export { displayModal };

@@ -61,7 +61,7 @@
   margin: 0;
   padding: 20px;
   order: 0;
-  width: 33%;
+  width: 33.33%;
 }
 
 .UserInfosText .artisteName {
@@ -110,15 +110,29 @@
 }
 
 .filterField_select {
+  
   position: relative;
   cursor: pointer;
   padding: 4px 8px;
   background-color: #901c1c;
   color: white;
-  border: 1px solid white;
   margin: 0 20px;
-  width: 100px;
+  width: 130px;
+  border-radius: 4px;
 }
+
+#filterField_select-label{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#filterField_select-label img{
+  width: 15px;
+  height: 15px;
+  margin:10px 5px;
+  transform: rotate(90deg)
+}
+
 
 .filterField_select-list {
   flex-direction: column;
@@ -126,26 +140,29 @@
   z-index: 1;
   top: 0;
   left: 0;
-  list-style-type: none;
+  list-style: none;
   background-color: #fff;
   padding: 0;
-  border: 1px solid #ccc;
   border-radius: 4px;
   max-height: 200px;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .filterField_select-list-item {
   padding: 4px 8px;
+  margin: 0 auto ;
   cursor: pointer;
   background-color: #901c1c;
   color: white;
-  border: 1px solid white;
-  width: 100px;
+  border-bottom: 1px solid #fff;
+  width: 130px;
+
 }
 
 .filterField_select-list-item:hover {
-  background-color: #f2f2f2;
+  scale:1.05;
+  border:2px solid #fff;
+  font-weight: 550;
 }
 
 .MediasContainer {
@@ -232,7 +249,7 @@
   display: flex;
   order: 1;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 550;
   color: white;
   padding: 11px;
   width: 170px;
@@ -243,7 +260,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  margin: 33%;
 }
 
 .submit-form-btn {
@@ -251,7 +268,14 @@
 }
 
 .contact_button {
-  margin: auto auto auto 60px;
+  margin: auto;
+}
+
+.contact_button:hover {
+  
+  
+  font-weight: bolder;
+  box-sixing:border-box;
 }
 
 .contact_modal {

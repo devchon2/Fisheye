@@ -25,10 +25,12 @@ const selectButton = document.querySelector('.filterField_select');
 const selectList = document.querySelector('.filterField_select-list');
 const selectItems = Array.from(document.querySelectorAll('.filterField_select-list-item'));
 
+
 // Création du corps pour les médias
 const MediasContainer = document.createElement('section');
 MediasContainer.classList.add('MediasContainer');
-const selectLabel = document.getElementById('filterField_select-label');
+const sortLabel = document.getElementById('sortType');
+
 const nameShortened = getNameByID().split(' ')[0];
 
 // Récupération des éléments du DOM
@@ -74,7 +76,9 @@ function displayData (photograph, medias) {
 
       // Tri des médias en fonction de l'option sélectionnée
       const sortedMedias = sortMedia(selectedID, medias);
-      selectLabel.textContent = selectedOption;
+      sortLabel.textContent = selectedOption;
+      
+     
       selectList.classList.add('hidden');
       selectButton.setAttribute('aria-expanded', 'false');
 
