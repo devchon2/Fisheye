@@ -12,7 +12,7 @@ import { datas, id, photographer, getIdFromUrl, getNameByID, sortMedia } from '.
 import { displayModal } from '../utils/contactForm.js';
 
 // Import lightbox.js
-import { lightBox } from '../utils/lightbox.js';
+import { LightBox } from '../utils/lightbox.js';
 
 // Récupération des médias
 const fullmedias = datas.media;
@@ -36,8 +36,8 @@ const Pheader = document.querySelector('.photograph-header');
 const Pbody = document.querySelector('.photograph-body');
 
 // Récupération des médias du photographe
-const Usermedias = fullmedias.filter((media) => media.photographerId == id);
-
+let Usermedias = fullmedias.filter((media) => media.photographerId == id);
+Usermedias = sortMedia(pop,Usermedias)
 // Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
 selectButton.addEventListener('click', () => {
   selectButton.setAttribute('aria-expanded', 'true');
@@ -96,7 +96,7 @@ function displayData (photograph, medias) {
       mediamodelDOM.onclick = () => {
         
         mediamodelDOM.classList.add('currentMedia');
-        const lightboxDOM = new lightBox(medias,nameShortened)
+        const lightboxDOM = new LightBox(medias,nameShortened)
         lightboxDOM.open()
       };
       
