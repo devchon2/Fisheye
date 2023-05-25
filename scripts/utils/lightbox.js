@@ -25,6 +25,19 @@ class LightBox {
     return currentMedia ? currentMedia.id : null;
   }
 
+  setCurrentMediaIndex(id) {
+    if (this.getCurrentMediaId()) {
+      const currentMedia = document.querySelector(".currentMedia");
+      currentMedia.classList.remove("currentMedia");
+    }
+    const currentMedia = document.getElementById(id);
+    if (currentMedia) {
+      currentMedia.classList.add("currentMedia");
+    }
+    return currentMedia;
+  }
+
+
   getCurrentMediaindex() {
     const currentMediaId = this.getCurrentMediaId();
     return this.mediaArray.findIndex((media) => media.id == currentMediaId);
@@ -47,7 +60,17 @@ class LightBox {
       
       this.lightboxMediaContainer.appendChild(mediaElement);
       this.lightboxMediaContainer.appendChild(titleBlock);
-
+    }
+    this.setCurrentMediaIndex(this.mediaArray[index].id);
+    if (this.currentMediaIndex == 0){
+      this.prevMedia.style.display = "none"
+    } else {
+      this.prevMedia.style.display = "flex"
+    }
+    if (this.currentMediaIndex == this.mediaArray.length -1 ){
+      this.nextMedia.style.display ="none"
+    } else{
+      this.nextMedia.style.display = "flex"
     }
   }
 
@@ -115,12 +138,14 @@ class LightBox {
       });
     }
     
-    if (this.currentMediaIndex < 0){
-      this.prevMedia.style.display = "none"
+    if (this.currentMediaIndex == 0 && this.prevMedia.style.display == "flex"){
+      this.prevMedia.style.display =="none"
     }
-      if (this.currentMediaIndex > this.mediaArray.length -1){
-        this.nextMedia.style.display = "none"
-      }
+
+    if (this.currentMediaIndex === this.mediaArray.length -1 && this.nextMedia.style.display == "flex"){
+      this.nextMedia.style.display = "none"
+    }
+    console.log(this.currentMediaIndex)
     
     const body = document.getElementById("main-photographer");
     body.setAttribute("aria-hidden", "true");
@@ -133,6 +158,8 @@ class LightBox {
   }
 
   close() {
+    const currentMedia = document.querySelector(".currentMedia");
+    
     if (this.lightboxBG) {
       this.lightboxCloseBtn.removeEventListener("click", this.close.bind(this));
       
@@ -170,64 +197,40 @@ class LightBox {
       });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const currentMedia = document.querySelector(".media-link.currentMedia");
     currentMedia.classList.remove('currentMedia')
-      this.currentMediaIndex = "none"
-    console.log(this.currentMediaIndex )
+
     
     
-    this.lightboxMediaContainer.innerHTML = ""
+    
+    
     const body = document.getElementById("main-photographer");
     this.lightboxMediaContainer.innerHTML = "";
     this.lightboxBG.classList.remove("visible");
     this.lightboxBG.classList.add("hidden");
     this.lightboxBG.setAttribute("aria-hidden", "true");
     body.setAttribute("aria-hidden", "false");
+    this.currentMediaIndex = this.getCurrentMediaindex(this.getCurrentMediaId());
+
   }
 
   switchToNextMedia() {
     const currentMediaindex = this.currentMediaIndex
     const Nextindex = currentMediaindex + 1;
-    if (this.prevMedia.style.display == "none"){
-      this.prevMedia.style.display = "flex"
-    }
+    
     this.currentMediaIndex = Nextindex
     this.getMediaUpdate(this.currentMediaIndex)
-    if (this.currentMediaIndex > this.mediaArray.length -2){
-      this.nextMedia.style.display = "none"
-    }
+    
   }
 
 
   switchToPreviousMedia() {
     const currentMediaindex = this.currentMediaIndex
     const Previndex = currentMediaindex - 1;
-    if (this.nextMedia.style.display == "none"){
-      this.nextMedia.style.display = "flex"
-    }
+    
     this.currentMediaIndex = Previndex;
 
     this.getMediaUpdate(this.currentMediaIndex)
-    if (this.currentMediaIndex < 1){
-      this.prevMedia.style.display = "none"
-    }
+    
   }
 
 
