@@ -123,13 +123,16 @@
 
 #filterField_select-label{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
-#filterField_select-label img{
+
+
+
+#select-arrow{
   width: 15px;
   height: 15px;
-  margin:10px 5px;
+  margin:10px 0px 10px 10px;
   transform: rotate(90deg)
 }
 
@@ -268,7 +271,7 @@
 }
 
 .contact_button {
-  margin: auto;
+  margin: auto auto auto 10%;
 }
 
 .contact_button:hover {
