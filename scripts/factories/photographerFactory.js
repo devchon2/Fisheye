@@ -84,43 +84,59 @@ function photographerFactory (data) {
     const resumeContainer = document.createElement('section')
     resumeContainer.classList.add('resumeContainer')
 
+
     // Création du container des infos photographe
     const UserInfosText = document.createElement('figcaption')
     UserInfosText.classList.add('UserInfosText')
 
     // Création du nom de l'artiste
     const artisteName = document.createElement('h2')
-    artisteName.classList.add('artisteName')
     artisteName.textContent = name
+    artisteName.classList.add('artisteName')
+    artisteName.setAttribute('aria-label', `${name}`)
+    artisteName.setAttribute('tabindex', '0')
+    
 
     // Création de la ville de l'artiste
     const cityLocation = document.createElement('address')
-    cityLocation.classList.add('artisteLocation')
     cityLocation.textContent = `${city}, ${country}`
+    cityLocation.classList.add('artisteLocation')
+    cityLocation.setAttribute('aria-label', `${city}, ${country}`)
+    cityLocation.setAttribute('tabindex', '0')
+    
 
     // Création de la citation de l'artiste
     const citation = document.createElement('blockquote')
-    citation.classList.add('artistePunchline')
     citation.textContent = tagline
+    citation.classList.add('artistePunchline')
+    citation.setAttribute('aria-label', `${tagline}`)
+    citation.setAttribute('tabindex', '0')
+
 
     // Création du nom dans la modale
     const Pname = document.getElementById('photographerName')
     Pname.textContent = name
 
     // Création du prix de l'artiste
-    const priceDOM = document.createElement('div')
+    const priceDOM = document.createElement('p')
     priceDOM.classList.add('artistePricing')
     priceDOM.textContent = `${price}€/jour`
+    priceDOM.setAttribute('aria-label', `${price}€/jour`)
+    priceDOM.setAttribute('tabindex', '2')
 
     // Création du container du portrait
     const portraitContainer = document.createElement('span')
     portraitContainer.classList.add('portraitContainer')
+    portraitContainer.setAttribute('aria-label', `${name}`)
+    portraitContainer.setAttribute('tabindex', '0')
 
     // Création du portrait
     const photo = document.createElement('img')
     photo.classList.add('portrait')
     photo.setAttribute('src', picture)
     photo.setAttribute('alt', name)
+    
+
 
     // Récupération du bouton Contact
     const contactButton = document.createElement('button')

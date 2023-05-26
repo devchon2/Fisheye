@@ -55,8 +55,12 @@ document.addEventListener('click', (event) => {
   }
 });
 
-const TotalLikes = document.createElement('div');
+const TotalLikes = document.createElement('p');
 TotalLikes.classList.add('TotalLikes');
+TotalLikes.setAttribute('aria-label', 'Total des likes');
+TotalLikes.setAttribute('tabindex', '1');
+
+
 
 // Récupération des données
 Pbody.appendChild(MediasContainer);

@@ -22,6 +22,7 @@
   position: relative;
   height: 95%;
   width: 70%;
+  opacity: 1;
   max-width: 110vh;
   background-color: white;
   /* Centrage du contenu de la lightbox */
@@ -32,6 +33,23 @@
   overflow: hidden;
   /* Z-index pour la superposition */
   z-index: 1;
+  /* Animation d'ouverture */
+  animation: lightboxIn 0.7s ease;
+
+}
+
+@keyframes lightboxIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity:1;
+  }
 }
 
 .lightbox_close_btn-div {
