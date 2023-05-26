@@ -70,7 +70,7 @@ class Image extends Media {
     mediaLikesIcon.classList.add('far', 'fa-heart');
     mediaLikes.appendChild(mediaLikesIcon);
 
-    mediaLikesIcon.addEventListener('click', (e) => {
+    mediaLikes.addEventListener('click', (e) => {
       e.stopPropagation(); // Ajoutez cette ligne pour empêcher la propagation de l'événement
       if (!mediaLikes.classList.contains('liked')) {
         const newLikes = this.increaseLikes();
@@ -185,7 +185,7 @@ class Video extends Media {
     mediaLikesIcon.classList.add('far', 'fa-heart');
     mediaLikes.appendChild(mediaLikesIcon);
 
-    mediaLikesIcon.addEventListener('click', (e) => {
+    mediaLikes.addEventListener('click', (e) => {
       e.stopPropagation(); // Ajoutez cette ligne pour empêcher la propagation de l'événement
       if (!mediaLikes.classList.contains('liked')) {
         const newLikes = this.increaseLikes();
