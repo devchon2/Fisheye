@@ -46,38 +46,9 @@ const formfieldsObjects = [
 
 // État de soumission du formulaire
 let alreadyValidate = false;
-
-/**
- * Affiche la modale.
- */
-function displayModal() {
-  modal.setAttribute("aria-hidden", "false");
-  Body.setAttribute("aria-hidden", "true");
-
-  if (alreadyValidate) {
-    modal.classList.add("visible");
-  } else {
-    modal.classList.remove("hidden");
-    modal.setAttribute("aria-hidden", "false");
-    Body.setAttribute("aria-hidden", "true");
-    closeModalBtn.focus();
-    modal.classList.add("visible");
-  }
-}
-
-/**
- * Ferme la modale.
- */
-function closeForm() {
-  setTimeout(() => {
-    modal.classList.remove("visible");
-    modal.classList.add("hidden");
-  }, 100);
-}
-
 // Événements de fermeture de la modale
 closeModalBtn.addEventListener("click", closeForm);
-modal.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" || e.key === 27) {
     closeForm();
   }
@@ -96,6 +67,70 @@ document.forms.reserve.addEventListener("submit", (e) => {
   e.preventDefault();
   validate();
 });
+/**
+ * Affiche la modale.
+ */
+function displayModal() {
+  modal.setAttribute("aria-hidden", "false");
+  Body.setAttribute("aria-hidden", "true");
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === 27) {
+      closeForm();
+    }
+  
+    if (e.key === "Enter" || e.key === 13) {
+      confirmValidation();
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (e.target === modal) closeForm();
+  });
+  
+  // Événements de validation du formulaire
+  document.forms.reserve.addEventListener("submit", confirmValidation);
+  document.forms.reserve.addEventListener("submit", (e) => {
+    e.preventDefault();
+    validate();
+  });
+  if (alreadyValidate) {
+    modal.classList.add("visible");
+  } else {
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    Body.setAttribute("aria-hidden", "true");
+    closeModalBtn.focus();
+    modal.classList.add("visible");
+  }
+  
+}
+
+/**
+ * Ferme la modale.
+ */
+function closeForm() {
+  setTimeout(() => {
+    document.removeEventListener("keydown", (e) => {
+      if (e.key === "Escape" || e.key === 27) {
+        closeForm();
+      }
+  });
+      
+    document.removeEventListener("click", (e) => {
+      if (e.target === modal) closeForm();
+    });
+    
+    // Événements de validation du formulaire
+    document.forms.reserve.removeEventListener("submit", confirmValidation);
+    document.forms.reserve.removeEventListener("submit", (e) => {
+      e.preventDefault();
+      validate();
+    });
+    modal.classList.remove("visible");
+    modal.classList.add("hidden");
+  }, 100);
+}
+
+
 
 /**
  * Confirme la validation du formulaire.
