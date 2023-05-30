@@ -1,0 +1,22 @@
+{
+    "name": "fisheye",
+    "version": "1.0.0",
+    "description": "Fisheye Website",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/devchon2/Fisheye.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/devchon2/Fisheye/issues"
+    },
+    "homepage": "https://devchon2.github.io/Fisheye/",
+    "devDependencies": {
+        "eslint": "^8.41.0"
+    }
+}

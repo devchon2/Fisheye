@@ -2,34 +2,35 @@
 /* eslint-disable max-classes-per-file */
 
 class Media {
-  constructor(id, title, likes, date) {
+  constructor (id, title, likes, date) {
     this.id = id
     this.title = title
     this.likes = likes
     this.date = date
   }
 
-  increaseLikes() {
-    this.likes++;
-    return this.likes;
-  }
-  decreaseLikes() {
-    this.likes--;
-    return this.likes;
+  increaseLikes () {
+    this.likes += 1
+    return this.likes
   }
 
-  getMediaId() {
+  decreaseLikes () {
+    this.likes -= 1
+    return this.likes
+  }
+
+  getMediaId () {
     return this.id
   }
 }
 
 class Image extends Media {
-  constructor(id, title, likes, date, image) {
+  constructor (id, title, likes, date, image) {
     super(id, title, likes, date)
     this.image = image
   }
 
-  get_Media_Card_DOM(name) {
+  get_Media_Card_DOM (name) {
     const path = `./assets/images/${name}/${this.image}`
 
     // Création des éléments du DOM
@@ -42,7 +43,7 @@ class Image extends Media {
     mediaLink.setAttribute('aria-label', `${this.title}, vue rapprochée`)
     mediaLink.setAttribute('tabindex', '0')
     mediaLink.setAttribute('role', 'button')
-    mediaLink.setAttribute("type", "image/jpg")
+    mediaLink.setAttribute('type', 'image/jpg')
     mediaLink.id = this.id
 
     // Création du container du media
@@ -58,7 +59,7 @@ class Image extends Media {
     // Création des infos du media
     const MediasInfos = document.createElement('div')
     MediasInfos.classList.add('media-infos')
-    MediasInfos.setAttribute('role', 'contentinfo');
+    MediasInfos.setAttribute('role', 'contentinfo')
 
     // Création du titre du media
     const mediaTitle = document.createElement('h2')
@@ -66,39 +67,37 @@ class Image extends Media {
     mediaTitle.textContent = this.title
 
     // Création du nombre de likes du media
-    const mediaLikes = document.createElement('p');
-    mediaLikes.classList.add('media-likes');
-    mediaLikes.textContent = `${this.likes} `;
+    const mediaLikes = document.createElement('p')
+    mediaLikes.classList.add('media-likes')
+    mediaLikes.textContent = `${this.likes} `
 
-    const mediaLikesIcon = document.createElement('i');
-    mediaLikesIcon.classList.add('far', 'fa-heart');
-    mediaLikes.appendChild(mediaLikesIcon);
+    const mediaLikesIcon = document.createElement('i')
+    mediaLikesIcon.classList.add('far', 'fa-heart')
+    mediaLikes.appendChild(mediaLikesIcon)
 
     mediaLikes.addEventListener('click', (e) => {
-      e.stopPropagation(); // Ajoutez cette ligne pour empêcher la propagation de l'événement
+      e.stopPropagation() // Ajoutez cette ligne pour empêcher la propagation de l'événement
       if (!mediaLikes.classList.contains('liked')) {
-        const newLikes = this.increaseLikes();
-        mediaLikes.classList.add('liked');
-        mediaLikesIcon.classList.remove('far');
-        mediaLikesIcon.classList.add('fas');
-        mediaLikes.textContent = `${newLikes} `;
+        const newLikes = this.increaseLikes()
+        mediaLikes.classList.add('liked')
+        mediaLikesIcon.classList.remove('far')
+        mediaLikesIcon.classList.add('fas')
+        mediaLikes.textContent = `${newLikes} `
         const totalLikes = document.querySelector('.TotalLikes')
         totalLikes.innerHTML = `${Number(totalLikes.textContent) + 1} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`
-        mediaLikes.appendChild(mediaLikesIcon);
+        mediaLikes.appendChild(mediaLikesIcon)
       } else {
-        const newLikes = this.decreaseLikes();
-        mediaLikes.classList.remove('liked');
-        mediaLikesIcon.classList.remove('fas');
-        mediaLikesIcon.classList.add('far');
+        const newLikes = this.decreaseLikes()
+        mediaLikes.classList.remove('liked')
+        mediaLikesIcon.classList.remove('fas')
+        mediaLikesIcon.classList.add('far')
 
-        mediaLikes.textContent = `${newLikes} `;
+        mediaLikes.textContent = `${newLikes} `
         const totalLikes = document.querySelector('.TotalLikes')
         totalLikes.innerHTML = `${Number(totalLikes.textContent) - 1} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`
-        mediaLikes.appendChild(mediaLikesIcon);
-
+        mediaLikes.appendChild(mediaLikesIcon)
       }
-
-    });
+    })
     // Ajout des éléments au DOM
     mediaLink.appendChild(mediaCard)
     mediaCard.appendChild(imgContainer)
@@ -111,7 +110,7 @@ class Image extends Media {
     return mediaLink
   }
 
-  get_Media_Lightbox_DOM(name) {
+  get_Media_Lightbox_DOM (name) {
     const path = `./assets/images/${name}/${this.image}`
 
     // Création des éléments du DOM
@@ -123,7 +122,7 @@ class Image extends Media {
     lightboxMedia.setAttribute('src', path)
     lightboxMedia.setAttribute('aria-label', `${this.title}, vue rapprochée`)
     lightboxMedia.setAttribute('alt', `${this.title}`)
-    lightboxMedia.setAttribute('type', "image/jpg")
+    lightboxMedia.setAttribute('type', 'image/jpg')
     lightboxMedia.id = this.id
 
     // Création du titre du media
@@ -143,12 +142,12 @@ class Image extends Media {
 }
 
 class Video extends Media {
-  constructor(id, title, likes, date, video) {
+  constructor (id, title, likes, date, video) {
     super(id, title, likes, date)
     this.video = video
   }
 
-  get_Media_Card_DOM(name) {
+  get_Media_Card_DOM (name) {
     const path = `./assets/images/${name}/${this.video}`
 
     // Création des éléments du DOM
@@ -164,7 +163,6 @@ class Video extends Media {
 
     mediaLink.id = this.id
 
-
     // Création du container du media
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('media-container')
@@ -174,12 +172,12 @@ class Video extends Media {
     video.classList.add('media')
     video.setAttribute('src', path)
     video.setAttribute('alt', `${this.title}`)
-    video.setAttribute('type', "video/mp4")
+    video.setAttribute('type', 'video/mp4')
 
     // Création des infos du media
     const MediasInfos = document.createElement('div')
     MediasInfos.classList.add('media-infos')
-    MediasInfos.setAttribute('role', 'contentinfo');
+    MediasInfos.setAttribute('role', 'contentinfo')
 
     // Création du titre du media
     const mediaTitle = document.createElement('h2')
@@ -187,49 +185,49 @@ class Video extends Media {
     mediaTitle.textContent = this.title
 
     // Création du nombre de likes du media
-    const mediaLikes = document.createElement('p');
-    mediaLikes.classList.add('media-likes');
-    mediaLikes.textContent = `${this.likes} `;
+    const mediaLikes = document.createElement('p')
+    mediaLikes.classList.add('media-likes')
+    mediaLikes.textContent = `${this.likes} `
     mediaLikes.setAttribute('aria-label', `${this.likes} likes`)
-    const mediaLikesIcon = document.createElement('i');
-    mediaLikesIcon.classList.add('far', 'fa-heart');
-    mediaLikes.appendChild(mediaLikesIcon);
+    const mediaLikesIcon = document.createElement('i')
+    mediaLikesIcon.classList.add('far', 'fa-heart')
+    mediaLikes.appendChild(mediaLikesIcon)
     mediaLikes.addEventListener('click', (e) => {
-      e.stopPropagation(); // Ajoutez cette ligne pour empêcher la propagation de l'événement
+      e.stopPropagation() // Ajoutez cette ligne pour empêcher la propagation de l'événement
       if (!mediaLikes.classList.contains('liked')) {
-        const newLikes = this.increaseLikes();
-        mediaLikes.classList.add('liked');
-        mediaLikesIcon.classList.remove('far');
-        mediaLikesIcon.classList.add('fas');
-        mediaLikes.textContent = `${newLikes} `;
+        const newLikes = this.increaseLikes()
+        mediaLikes.classList.add('liked')
+        mediaLikesIcon.classList.remove('far')
+        mediaLikesIcon.classList.add('fas')
+        mediaLikes.textContent = `${newLikes} `
         const totalLikes = document.querySelector('.TotalLikes')
-        totalLikes.innerHTML = `${Number(totalLikes.textContent)} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
-        mediaLikes.appendChild(mediaLikesIcon);
+        totalLikes.innerHTML = `${Number(totalLikes.textContent)} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`
+        mediaLikes.appendChild(mediaLikesIcon)
       } else {
-        const newLikes = this.decreaseLikes();
-        mediaLikes.classList.remove('liked');
-        mediaLikesIcon.classList.remove('fas');
-        mediaLikesIcon.classList.add('far');
-        mediaLikes.textContent = `${newLikes} `;
+        const newLikes = this.decreaseLikes()
+        mediaLikes.classList.remove('liked')
+        mediaLikesIcon.classList.remove('fas')
+        mediaLikesIcon.classList.add('far')
+        mediaLikes.textContent = `${newLikes} `
         const totalLikes = document.querySelector('.TotalLikes')
-        totalLikes.innerHTML = `${Number(totalLikes.textContent)} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
-        mediaLikes.appendChild(mediaLikesIcon);
-      }})
+        totalLikes.innerHTML = `${Number(totalLikes.textContent)} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`
+        mediaLikes.appendChild(mediaLikesIcon)
+      }
+    })
 
+    // Ajout des éléments au DOM
+    mediaLink.appendChild(mediaCard)
+    mediaCard.appendChild(imgContainer)
+    MediasInfos.appendChild(mediaTitle)
+    MediasInfos.appendChild(mediaLikes)
+    mediaCard.appendChild(MediasInfos)
+    imgContainer.appendChild(video)
+    mediaCard.appendChild(MediasInfos)
+    return mediaLink
+  }
 
-      // Ajout des éléments au DOM
-      mediaLink.appendChild(mediaCard)
-      mediaCard.appendChild(imgContainer)
-      MediasInfos.appendChild(mediaTitle)
-      MediasInfos.appendChild(mediaLikes)
-      mediaCard.appendChild(MediasInfos)
-      imgContainer.appendChild(video)
-      mediaCard.appendChild(MediasInfos)
-      return mediaLink
-    }
-
-  get_Media_Lightbox_DOM(name) {
-      const path = `./assets/images/${name}/${this.video}`
+  get_Media_Lightbox_DOM (name) {
+    const path = `./assets/images/${name}/${this.video}`
 
     // Création des éléments du DOM
     const lightboxMediaCard = document.createElement('figure')
@@ -241,7 +239,7 @@ class Video extends Media {
     lightboxMedia.setAttribute('aria-label', `${this.title}, vue rapprochée`)
     lightboxMedia.setAttribute('controls', 'True')
     lightboxMedia.setAttribute('autoplay', 'True')
-    lightboxMedia.setAttribute("type","video/mp4")
+    lightboxMedia.setAttribute('type', 'video/mp4')
     lightboxMedia.id = this.id
 
     // Création du titre du media
@@ -257,10 +255,10 @@ class Video extends Media {
     lightboxMediaCard.appendChild(h2Container)
 
     return lightboxMediaCard
-    }
+  }
 }
 
-function MediaFactory(Medias) {
+function MediaFactory (Medias) {
   const mediaElements = []
   let TotalizeLikes = 0
   Medias.forEach((element) => {

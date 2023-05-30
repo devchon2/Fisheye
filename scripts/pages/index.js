@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line import/no-useless-path-segments, import/extensions
-import { photographerFactory } from './../factories/photographerFactory.js'
+import photographerFactory from './../factories/photographerFactory.js'
 import { getDatas } from '../utils/utils.js'
 
 // Affichage des éléments de la page

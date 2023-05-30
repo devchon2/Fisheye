@@ -6,7 +6,7 @@ function photographerFactory (data) {
   // Récupérer les données du photographe
   const { name, id, city, country, tagline, price, portrait } = data
   let picture = `./assets/photographers/${portrait}`
-  
+
   function getUserCardDOM () {
     // Création des cartes
     const article = document.createElement('article')
@@ -84,7 +84,6 @@ function photographerFactory (data) {
     const resumeContainer = document.createElement('section')
     resumeContainer.classList.add('resumeContainer')
 
-
     // Création du container des infos photographe
     const UserInfosText = document.createElement('figcaption')
     UserInfosText.classList.add('UserInfosText')
@@ -95,7 +94,6 @@ function photographerFactory (data) {
     artisteName.classList.add('artisteName')
     artisteName.setAttribute('aria-label', `${name}`)
     artisteName.setAttribute('tabindex', '0')
-    
 
     // Création de la ville de l'artiste
     const cityLocation = document.createElement('address')
@@ -103,7 +101,6 @@ function photographerFactory (data) {
     cityLocation.classList.add('artisteLocation')
     cityLocation.setAttribute('aria-label', `${city}, ${country}`)
     cityLocation.setAttribute('tabindex', '0')
-    
 
     // Création de la citation de l'artiste
     const citation = document.createElement('blockquote')
@@ -111,7 +108,6 @@ function photographerFactory (data) {
     citation.classList.add('artistePunchline')
     citation.setAttribute('aria-label', `${tagline}`)
     citation.setAttribute('tabindex', '0')
-
 
     // Création du nom dans la modale
     const Pname = document.getElementById('photographerName')
@@ -135,8 +131,6 @@ function photographerFactory (data) {
     photo.classList.add('portrait')
     photo.setAttribute('src', picture)
     photo.setAttribute('alt', name)
-    
-
 
     // Récupération du bouton Contact
     const contactButton = document.createElement('button')
