@@ -1,12 +1,13 @@
-/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-/* eslint-disable camelcase */
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line import/no-useless-path-segments, import/extensions
 import photographerFactory from './../factories/photographerFactory.js'
-import { getDatas } from '../utils/utils.js'
+import { getDatas } from './../utils/utils.js'
 
-// Affichage des éléments de la page
+/**
+ * Affiche les données sur la page.
+ * @function
+ * @param {Array} datas - Les données à afficher.
+ */
 function displayData (datas) {
   const photographersSection = document.querySelector('.photographer_section')
 
@@ -17,6 +18,10 @@ function displayData (datas) {
   })
 }
 
+/**
+ * Fonction d'initialisation.
+ * @async
+ */
 async function init () {
   const { photographers } = await getDatas() // Récupère les photographes
 

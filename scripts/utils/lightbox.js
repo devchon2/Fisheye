@@ -276,4 +276,4 @@ class LightBox {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { LightBox }
+export default LightBox

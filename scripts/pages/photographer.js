@@ -1,23 +1,24 @@
+/* eslint-disable import/extensions */
 
 // Importer la fonction photographerFactory() du fichier photographerFactory.js
-// eslint-disable-next-line import/extensions
-import { photographerFactory } from '../factories/photographerFactory.js'
+
+import photographerFactory from '../factories/photographerFactory.js'
 
 // Importer la fonction MediaFactory() du fichier mediaFactory.js
-// eslint-disable-next-line import/extensions
-import { MediaFactory } from '../factories/mediaFactory.js'
+
+import MediaFactory from '../factories/mediaFactory.js'
 
 // Importer les fonctions utilitaires du fichier utils.js
-// eslint-disable-next-line import/extensions
+
 import { datas, id, photographer, getIdFromUrl, getNameByID, sortMedia } from '../utils/utils.js'
 
 // Importer la fonction displayModal depuis le fichier "utils.js"
-// eslint-disable-next-line import/extensions
-import { displayModal } from '../utils/contactForm.js'
+
+import displayModal from '../utils/contactForm.js'
 
 // Import lightbox.js
-// eslint-disable-next-line import/extensions
-import { LightBox } from '../utils/lightbox.js'
+
+import LightBox from '../utils/lightbox.js'
 
 // Récupération des médias
 const fullmedias = datas.media
@@ -69,7 +70,12 @@ TotalLikes.setAttribute('tabindex', '1')
 Pbody.appendChild(MediasContainer)
 Resume.appendChild(TotalLikes)
 
-// Affichage des éléments de la page
+/**
+ * Affiche les données du photographe et des médias sur la page.
+ * @function
+ * @param {Object} photograph - Les données du photographe.
+ * @param {Array} medias - Les données des médias.
+ */
 function displayData (photograph, medias) {
   const rawMedias = MediaFactory(medias)
   const mediaModels = rawMedias.mediaElements
@@ -91,7 +97,7 @@ function displayData (photograph, medias) {
       // vide le container des médias et le slider de la lightbox
       MediasContainer.innerHTML = ''
       // Utiliser les médias triés pour afficher les médias
-      displayData(photographer, sortedMedias)
+      displayData(photograph, sortedMedias)
     })
   })
 
@@ -119,6 +125,10 @@ function displayData (photograph, medias) {
   }
 }
 
+/**
+ * Fonction d'initialisation.
+ * @function
+ */
 function init () {
   displayData(photographer, Usermedias)
 }

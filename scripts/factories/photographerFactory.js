@@ -2,11 +2,22 @@
 // eslint-disable-next-line linebreak-style
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
+
+/**
+ * Fabrique de photographes.
+ * @function
+ * @param {Object} data - Les données du photographe.
+ * @returns {Object}  - Un objet avec les fonctions pour obtenir le DOM du photographe
+ */
 function photographerFactory (data) {
   // Récupérer les données du photographe
   const { name, id, city, country, tagline, price, portrait } = data
   let picture = `./assets/photographers/${portrait}`
 
+  /**
+   * Obtient le DOM de la carte du photographe.
+   * @returns {HTMLElement} Le DOM de la carte du photographe.
+   */
   function getUserCardDOM () {
     // Création des cartes
     const article = document.createElement('article')
@@ -72,6 +83,10 @@ function photographerFactory (data) {
     return article
   }
 
+  /**
+   * Obtient le DOM de la page du photographe.
+   * @returns {HTMLElement} Le DOM de la page du photographe.
+   */
   function getUserPageDOM () {
     // Création de la page du photographe
 
@@ -149,10 +164,11 @@ function photographerFactory (data) {
     main.appendChild(resumeContainer)
     return UserInfosContainer
   }
+
   return {
     getUserCardDOM,
     getUserPageDOM
   }
 }
 
-export { photographerFactory }
+export default photographerFactory

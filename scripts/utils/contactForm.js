@@ -5,9 +5,15 @@
  */
 
 // Récupération des éléments du DOM
-const modal = document.querySelector('.contact_modal')
+const BGmodal = document.querySelector('.contact_modal')
+const modal = document.querySelector('.modal')
 const Body = document.getElementById('main-photographer')
-const closeModalBtn = document.querySelector('.close')
+const CloseCrossBtn = document.querySelector('.close')
+const CloseModalBtn = document.getElementById('btn-close')
+const ValidateModal = document.querySelector(".modal_validate")
+const form = document.querySelector('form.reserve')
+const modalTitle = document.getElementById('modalTitle')
+const modalTitleValidation = document.getElementById('modalTitle_Validate')
 
 // Récupération des valeurs des éléments du formulaire
 const inputFirstName = document.forms.reserve.first
@@ -47,7 +53,10 @@ const formfieldsObjects = [
 // État de soumission du formulaire
 let alreadyValidate = false
 // Événements de fermeture de la modale
-closeModalBtn.addEventListener('click', closeForm)
+CloseCrossBtn.addEventListener('click', closeForm)
+if (CloseModalBtn){
+   CloseModalBtn.addEventListener('click', closeForm)}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' || e.key === 27) {
     closeForm()
@@ -67,11 +76,12 @@ document.forms.reserve.addEventListener('submit', (e) => {
   e.preventDefault()
   validate()
 })
+
 /**
  * Affiche la modale.
  */
 function displayModal () {
-  modal.setAttribute('aria-hidden', 'false')
+  BGmodal.setAttribute('aria-hidden', 'false')
   Body.setAttribute('aria-hidden', 'true')
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' || e.key === 27) {
@@ -92,14 +102,15 @@ function displayModal () {
     e.preventDefault()
     validate()
   })
+
   if (alreadyValidate) {
-    modal.classList.add('visible')
+    BGmodal.classList.add('visible')
   } else {
-    modal.classList.remove('hidden')
-    modal.setAttribute('aria-hidden', 'false')
+    BGmodal.classList.remove('hidden')
+    BGmodal.setAttribute('aria-hidden', 'false')
     Body.setAttribute('aria-hidden', 'true')
-    closeModalBtn.focus()
-    modal.classList.add('visible')
+    CloseCrossBtn.focus()
+    BGmodal.classList.add('visible')
   }
 }
 
@@ -108,6 +119,8 @@ function displayModal () {
  */
 function closeForm () {
   setTimeout(() => {
+    BGmodal.classList.remove('visible')
+    BGmodal.classList.add('hidden')
     document.removeEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 27) {
         closeForm()
@@ -124,8 +137,6 @@ function closeForm () {
       e.preventDefault()
       validate()
     })
-    modal.classList.remove('visible')
-    modal.classList.add('hidden')
   }, 100)
 }
 
@@ -133,11 +144,26 @@ function closeForm () {
  * Confirme la validation du formulaire.
  */
 function confirmValidation () {
-  if (validate()) {
-    console.log(inputFirstName.value)
-    console.log(inputLastName.value)
-    console.log(inputEmail.value)
-    console.log(inputText.value)
+  const valide = true
+  if (valide) {
+    console.log('Formulaire valide')
+    console.log('firstName', inputFirstName.value)
+    console.log('lastName', inputLastName.value)
+    console.log('Email', inputEmail.value)
+    console.log('message', inputText.value)
+    modalTitle.classList.add('hidden')
+    modalTitle.classList.remove('visible')
+     form.classList.add('hidden')
+    form.classList.remove('visible')
+    modalTitleValidation.classList.remove('hidden')
+    modalTitleValidation.classList.add('visible')
+    CloseModalBtn.classList.remove('hidden')
+    CloseModalBtn.classList.add('visible')
+    ValidateModal.classList.remove('hidden')
+    ValidateModal.classList.add('visible')
+    CloseModalBtn.focus()
+
+    
     alreadyValidate = true
   }
 }
@@ -240,4 +266,4 @@ function validate () {
   return formIsTrue
 }
 
-export { displayModal }
+export default displayModal

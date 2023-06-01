@@ -1,7 +1,19 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable max-classes-per-file */
+/* eslint-disable linebreak-style */
 
+/**
+ * Classe représentant un média.
+ * @class
+ */
 class Media {
+  /**
+   * Crée une instance de Media.
+   * @constructor
+   * @param {number} id - L'identifiant du média.
+   * @param {string} title - Le titre du média.
+   * @param {number} likes - Le nombre de likes du média.
+   * @param {string} date - La date du média.
+   */
   constructor (id, title, likes, date) {
     this.id = id
     this.title = title
@@ -9,27 +21,57 @@ class Media {
     this.date = date
   }
 
+  /**
+   * Augmente le nombre de likes du média de 1.
+   * @returns {number} Le nouveau nombre de likes du média.
+   */
   increaseLikes () {
     this.likes += 1
     return this.likes
   }
 
+  /**
+   * Diminue le nombre de likes du média de 1.
+   * @returns {number} Le nouveau nombre de likes du média.
+   */
   decreaseLikes () {
     this.likes -= 1
     return this.likes
   }
 
+  /**
+   * Obtient l'identifiant du média.
+   * @returns {number} L'identifiant du média.
+   */
   getMediaId () {
     return this.id
   }
 }
 
+/**
+ * Classe représentant une image, héritant de la classe Media.
+ * @class
+ */
 class Image extends Media {
+  /**
+   * Crée une instance de Image.
+   * @constructor
+   * @param {number} id - L'identifiant de l'image.
+   * @param {string} title - Le titre de l'image.
+   * @param {number} likes - Le nombre de likes de l'image.
+   * @param {string} date - La date de l'image.
+   * @param {string} image - Le nom de fichier de l'image.
+   */
   constructor (id, title, likes, date, image) {
     super(id, title, likes, date)
     this.image = image
   }
 
+  /**
+   * Obtient le DOM de la carte du média.
+   * @param {string} name - Le nom du répertoire contenant l'image.
+   * @returns {HTMLElement} Le DOM de la carte du média.
+   */
   get_Media_Card_DOM (name) {
     const path = `./assets/images/${name}/${this.image}`
 
@@ -50,7 +92,7 @@ class Image extends Media {
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('media-container')
 
-    // Création de la vidéo
+    // Création de l'image
     const img = document.createElement('img')
     img.classList.add('media')
     img.setAttribute('src', path)
@@ -98,6 +140,7 @@ class Image extends Media {
         mediaLikes.appendChild(mediaLikesIcon)
       }
     })
+
     // Ajout des éléments au DOM
     mediaLink.appendChild(mediaCard)
     mediaCard.appendChild(imgContainer)
@@ -110,6 +153,11 @@ class Image extends Media {
     return mediaLink
   }
 
+  /**
+   * Obtient le DOM de la lightbox du média.
+   * @param {string} name - Le nom du répertoire contenant l'image.
+   * @returns {HTMLElement} Le DOM de la lightbox du média.
+   */
   get_Media_Lightbox_DOM (name) {
     const path = `./assets/images/${name}/${this.image}`
 
@@ -133,7 +181,6 @@ class Image extends Media {
     h2Container.appendChild(lightboxMediaTitle)
 
     // Ajout des éléments au DOM
-
     lightboxMediaCard.appendChild(lightboxMedia)
     lightboxMediaCard.appendChild(h2Container)
 
@@ -141,12 +188,30 @@ class Image extends Media {
   }
 }
 
+/**
+ * Classe représentant une vidéo, héritant de la classe Media.
+ * @class
+ */
 class Video extends Media {
+  /**
+   * Crée une instance de Video.
+   * @constructor
+   * @param {number} id - L'identifiant de la vidéo.
+   * @param {string} title - Le titre de la vidéo.
+   * @param {number} likes - Le nombre de likes de la vidéo.
+   * @param {string} date - La date de la vidéo.
+   * @param {string} video - Le nom de fichier de la vidéo.
+   */
   constructor (id, title, likes, date, video) {
     super(id, title, likes, date)
     this.video = video
   }
 
+  /**
+   * Obtient le DOM de la carte du média.
+   * @param {string} name - Le nom du répertoire contenant la vidéo.
+   * @returns {HTMLElement} Le DOM de la carte du média.
+   */
   get_Media_Card_DOM (name) {
     const path = `./assets/images/${name}/${this.video}`
 
@@ -160,7 +225,6 @@ class Video extends Media {
     mediaLink.setAttribute('aria-label', `${this.title}, vue rapprochée`)
     mediaLink.setAttribute('tabindex', '0')
     mediaLink.setAttribute('role', 'button')
-
     mediaLink.id = this.id
 
     // Création du container du media
@@ -226,6 +290,11 @@ class Video extends Media {
     return mediaLink
   }
 
+  /**
+   * Obtient le DOM de la lightbox du média.
+   * @param {string} name - Le nom du répertoire contenant la vidéo.
+   * @returns {HTMLElement} Le DOM de la lightbox du média.
+   */
   get_Media_Lightbox_DOM (name) {
     const path = `./assets/images/${name}/${this.video}`
 
@@ -250,7 +319,6 @@ class Video extends Media {
     h2Container.appendChild(lightboxMediaTitle)
 
     // Ajout des éléments au DOM
-
     lightboxMediaCard.appendChild(lightboxMedia)
     lightboxMediaCard.appendChild(h2Container)
 
@@ -258,6 +326,12 @@ class Video extends Media {
   }
 }
 
+/**
+ * Fabrique de médias.
+ * @function
+ * @param {Array} Medias - Les médias à créer.
+ * @returns {Object} Un objet contenant les éléments médias et le total de likes.
+ */
 function MediaFactory (Medias) {
   const mediaElements = []
   let TotalizeLikes = 0
@@ -293,7 +367,4 @@ function MediaFactory (Medias) {
   }
 }
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  MediaFactory
-}
+export default MediaFactory
