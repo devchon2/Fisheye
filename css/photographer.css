@@ -24,7 +24,7 @@
 
 /* Styles généraux */
 #main-photographer {
-  display: block;
+  display: flex;
   margin: 0 100px;
 }
 
@@ -35,6 +35,17 @@
 
 #txtMsg {
   height: 100px;
+}
+
+#sortType{
+  display:inline-block;
+  position: absolute;
+  right:40px;
+  top: 10px;
+ cursor: pointer;
+  background-color: #901c1c;
+  color: white;
+  border-radius: 4px;
 }
 
 /* En-tête du photographe */
@@ -110,7 +121,10 @@
 }
 
 .filterField_select {
-  
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: relative;
   cursor: pointer;
   padding: 4px 8px;
@@ -121,20 +135,22 @@
   border-radius: 4px;
 }
 
-#filterField_select-label{
+#filterField_select-label {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
-
-
-#select-arrow{
+#select-arrow {
   width: 15px;
   height: 15px;
-  margin:10px 0px 10px 10px;
-  transform: rotate(90deg)
+  margin: 10px 0px 10px 5px;
+  transform: rotate(90deg);
+  position: relative;
+  left:40px;
 }
+
 
 
 .filterField_select-list {
@@ -153,18 +169,17 @@
 
 .filterField_select-list-item {
   padding: 4px 8px;
-  margin: 0 auto ;
+  margin: 0 auto;
   cursor: pointer;
   background-color: #901c1c;
   color: white;
   border-bottom: 1px solid #fff;
   width: 130px;
-
 }
 
 .filterField_select-list-item:hover {
-  scale:1.05;
-  border:2px solid #fff;
+  scale: 1.05;
+  border: 2px solid #fff;
   font-weight: 550;
 }
 
@@ -227,7 +242,6 @@
   align-items: center;
   font-size: 12px;
   font-weight: bold;
-  
 }
 
 .media-likes.liked i {
@@ -246,8 +260,6 @@
   }
 }
 
-
-
 .media-link {
   cursor: pointer;
 }
@@ -258,7 +270,7 @@
   align-items: center;
   font-size: 1rem;
   font-weight: bold;
-  width: 50px
+  width: 50px;
 }
 
 .fa-heart {
@@ -266,7 +278,6 @@
   font-size: 1.2rem;
   padding-left: 5px;
 }
-
 
 .submit-form-btn,
 .contact_button {
@@ -287,11 +298,11 @@
   margin: 33%;
 }
 
-#btn-close{
+#btn-close {
   margin: 20px auto;
   font-size: 1.4rem;
-  height:50px;
-  width:100px;
+  height: 50px;
+  width: 100px;
   order: 1;
   font-size: 20px;
   font-weight: 550;
@@ -303,7 +314,6 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  
 }
 
 .submit-form-btn {
@@ -315,10 +325,8 @@
 }
 
 .contact_button:hover {
-  
-  
   font-weight: bolder;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .contact_modal {
@@ -354,12 +362,23 @@
   box-sizing: content-box;
 }
 
-#modalTitle,#modalTitle_Validate {
+#modalTitle,
+#modalTitle_Validate {
   flex-direction: column;
   font-size: 48px;
   font-weight: normal;
   text-align: start;
   align-self: start;
+  line-height: 1;
+}
+
+#modalTitle_Validate {
+  font-size: 36px;
+  width: 100%;
+  margin: 0 -50px 0 auto;
+  font-weight: normal;
+  text-align: center;
+  align-self: center;
   line-height: 1;
 }
 
@@ -369,10 +388,10 @@
   align-self: flex-start;
 }
 .modal_validate {
-  display:block;
+  display: block;
   text-align: center;
-  margin:20px auto;
-  font-weight:bold;
+  margin: 20px auto;
+  font-weight: bold;
 }
 
 form {

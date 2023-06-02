@@ -35,7 +35,6 @@
   z-index: 1;
   /* Animation d'ouverture */
   animation: lightboxIn 0.7s ease;
-
 }
 
 @keyframes lightboxIn {
@@ -48,7 +47,7 @@
   }
   100% {
     transform: scale(1);
-    opacity:1;
+    opacity: 1;
   }
 }
 
@@ -80,7 +79,6 @@
   top: 50%;
   height: 80px;
   opacity: 0.4;
-
 }
 
 .next {
@@ -123,7 +121,6 @@
   /* Ordre d'affichage */
   order: 1;
   margin: auto;
-  
 }
 
 .LightboxIn {
@@ -135,9 +132,9 @@
   width: 99%;
   height: 95%;
   box-shadow: 2px 0 0 0px lightgrey;
-  box-sizing:content-box;
-  border-radius:5px;
-  right:-1px;
+  box-sizing: content-box;
+  border-radius: 5px;
+  right: -1px;
 }
 
 .LightboxInTitle {
