@@ -110,6 +110,7 @@ class Image extends Media {
     const mediaLikes = document.createElement('p');
     mediaLikes.classList.add('media-likes');
     mediaLikes.textContent = `${this.likes} `;
+    mediaLikes.setAttribute('role', 'button');
 
     const mediaLikesIcon = document.createElement('i');
     mediaLikesIcon.classList.add('far', 'fa-heart');
@@ -253,7 +254,8 @@ class Video extends Media {
     const mediaLikes = document.createElement('p');
     mediaLikes.classList.add('media-likes');
     mediaLikes.textContent = `${this.likes} `;
-    mediaLikes.setAttribute('aria-label', `${this.likes} likes`);
+    mediaLikes.setAttribute('aria-label','likes');
+    mediaLikes.setAttribute('role','button');
     const mediaLikesIcon = document.createElement('i');
     mediaLikesIcon.classList.add('far', 'fa-heart');
     mediaLikes.appendChild(mediaLikesIcon);

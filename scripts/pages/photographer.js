@@ -50,7 +50,6 @@ const Pheader = document.querySelector('.photograph-header');
 const Pbody = document.querySelector('.photograph-body');
 
 // Récupération des médias du photographe
-// eslint-disable-next-line eqeqeq
 let Usermedias = fullmedias.filter((media) => media.photographerId == id);
 Usermedias = sortMedia('pop', Usermedias);
 // Afficher la liste déroulante lorsque l'utilisateur clique sur le bouton
@@ -71,7 +70,7 @@ document.addEventListener('click', (event) => {
 const TotalLikes = document.createElement('p');
 TotalLikes.classList.add('TotalLikes');
 TotalLikes.setAttribute('aria-label', 'Total des likes');
-TotalLikes.setAttribute('tabindex', '0');
+
 
 // Récupération des données
 Pbody.appendChild(MediasContainer);
@@ -121,6 +120,13 @@ function displayData(photograph, medias) {
         const lightboxDOM = new LightBox(medias, nameShortened);
         lightboxDOM.open();
       };
+      mediamodelDOM.onkeydown = (event) => {
+        if (event.key === 'Enter') {
+          mediamodelDOM.classList.add('currentMedia');
+          const lightboxDOM = new LightBox(medias, nameShortened);
+          lightboxDOM.open();
+        }
+      }
     }
   }
 
