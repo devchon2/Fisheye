@@ -49,7 +49,7 @@ function sortbyPops(mediaToSort) {
   document.getElementById('date').setAttribute('aria-selected', 'false');
   document.getElementById('titre').setAttribute('aria-selected', 'false');
   document
-    .querySelector('.filterField_select')
+    .querySelector('.filterField_select-list')
     .setAttribute('aria-activedescendant', 'pop');
 
   return medias;
@@ -65,8 +65,8 @@ function sortbyDate(mediaToSort) {
   document.getElementById('date').setAttribute('aria-selected', 'true');
   document.getElementById('titre').setAttribute('aria-selected', 'false');
   document
-    .querySelector('.filterField_select')
-    .setAttribute('aria-active-descendant', 'date');
+    .querySelector('.filterField_select-list')
+    .setAttribute('aria-activedescendant', 'date');
 
   return medias;
 }
@@ -80,10 +80,7 @@ function sortbyTitle(mediaToSort) {
   document.getElementById('pop').setAttribute('aria-selected', 'false');
   document.getElementById('date').setAttribute('aria-selected', 'false');
   document.getElementById('titre').setAttribute('aria-selected', 'true');
-  document
-    .querySelector('.filterField_select')
-    .setAttribute('aria-active-descendant', 'titre');
-
+  
   return medias;
 }
 
@@ -96,20 +93,20 @@ function sortMedia(sortBy, medias) {
     case 'pop':
       SortedUsermedias = sortbyPops(medias);
       document
-        .querySelector('.filterField_select')
-        .setAttribute('aria-active-descendant', 'pop');
+        .querySelector('.filterField_select-list')
+        .setAttribute('aria-activedescendant', 'pop');
       break;
     case 'date':
       SortedUsermedias = sortbyDate(medias);
       document
-        .querySelector('.filterField_select')
-        .setAttribute('aria-active-descendant', 'date');
+        .querySelector('.filterField_select-list')
+        .setAttribute('aria-activedescendant', 'date');
       break;
     case 'titre':
       SortedUsermedias = sortbyTitle(medias);
       document
-        .querySelector('.filterField_select')
-        .setAttribute('aria-active-descendant', 'titre');
+        .querySelector('.filterField_select-list')
+        .setAttribute('aria-activedescendant', 'titre');
       break;
     default:
       SortedUsermedias = sortbyPops(medias);

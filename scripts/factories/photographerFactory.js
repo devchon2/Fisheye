@@ -129,7 +129,7 @@ function photographerFactory(data) {
     priceDOM.classList.add('artistePricing');
     priceDOM.textContent = `${price}€/jour`;
     priceDOM.setAttribute('aria-label', `${price}€/jour`);
-    priceDOM.setAttribute('tabindex', '-1');
+    priceDOM.setAttribute('tabindex', '0');
 
     // Création du container du portrait
     const portraitContainer = document.createElement('span');

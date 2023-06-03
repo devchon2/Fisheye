@@ -24,38 +24,29 @@
             <!-- Logo du site -->
             <img src='./assets/images/logo.png' class='logo' alt='Fisheye Home Page'>
         </a>
-        </h1>
+        </h1>aria
     </header>
     <main id='main-photographer' aria-hidden='false'>
         <!-- Section pour l'en-tête du photographe -->
-        <div class='photograph-header' tabindex='0'></div>
+        <div class='photograph-header' ></div>
         <!-- Section pour le corps du photographe -->
         <div class='photograph-body'>
             <div class='FilterField'>
-                <!-- Libellé pour le tri des photographes -->
                 Trier par :
-                <button role='listbox' tabindex='0' class='filterField_select' aria-expanded='false'
-                    aria-haspopup='true' aria-activedescendant=''>
+                <button tabindex='0' class='filterField_select' aria-expanded='false' aria-haspopup='true' >
                     <span id='filterField_select-label'>
                         <span id='sortType'>Popularité </span>
-                        <img id='select-arrow' class='down' src='./assets/icons/LightboxArrowlist.svg'
-                            alt='decrease sense'>
+                        <img id='select-arrow' class='down' src='./assets/icons/LightboxArrowlist.svg' alt='decrease sense'>
                     </span>
-                    <ul class='filterField_select-list hidden'>
-                        <!-- Options de tri -->
-                        <li role='option' id='pop' aria-selected='false' class='filterField_select-list-item'>
-                            Popularité
-                        </li>
-                        <li role='option' id='date' aria-selected='false' class='filterField_select-list-item'>
-                            Date
-                        </li>
-                        <li role='option' id='titre' aria-selected='false' class='filterField_select-list-item'>
-                            Titre
-                        </li>
+                    <ul role='listbox' class='filterField_select-list hidden'>
+                        <li role='option' id='pop' aria-selected='false' class='filterField_select-list-item'>Popularité</li>
+                        <li role='option' id='date' aria-selected='false' class='filterField_select-list-item'>Date</li>
+                        <li role='option' id='titre' aria-selected='false' class='filterField_select-list-item'>Titre</li>
                     </ul>
                 </button>
             </div>
         </div>
+        
     </main>
     <!-- Lightbox -->
 
