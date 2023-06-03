@@ -267,9 +267,9 @@ class Video extends Media {
         mediaLikesIcon.classList.add("fas");
         mediaLikes.textContent = `${newLikes} `;
         const totalLikes = document.querySelector(".TotalLikes");
-        totalLikes.innerHTML = `${Number(
-          totalLikes.textContent
-        )} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
+        totalLikes.innerHTML = `${
+          Number(totalLikes.textContent) + 1
+        } <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
         mediaLikes.appendChild(mediaLikesIcon);
       } else {
         const newLikes = this.decreaseLikes();
@@ -278,9 +278,9 @@ class Video extends Media {
         mediaLikesIcon.classList.add("far");
         mediaLikes.textContent = `${newLikes} `;
         const totalLikes = document.querySelector(".TotalLikes");
-        totalLikes.innerHTML = `${Number(
-          totalLikes.textContent
-        )} <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
+        totalLikes.innerHTML = `${
+          Number(totalLikes.textContent) - 1
+        } <i aria-label="likes" class="fas fa-heart" aria-hidden="true"></i>`;
         mediaLikes.appendChild(mediaLikesIcon);
       }
     });

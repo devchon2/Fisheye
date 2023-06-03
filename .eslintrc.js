@@ -10,7 +10,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  "rules": {
+  rules: {
     "eqeqeq": "off",
     "no-use-before-define": "off",
     "no-console": "off",

@@ -128,7 +128,6 @@
   display: flex;
   object-fit: cover;
   object-position: center;
-  repeat: no-repeat;
   width: 99%;
   height: 95%;
   box-shadow: 2px 0 0 0px lightgrey;

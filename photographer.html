@@ -27,17 +27,16 @@
     </header>
     <main id="main-photographer" aria-hidden="false">
         <!-- Section pour l'en-tête du photographe -->
-        <section class="photograph-header" tabindex="0"></section>
+        <div class="photograph-header" tabindex="0"></div>
         <!-- Section pour le corps du photographe -->
-        <section class="photograph-body">
-
+        <div class="photograph-body">
             <div class="FilterField">
                 <!-- Libellé pour le tri des photographes -->
                 Trier par :
                 <div role="listbox" tabindex="0" class="filterField_select" aria-expanded="false">
-                    <span id="filterField_select-label ">
+                    <span id="filterField_select-label">
                         <span id="sortType">Popularité </span>
-                        <img id='select-arrow' src='./assets/icons/LightboxArrowlist.svg' alt="Descendant">
+                        <img id='select-arrow' class="down" src='./assets/icons/LightboxArrowlist.svg' alt="Descendant">
                     </span>
                     <ul class="filterField_select-list hidden">
                         <!-- Options de tri -->
@@ -53,7 +52,7 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
     <!-- Lightbox -->
 
@@ -66,7 +65,7 @@
             </div>
             <figure class=" lightbox_media-Container">
             </figure>
-            <img class="prev" role="button" src="assets/icons/LightboxArrow.svg" alt="media précédent" >
+            <img class="prev" role="button" src="assets/icons/LightboxArrow.svg" alt="media précédent">
             <img class="next" role="button" src="assets/icons/LightboxArrow.svg" alt="media suivant">
         </div>
     </div>
@@ -85,7 +84,7 @@
 
                 <h2 id="modalTitle_Validate" class="hidden">
                     <!-- Titre de la modal de contact -->
-                    Merci ! 
+                    Merci !
                 </h2>
 
                 <!-- Bouton de fermeture de la modal de contact -->
@@ -95,15 +94,15 @@
             <form name="reserve" class="reserve visible">
                 <div class="formData">
                     <label class="text-label" for="first">Prénom</label>
-                    <input class="text-control" type="text" id="first" name="first" minlength="2">
+                    <input class="text-control" type="text" id="first" name="first" minlength="2" autocomplete="given-name" aria-autocomplete="inline">
                 </div>
                 <div class="formData">
                     <label class="text-label" for="last">Nom</label>
-                    <input class="text-control" type="text" id="last" name="last" minlength="2">
+                    <input class="text-control" type="text" id="last" name="last" minlength="2" autocomplete="family-name" aria-autocomplete="inline">
                 </div>
                 <div class="formData">
                     <label class="text-label" for="email">E-mail</label>
-                    <input class="text-control" type="email" id="email" name="email">
+                    <input class="text-control" type="email" id="email" name="email" autocomplete="off" aria-autocomplete="none">
                 </div>
                 <div class="formData">
                     <label class="text-label" for="txtMsg">Votre message</label>

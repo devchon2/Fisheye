@@ -201,14 +201,11 @@ class LightBox {
           this.close.bind(this);
         }
       });
-      this.lightboxBG.addEventListener(
-        "keydown",
-        (e) => {
-          if (e.key === "Escape" || e.key === 27) {
-            this.close();
-          }
-        },
-      );
+      this.lightboxBG.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" || e.key === 27) {
+          this.close();
+        }
+      });
 
       document.addEventListener("click", (e) => {
         if (e.target === this.lightboxBG && e.target !== this.lightbox) {
@@ -265,7 +262,7 @@ class LightBox {
   /**
    * Close the lightbox.
    */
-  close() {    
+  close() {
     const currentMedia = document.querySelector(".currentMedia");
     currentMedia.classList.remove("currentMedia");
     const body = document.getElementById("main-photographer");
