@@ -11,7 +11,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    "eqeqeq": "off",
+    // "eqeqeq": "off",
     "no-use-before-define": "off",
     "no-console": "off",
     "max-classes-per-file": ["error", 3],

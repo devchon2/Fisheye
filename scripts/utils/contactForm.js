@@ -143,8 +143,8 @@ function closeForm() {
  * Confirme la validation du formulaire.
  */
 function confirmValidation() {
-  const valide = true;
-  if (valide) {
+  // const valide = true; pour tester le formulaire valide
+  if (validate()) {
     console.log("Formulaire valide");
     console.log("firstName", inputFirstName.value);
     console.log("lastName", inputLastName.value);
