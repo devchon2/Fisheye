@@ -14,7 +14,7 @@ const photographer = photographers.find((element) => element.id == id);
  * Fonction pour récupérer les données depuis le fichier JSON
  */
 async function getDatas() {
-  const response = await fetch("./data/photographers.json");
+  const response = await fetch('./data/photographers.json');
   // et bien retourner le tableau photographers seulement une fois récupéré
   const Datas = await response.json();
   return Datas;
@@ -26,7 +26,7 @@ async function getDatas() {
 function getIdFromUrl() {
   const url = window.location.search; // Récupère l'url
   const urlParams = new URLSearchParams(url); // Récupère les paramètres de l'url
-  const urlId = urlParams.get("id"); // Récupère l'id de l'url
+  const urlId = urlParams.get('id'); // Récupère l'id de l'url
   return urlId;
 }
 
@@ -35,7 +35,7 @@ function getIdFromUrl() {
  */
 function getNameByID() {
   const fullname = photographer.name; // Récupère le nom du photographe
-  const Pname = fullname.split(" ")[0]; // Récupère le prénom du photographe
+  const Pname = fullname.split(' ')[0]; // Récupère le prénom du photographe
   return Pname;
 }
 
@@ -45,6 +45,13 @@ function getNameByID() {
 function sortbyPops(mediaToSort) {
   const medias = mediaToSort;
   medias.sort((a, b) => b.likes - a.likes);
+  document.getElementById('pop').setAttribute('aria-selected', 'true');
+  document.getElementById('date').setAttribute('aria-selected', 'false');
+  document.getElementById('titre').setAttribute('aria-selected', 'false');
+  document
+    .querySelector('.filterField_select')
+    .setAttribute('aria-active-descendant', 'pop');
+
   return medias;
 }
 
@@ -54,6 +61,13 @@ function sortbyPops(mediaToSort) {
 function sortbyDate(mediaToSort) {
   const medias = mediaToSort;
   medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+  document.getElementById('pop').setAttribute('aria-selected', 'false');
+  document.getElementById('date').setAttribute('aria-selected', 'true');
+  document.getElementById('titre').setAttribute('aria-selected', 'false');
+  document
+    .querySelector('.filterField_select')
+    .setAttribute('aria-active-descendant', 'date');
+
   return medias;
 }
 
@@ -63,6 +77,13 @@ function sortbyDate(mediaToSort) {
 function sortbyTitle(mediaToSort) {
   const medias = mediaToSort;
   medias.sort((a, b) => a.title.localeCompare(b.title));
+  document.getElementById('pop').setAttribute('aria-selected', 'false');
+  document.getElementById('date').setAttribute('aria-selected', 'false');
+  document.getElementById('titre').setAttribute('aria-selected', 'true');
+  document
+    .querySelector('.filterField_select')
+    .setAttribute('aria-active-descendant', 'titre');
+
   return medias;
 }
 
@@ -72,14 +93,23 @@ function sortbyTitle(mediaToSort) {
 function sortMedia(sortBy, medias) {
   let SortedUsermedias;
   switch (sortBy) {
-    case "pop":
+    case 'pop':
       SortedUsermedias = sortbyPops(medias);
+      document
+        .querySelector('.filterField_select')
+        .setAttribute('aria-active-descendant', 'pop');
       break;
-    case "date":
+    case 'date':
       SortedUsermedias = sortbyDate(medias);
+      document
+        .querySelector('.filterField_select')
+        .setAttribute('aria-active-descendant', 'date');
       break;
-    case "titre":
+    case 'titre':
       SortedUsermedias = sortbyTitle(medias);
+      document
+        .querySelector('.filterField_select')
+        .setAttribute('aria-active-descendant', 'titre');
       break;
     default:
       SortedUsermedias = sortbyPops(medias);

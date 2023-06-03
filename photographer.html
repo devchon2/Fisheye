@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang='fr'>
 
 <head>
     <!-- Lien vers la feuille de style CSS -->
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
+    <link href='./css/style.css' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
     <!-- Icône du site -->
-    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
 
     <!-- Lien vers la police de caractères -->
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=DM+Sans&display=swap' rel='stylesheet'>
     <!-- Script pour utiliser les icônes de Font Awesome -->
-    <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
+    <script src='https://kit.fontawesome.com/c6b75d90fa.js' crossorigin='anonymous'></script>
 
     <!-- Titre de la page -->
     <title>Fisheye - photographe</title>
@@ -20,104 +20,112 @@
 <body>
     <header>
         <!-- Lien vers la page d'accueil -->
-        <a href="./index.html">
+        <a href='./index.html'>
             <!-- Logo du site -->
-            <img src="./assets/images/logo.png" class="logo" alt="Fisheye Page d'accueil">
+            <img src='./assets/images/logo.png' class='logo' alt='Fisheye Home Page'>
         </a>
+        </h1>
     </header>
-    <main id="main-photographer" aria-hidden="false">
+    <main id='main-photographer' aria-hidden='false'>
         <!-- Section pour l'en-tête du photographe -->
-        <div class="photograph-header" tabindex="0"></div>
+        <div class='photograph-header' tabindex='0'></div>
         <!-- Section pour le corps du photographe -->
-        <div class="photograph-body">
-            <div class="FilterField">
+        <div class='photograph-body'>
+            <div class='FilterField'>
                 <!-- Libellé pour le tri des photographes -->
                 Trier par :
-                <div role="listbox" tabindex="0" class="filterField_select" aria-expanded="false">
-                    <span id="filterField_select-label">
-                        <span id="sortType">Popularité </span>
-                        <img id='select-arrow' class="down" src='./assets/icons/LightboxArrowlist.svg' alt="Descendant">
+                <button role='listbox' tabindex='0' class='filterField_select' aria-expanded='false'
+                    aria-haspopup='true' aria-activedescendant=''>
+                    <span id='filterField_select-label'>
+                        <span id='sortType'>Popularité </span>
+                        <img id='select-arrow' class='down' src='./assets/icons/LightboxArrowlist.svg'
+                            alt='decrease sense'>
                     </span>
-                    <ul class="filterField_select-list hidden">
+                    <ul class='filterField_select-list hidden'>
                         <!-- Options de tri -->
-                        <li role="option" id="pop" class="filterField_select-list-item">
+                        <li role='option' id='pop' aria-selected='false' class='filterField_select-list-item'>
                             Popularité
                         </li>
-                        <li role="option" id="date" class="filterField_select-list-item">
+                        <li role='option' id='date' aria-selected='false' class='filterField_select-list-item'>
                             Date
                         </li>
-                        <li role="option" id="titre" class="filterField_select-list-item">
+                        <li role='option' id='titre' aria-selected='false' class='filterField_select-list-item'>
                             Titre
                         </li>
                     </ul>
-                </div>
+                </button>
             </div>
         </div>
     </main>
     <!-- Lightbox -->
 
-    <div class="lightbox-Bg hidden" aria-hidden="true">
-        <div class="lightbox" role="dialog">
-            <div class="lightbox_close_btn-div">
+    <div class='lightbox-Bg hidden' aria-hidden='true'>
+        <div class='lightbox' role='dialog' aria-label='image CloseUp View'>
+            <div class='lightbox_close_btn-div'>
                 <!-- Bouton de fermeture de la lightbox -->
-                <img role="button" class="lightbox_Close-btn" aria-label="fermer la lightbox"
-                    src="./assets/icons/LightboxCloseBtn.svg" alt="Bouton de fermeture">
+                <img role='button' class='lightbox_Close-btn' aria-label='Close dialog'
+                    src='./assets/icons/LightboxCloseBtn.svg' alt='Bouton de fermeture'>
             </div>
-            <figure class=" lightbox_media-Container">
+            <figure class=' lightbox_media-Container'>
             </figure>
-            <img class="prev" role="button" src="assets/icons/LightboxArrow.svg" alt="media précédent">
-            <img class="next" role="button" src="assets/icons/LightboxArrow.svg" alt="media suivant">
+            <img class='prev' role='button' src='assets/icons/LightboxArrow.svg' alt='media précédent'>
+            <img class='next' role='button' src='assets/icons/LightboxArrow.svg' alt='media suivant'>
         </div>
     </div>
 
     <!-- Modal de contact -->
-    <div class="contact_modal hidden" role="dialog" aria-hidden="true" aria-describedby="modalTitle">
-        <div class="modal">
+    <div class='contact_modal hidden' role='dialog' aria-hidden='true'>
+        <div class='modal' aria-labelledby=' modalTitle'>
             <header>
-                <h2 id="modalTitle" class="visible">
+                <h2 id='modalTitle' class='visible'>
                     <!-- Titre de la modal de contact -->
                     Contactez-moi
                     <br>
-                    <span id="photographerName"></span>
+                    <span id='photographerName'></span>
                 </h2>
 
 
-                <h2 id="modalTitle_Validate" class="hidden">
+                <h2 id='modalTitle_Validate' class='hidden'>
                     <!-- Titre de la modal de contact -->
                     Merci !
                 </h2>
 
                 <!-- Bouton de fermeture de la modal de contact -->
-                <img role="button" tabindex="0" class="close" aria-label="bouton de cloture de la modale"
-                    src="./assets/icons/close.svg" alt="bouton en forme de croix">
+                <img role='button' tabindex='0' class='close' aria-label='bouton de cloture de la modale'
+                    src='./assets/icons/close.svg' alt=''>
             </header>
-            <form name="reserve" class="reserve visible">
-                <div class="formData">
-                    <label class="text-label" for="first">Prénom</label>
-                    <input class="text-control" type="text" id="first" name="first" minlength="2" autocomplete="given-name" aria-autocomplete="inline">
+            <form name='reserve' class='reserve visible'>
+                <div class='formData'>
+                    <label for='first' id='firstLabel' class='text-label'>Prénom</label>
+                    <input class='text-control' type='text' id='first' name='first' minlength='2'
+                        autocomplete='given-name' aria-autocomplete='inline' aria-labelledby='firstLabel'>
                 </div>
-                <div class="formData">
-                    <label class="text-label" for="last">Nom</label>
-                    <input class="text-control" type="text" id="last" name="last" minlength="2" autocomplete="family-name" aria-autocomplete="inline">
+                <div class='formData'>
+                    <label for='last' id='lastLabel' class='text-label'>Nom</label>
+                    <input class='text-control' type='text' id='last' name='last' minlength='2'
+                        autocomplete='family-name' aria-autocomplete='inline' aria-labelledby='lastLabel'>
                 </div>
-                <div class="formData">
-                    <label class="text-label" for="email">E-mail</label>
-                    <input class="text-control" type="email" id="email" name="email" autocomplete="off" aria-autocomplete="none">
+                <div class='formData'>
+                    <label for='email' id='emailLabel' class='text-label'>E-mail</label>
+                    <input class='text-control' type='email' id='email' name='email' autocomplete='off'
+                        aria-autocomplete='none' aria-labelledby='emailLabel'>
                 </div>
-                <div class="formData">
-                    <label class="text-label" for="txtMsg">Votre message</label>
-                    <textarea id="txtMsg" class="text-control" name="txtMsg" minlength="50" maxlength="200"></textarea>
+                <div class='formData'>
+                    <label for='txtMsg' id='txtMsgLabel' class='text-label'>Votre message</label>
+                    <textarea id='txtMsg' class='text-control' name='txtMsg' minlength='50' maxlength='200'
+                        aria-labelledby='txtMsgLabel'></textarea>
                 </div>
-                <button class="submit-form-btn" type="submit">Envoyer</button>
+                <button class='submit-form-btn' type='submit' aria-label='Send'>Envoyer</button>
             </form>
-            <p class="modal_validate hidden"> Votre message a bien été envoyé!</p>
 
-            <button id="btn-close" class="hidden">Fermer</button>
+            <p class='modal_validate hidden'> Votre message a bien été envoyé!</p>
+
+            <button id='btn-close' class='hidden' aria-label="Close Contact Form">Fermer</button>
         </div>`
     </div>
     <!-- Scripts -->
 
-    <script src="./scripts/pages/photographer.js" type="module"></script>
+    <script src='./scripts/pages/photographer.js' type='module'></script>
 
 </body>
 

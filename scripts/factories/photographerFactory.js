@@ -15,36 +15,36 @@ function photographerFactory(data) {
    */
   function getUserCardDOM() {
     // Création des cartes
-    const article = document.createElement("article");
-    article.classList.add("photographersCard");
+    const article = document.createElement('article');
+    article.classList.add('photographersCard');
 
     // Création du container de la figure
-    const figureContainer = document.createElement("figure");
-    figureContainer.classList.add("figureContainer");
+    const figureContainer = document.createElement('figure');
+    figureContainer.classList.add('figureContainer');
 
     // Création de la Div de l'image
-    const imgContainer = document.createElement("div");
-    imgContainer.classList.add("imgContainer");
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add('imgContainer');
 
     // Création de l'image
-    const img = document.createElement("img");
-    img.classList.add("PortraitImg");
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", name);
+    const img = document.createElement('img');
+    img.classList.add('PortraitImg');
+    img.setAttribute('src', picture);
+    img.setAttribute('alt', name);
 
     // Création de la Div du Texte de Présentation
-    const infosContainer = document.createElement("figcaption");
-    infosContainer.classList.add("MoreInfos");
+    const infosContainer = document.createElement('figcaption');
+    infosContainer.classList.add('MoreInfos');
 
     // Création du nom de l'artiste
-    const artisteName = document.createElement("h2");
-    artisteName.classList.add("artisteName");
+    const artisteName = document.createElement('h2');
+    artisteName.classList.add('artisteName');
     artisteName.textContent = name;
 
     // Création du lien vers la page du photographe pour l'image
-    const imgPageLink = document.createElement("a");
-    imgPageLink.classList.add("imgPageLink");
-    imgPageLink.setAttribute("aria-label", `${name}`);
+    const imgPageLink = document.createElement('a');
+    imgPageLink.classList.add('imgPageLink');
+    imgPageLink.setAttribute('aria-label', `${name}`);
     imgPageLink.href = `photographer.html?id=${id}`;
     imgContainer.appendChild(img);
     imgPageLink.appendChild(imgContainer);
@@ -53,18 +53,18 @@ function photographerFactory(data) {
     figureContainer.appendChild(imgPageLink);
 
     // Création de la ville de l'artiste
-    const cityLocation = document.createElement("address");
-    cityLocation.classList.add("artisteLocation");
+    const cityLocation = document.createElement('address');
+    cityLocation.classList.add('artisteLocation');
     cityLocation.textContent = `${city}, ${country}`;
 
     // Création de la citation de l'artiste
-    const citation = document.createElement("blockquote");
-    citation.classList.add("artistePunchline");
+    const citation = document.createElement('blockquote');
+    citation.classList.add('artistePunchline');
     citation.textContent = tagline;
 
     // Création du prix de l'artiste
-    const pricing = document.createElement("p");
-    pricing.classList.add("artistePricing");
+    const pricing = document.createElement('p');
+    pricing.classList.add('artistePricing');
     pricing.textContent = `${price}€/jour`;
 
     // Construction du module Final de la carte
@@ -87,66 +87,67 @@ function photographerFactory(data) {
 
     picture = `./assets/photographers/${portrait}`;
     // Création du container photographe
-    const UserInfosContainer = document.createElement("figure");
-    UserInfosContainer.classList.add("photographContainer");
+    const UserInfosContainer = document.createElement('figure');
+    UserInfosContainer.classList.add('photographContainer');
 
     // Création de la div de résumé
-    const resumeContainer = document.createElement("section");
-    resumeContainer.classList.add("resumeContainer");
+    const resumeContainer = document.createElement('section');
+    resumeContainer.classList.add('resumeContainer');
 
     // Création du container des infos photographe
-    const UserInfosText = document.createElement("figcaption");
-    UserInfosText.classList.add("UserInfosText");
+    const UserInfosText = document.createElement('figcaption');
+    UserInfosText.classList.add('UserInfosText');
 
     // Création du nom de l'artiste
-    const artisteName = document.createElement("h2");
+    const artisteName = document.createElement('h1');
     artisteName.textContent = name;
-    artisteName.classList.add("artisteName");
-    artisteName.setAttribute("aria-label", `${name}`);
-    artisteName.setAttribute("tabindex", "0");
+    artisteName.classList.add('artisteName');
+    artisteName.setAttribute('aria-label', `${name}`);
+    artisteName.setAttribute('tabindex', '0');
+    artisteName.id = 'photographerName';
 
     // Création de la ville de l'artiste
-    const cityLocation = document.createElement("address");
+    const cityLocation = document.createElement('address');
     cityLocation.textContent = `${city}, ${country}`;
-    cityLocation.classList.add("artisteLocation");
-    cityLocation.setAttribute("aria-label", `${city}, ${country}`);
-    cityLocation.setAttribute("tabindex", "0");
+    cityLocation.classList.add('artisteLocation');
+    cityLocation.setAttribute('aria-label', `${city}, ${country}`);
+    cityLocation.setAttribute('tabindex', '0');
 
     // Création de la citation de l'artiste
-    const citation = document.createElement("blockquote");
+    const citation = document.createElement('blockquote');
     citation.textContent = tagline;
-    citation.classList.add("artistePunchline");
-    citation.setAttribute("aria-label", `${tagline}`);
-    citation.setAttribute("tabindex", "0");
+    citation.classList.add('artistePunchline');
+    citation.setAttribute('aria-label', `${tagline}`);
+    citation.setAttribute('tabindex', '0');
 
     // Création du nom dans la modale
-    const Pname = document.getElementById("photographerName");
+    const Pname = document.getElementById('photographerName');
     Pname.textContent = name;
 
     // Création du prix de l'artiste
-    const priceDOM = document.createElement("p");
-    priceDOM.classList.add("artistePricing");
+    const priceDOM = document.createElement('p');
+    priceDOM.classList.add('artistePricing');
     priceDOM.textContent = `${price}€/jour`;
-    priceDOM.setAttribute("aria-label", `${price}€/jour`);
-    priceDOM.setAttribute("tabindex", "2");
+    priceDOM.setAttribute('aria-label', `${price}€/jour`);
+    priceDOM.setAttribute('tabindex', '-1');
 
     // Création du container du portrait
-    const portraitContainer = document.createElement("span");
-    portraitContainer.classList.add("portraitContainer");
-    portraitContainer.setAttribute("aria-label", `${name}`);
-    portraitContainer.setAttribute("tabindex", "0");
+    const portraitContainer = document.createElement('span');
+    portraitContainer.classList.add('portraitContainer');
+    portraitContainer.setAttribute('tabindex', '0');
 
     // Création du portrait
-    const photo = document.createElement("img");
-    photo.classList.add("portrait");
-    photo.setAttribute("src", picture);
-    photo.setAttribute("alt", name);
+    const photo = document.createElement('img');
+    photo.classList.add('portrait');
+    photo.setAttribute('src', picture);
+    photo.setAttribute('alt', name);
+    photo.setAttribute('ariaLabelledby', 'photographerName');
 
     // Récupération du bouton Contact
-    const contactButton = document.createElement("button");
-    contactButton.classList.add("contact_button");
-    contactButton.textContent = "Contactez-moi";
-    contactButton.setAttribute("aria-label", "Contactez-moi");
+    const contactButton = document.createElement('button');
+    contactButton.classList.add('contact_button');
+    contactButton.textContent = 'Contactez-moi';
+    contactButton.setAttribute('aria-label', 'Contact me');
     UserInfosContainer.appendChild(UserInfosText);
     UserInfosContainer.appendChild(portraitContainer);
     UserInfosContainer.appendChild(contactButton);
@@ -154,7 +155,7 @@ function photographerFactory(data) {
     UserInfosText.appendChild(cityLocation);
     UserInfosText.appendChild(citation);
     portraitContainer.appendChild(photo);
-    const main = document.getElementById("main-photographer");
+    const main = document.getElementById('main-photographer');
     resumeContainer.appendChild(priceDOM);
     main.appendChild(resumeContainer);
     return UserInfosContainer;

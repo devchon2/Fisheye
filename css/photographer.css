@@ -30,7 +30,11 @@
 
 #photographerName {
   display: flex;
-  margin-top: 5px;
+  justify-content: start;
+  color: #d3573c;
+  font-size: 2.5rem;
+  font-weight: 500;
+  width: 100%;
 }
 
 #txtMsg {
@@ -45,8 +49,8 @@
   background-color: #901c1c;
   color: white;
   border-radius: 4px;
-  margin-right:20px;
-  padding:10px 0;
+  margin-right: 20px;
+  padding: 10px 0;
 }
 
 /* En-tête du photographe */
@@ -76,7 +80,7 @@
   width: 33.33%;
 }
 
-.UserInfosText .artisteName {
+.artisteName {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,16 +138,17 @@
   margin: 0 20px;
   width: 130px;
   border-radius: 4px;
+  border: none;
 }
 
 #filterField_select-label {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:100%;
+  width: 100%;
 }
 
-#select-arrow.down{
+#select-arrow.down {
   width: 15px;
   height: 15px;
   transform: rotate(90deg);

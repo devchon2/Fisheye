@@ -3,15 +3,15 @@
  */
 
 // Récupération des éléments du DOM
-const BGmodal = document.querySelector(".contact_modal");
-const modal = document.querySelector(".modal");
-const Body = document.getElementById("main-photographer");
-const CloseCrossBtn = document.querySelector(".close");
-const CloseModalBtn = document.getElementById("btn-close");
-const ValidateModal = document.querySelector(".modal_validate");
-const form = document.querySelector("form.reserve");
-const modalTitle = document.getElementById("modalTitle");
-const modalTitleValidation = document.getElementById("modalTitle_Validate");
+const BGmodal = document.querySelector('.contact_modal');
+const modal = document.querySelector('.modal');
+const Body = document.getElementById('main-photographer');
+const CloseCrossBtn = document.querySelector('.close');
+const CloseModalBtn = document.getElementById('btn-close');
+const ValidateModal = document.querySelector('.modal_validate');
+const form = document.querySelector('form.reserve');
+const modalTitle = document.getElementById('modalTitle');
+const modalTitleValidation = document.getElementById('modalTitle_Validate');
 
 // Récupération des valeurs des éléments du formulaire
 const inputFirstName = document.forms.reserve.first;
@@ -29,49 +29,49 @@ const formfieldsObjects = [
   {
     formfield: inputFirstName,
     condition: () => !validateFirstName(),
-    message: ""
+    message: ''
   },
   {
     formfield: inputLastName,
     condition: () => !validateLastname(),
-    message: ""
+    message: ''
   },
   {
     formfield: inputEmail,
     condition: () => !validateEmail(),
-    message: "Veuillez entrer une adresse e-mail valide."
+    message: 'Veuillez entrer une adresse e-mail valide.'
   },
   {
     formfield: inputText,
     condition: () => !validateText(),
-    message: "Veuillez entrer une adresse e-mail valide."
+    message: 'Veuillez entrer une adresse e-mail valide.'
   }
 ];
 
 // État de soumission du formulaire
 let alreadyValidate = false;
 // Événements de fermeture de la modale
-CloseCrossBtn.addEventListener("click", closeForm);
+CloseCrossBtn.addEventListener('click', closeForm);
 if (CloseModalBtn) {
-  CloseModalBtn.addEventListener("click", closeForm);
+  CloseModalBtn.addEventListener('click', closeForm);
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" || e.key === 27) {
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.key === 27) {
     closeForm();
   }
 
-  if (e.key === "Enter" || e.key === 13) {
+  if (e.key === 'Enter' || e.key === 13) {
     confirmValidation();
   }
 });
-document.addEventListener("click", (e) => {
+document.addEventListener('click', (e) => {
   if (e.target === modal) closeForm();
 });
 
 // Événements de validation du formulaire
-document.forms.reserve.addEventListener("submit", confirmValidation);
-document.forms.reserve.addEventListener("submit", (e) => {
+document.forms.reserve.addEventListener('submit', confirmValidation);
+document.forms.reserve.addEventListener('submit', (e) => {
   e.preventDefault();
   validate();
 });
@@ -80,36 +80,36 @@ document.forms.reserve.addEventListener("submit", (e) => {
  * Affiche la modale.
  */
 function displayModal() {
-  BGmodal.setAttribute("aria-hidden", "false");
-  Body.setAttribute("aria-hidden", "true");
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" || e.key === 27) {
+  BGmodal.setAttribute('aria-hidden', 'false');
+  Body.setAttribute('aria-hidden', 'true');
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 27) {
       closeForm();
     }
 
-    if (e.key === "Enter" || e.key === 13) {
+    if (e.key === 'Enter' || e.key === 13) {
       confirmValidation();
     }
   });
-  document.addEventListener("click", (e) => {
+  document.addEventListener('click', (e) => {
     if (e.target === modal) closeForm();
   });
 
   // Événements de validation du formulaire
-  document.forms.reserve.addEventListener("submit", confirmValidation);
-  document.forms.reserve.addEventListener("submit", (e) => {
+  document.forms.reserve.addEventListener('submit', confirmValidation);
+  document.forms.reserve.addEventListener('submit', (e) => {
     e.preventDefault();
     validate();
   });
 
   if (alreadyValidate) {
-    BGmodal.classList.add("visible");
+    BGmodal.classList.add('visible');
   } else {
-    BGmodal.classList.remove("hidden");
-    BGmodal.setAttribute("aria-hidden", "false");
-    Body.setAttribute("aria-hidden", "true");
+    BGmodal.classList.remove('hidden');
+    BGmodal.setAttribute('aria-hidden', 'false');
+    Body.setAttribute('aria-hidden', 'true');
     CloseCrossBtn.focus();
-    BGmodal.classList.add("visible");
+    BGmodal.classList.add('visible');
   }
 }
 
@@ -118,21 +118,21 @@ function displayModal() {
  */
 function closeForm() {
   setTimeout(() => {
-    BGmodal.classList.remove("visible");
-    BGmodal.classList.add("hidden");
-    document.removeEventListener("keydown", (e) => {
-      if (e.key === "Escape" || e.key === 27) {
+    BGmodal.classList.remove('visible');
+    BGmodal.classList.add('hidden');
+    document.removeEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 27) {
         closeForm();
       }
     });
 
-    document.removeEventListener("click", (e) => {
+    document.removeEventListener('click', (e) => {
       if (e.target === modal) closeForm();
     });
 
     // Événements de validation du formulaire
-    document.forms.reserve.removeEventListener("submit", confirmValidation);
-    document.forms.reserve.removeEventListener("submit", (e) => {
+    document.forms.reserve.removeEventListener('submit', confirmValidation);
+    document.forms.reserve.removeEventListener('submit', (e) => {
       e.preventDefault();
       validate();
     });
@@ -145,21 +145,21 @@ function closeForm() {
 function confirmValidation() {
   // const valide = true; pour tester le formulaire valide
   if (validate()) {
-    console.log("Formulaire valide");
-    console.log("firstName", inputFirstName.value);
-    console.log("lastName", inputLastName.value);
-    console.log("Email", inputEmail.value);
-    console.log("message", inputText.value);
-    modalTitle.classList.add("hidden");
-    modalTitle.classList.remove("visible");
-    form.classList.add("hidden");
-    form.classList.remove("visible");
-    modalTitleValidation.classList.remove("hidden");
-    modalTitleValidation.classList.add("visible");
-    CloseModalBtn.classList.remove("hidden");
-    CloseModalBtn.classList.add("visible");
-    ValidateModal.classList.remove("hidden");
-    ValidateModal.classList.add("visible");
+    console.log('Formulaire valide');
+    console.log('firstName', inputFirstName.value);
+    console.log('lastName', inputLastName.value);
+    console.log('Email', inputEmail.value);
+    console.log('message', inputText.value);
+    modalTitle.classList.add('hidden');
+    modalTitle.classList.remove('visible');
+    form.classList.add('hidden');
+    form.classList.remove('visible');
+    modalTitleValidation.classList.remove('hidden');
+    modalTitleValidation.classList.add('visible');
+    CloseModalBtn.classList.remove('hidden');
+    CloseModalBtn.classList.add('visible');
+    ValidateModal.classList.remove('hidden');
+    ValidateModal.classList.add('visible');
     CloseModalBtn.focus();
 
     alreadyValidate = true;
@@ -173,12 +173,12 @@ function confirmValidation() {
 function validateFirstName() {
   if (inputFirstName.value.trim().length < 2) {
     formfieldsObjects[0].message =
-      "Veuillez entrer 2 lettres ou plus pour le prénom.";
+      'Veuillez entrer 2 lettres ou plus pour le prénom.';
     return false;
   }
   if (!regexpFirstName.test(inputFirstName.value.trim())) {
     formfieldsObjects[0].message =
-      "Veuillez entrer uniquement des lettres pour le prénom.";
+      'Veuillez entrer uniquement des lettres pour le prénom.';
     return false;
   }
   return true;
@@ -191,15 +191,15 @@ function validateFirstName() {
 function validateLastname() {
   if (
     inputLastName.value.trim().length < 2 ||
-    inputLastName.value.trim() === ""
+    inputLastName.value.trim() === ''
   ) {
     formfieldsObjects[1].message =
-      "Veuillez entrer au minimum 2 lettres ou plus pour le nom.";
+      'Veuillez entrer au minimum 2 lettres ou plus pour le nom.';
     return false;
   }
   if (!regexpLastName.test(inputLastName.value.trim())) {
     formfieldsObjects[1].message =
-      "Veuillez entrer uniquement des lettres pour le nom.";
+      'Veuillez entrer uniquement des lettres pour le nom.';
     return false;
   }
   return true;
@@ -211,7 +211,7 @@ function validateLastname() {
  */
 function validateEmail() {
   if (!regexpEmail.test(inputEmail.value.trim())) {
-    formfieldsObjects[2].message = "Veuillez entrer une adresse mail valide.";
+    formfieldsObjects[2].message = 'Veuillez entrer une adresse mail valide.';
     return false;
   }
   return true;
@@ -223,7 +223,7 @@ function validateEmail() {
  */
 function validateText() {
   if (inputText.value.trim().length < 10) {
-    formfieldsObjects[3].message = "Veuillez entrer au minimum 50 caractères.";
+    formfieldsObjects[3].message = 'Veuillez entrer au minimum 50 caractères.';
     return false;
   }
   return true;
@@ -241,25 +241,25 @@ function validate() {
     const { message } = formfieldsObjects[i];
     if (condition) {
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        "data-error",
+        'data-error',
         message
       );
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        "data-error-visible",
-        "true"
+        'data-error-visible',
+        'true'
       );
-      formfieldsObjects[i].formfield.parentElement.classList.add("error");
+      formfieldsObjects[i].formfield.parentElement.classList.add('error');
       formfieldsObjects[i].formfield.focus();
       formIsTrue = false;
     } else {
       formfieldsObjects[i].formfield.parentElement.removeAttribute(
-        "data-error"
+        'data-error'
       );
       formfieldsObjects[i].formfield.parentElement.setAttribute(
-        "data-error-visible",
-        "false"
+        'data-error-visible',
+        'false'
       );
-      formfieldsObjects[i].formfield.parentElement.classList.remove("error");
+      formfieldsObjects[i].formfield.parentElement.classList.remove('error');
     }
   }
   return formIsTrue;
