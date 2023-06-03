@@ -104,7 +104,7 @@ function photographerFactory(data) {
     artisteName.classList.add('artisteName');
     artisteName.setAttribute('aria-label', `${name}`);
     artisteName.setAttribute('tabindex', '0');
-    artisteName.id = 'photographerName';
+    artisteName.id = 'photographName';
 
     // Création de la ville de l'artiste
     const cityLocation = document.createElement('address');
@@ -121,7 +121,7 @@ function photographerFactory(data) {
     citation.setAttribute('tabindex', '0');
 
     // Création du nom dans la modale
-    const Pname = document.getElementById('photographName');
+    const Pname = document.getElementById('photographerName');
     Pname.textContent = name;
 
     // Création du prix de l'artiste
@@ -141,7 +141,7 @@ function photographerFactory(data) {
     photo.classList.add('portrait');
     photo.setAttribute('src', picture);
     photo.setAttribute('alt', name);
-    photo.setAttribute('ariaLabelledby', 'photographerName');
+    photo.setAttribute('ariaLabelledby', 'photographName');
 
     // Récupération du bouton Contact
     const contactButton = document.createElement('button');
