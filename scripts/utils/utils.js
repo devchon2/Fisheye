@@ -50,7 +50,7 @@ function sortbyPops(mediaToSort) {
   document.getElementById('titre').setAttribute('aria-selected', 'false');
   document
     .querySelector('.filterField_select')
-    .setAttribute('aria-active-descendant', 'pop');
+    .setAttribute('aria-activedescendant', 'pop');
 
   return medias;
 }

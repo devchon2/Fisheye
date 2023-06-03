@@ -121,7 +121,7 @@ function photographerFactory(data) {
     citation.setAttribute('tabindex', '0');
 
     // Création du nom dans la modale
-    const Pname = document.getElementById('photographerName');
+    const Pname = document.getElementById('photographName');
     Pname.textContent = name;
 
     // Création du prix de l'artiste
