@@ -80,6 +80,7 @@ class Image extends Media {
     // Création du lien du container
     const mediaLink = document.createElement('a');
     mediaLink.classList.add('media-link');
+    mediaLink.id = this.id;
     mediaLink.setAttribute('aria-label', `${this.title}, ClosedUp View`);
     mediaLink.setAttribute('tabindex', '0');
     mediaLink.setAttribute('role', 'button');
@@ -94,7 +95,7 @@ class Image extends Media {
     const img = document.createElement('img');
     img.classList.add('media');
     img.setAttribute('src', path);
-    img.setAttribute('alt', '');
+    img.setAttribute('aria-labelledby', `${this.id}`);
 
     // Création des infos du media
     const MediasInfos = document.createElement('div');

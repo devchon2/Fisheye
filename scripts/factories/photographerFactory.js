@@ -103,7 +103,6 @@ function photographerFactory(data) {
     artisteName.textContent = name;
     artisteName.classList.add('artisteName');
     artisteName.setAttribute('aria-label', `${name}`);
-    artisteName.setAttribute('tabindex', '0');
     artisteName.id = 'photographName';
 
     // Création de la ville de l'artiste
@@ -111,14 +110,12 @@ function photographerFactory(data) {
     cityLocation.textContent = `${city}, ${country}`;
     cityLocation.classList.add('artisteLocation');
     cityLocation.setAttribute('aria-label', `${city}, ${country}`);
-    cityLocation.setAttribute('tabindex', '0');
 
     // Création de la citation de l'artiste
     const citation = document.createElement('blockquote');
     citation.textContent = tagline;
     citation.classList.add('artistePunchline');
     citation.setAttribute('aria-label', `${tagline}`);
-    citation.setAttribute('tabindex', '0');
 
     // Création du nom dans la modale
     const Pname = document.getElementById('photographerName');
