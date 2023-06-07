@@ -122,6 +122,7 @@
   align-items: center;
   margin: 0;
   padding: 20px;
+  width:fit-content
 }
 
 .filterField_select {
@@ -156,6 +157,7 @@
 }
 
 .filterField_select-list {
+  display:unset;
   flex-direction: column;
   position: absolute;
   z-index: 1;
