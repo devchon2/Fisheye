@@ -157,7 +157,6 @@
 }
 
 .filterField_select-list {
-  display:unset;
   flex-direction: column;
   position: absolute;
   z-index: 1;

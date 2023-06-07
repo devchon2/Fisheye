@@ -78,15 +78,17 @@ function displayData(photograph, medias) {
   });
 
   // Fermer la liste déroulante lorsque l'utilisateur clique en dehors du bouton et de la liste
-  selectButton.addEventListener('click', (event) => {
-    const isClickInside = selectButton.contains(event.target);
-    if (!isClickInside) {
-      selectButton.setAttribute('aria-expanded', 'false');
-      selectList.classList.add('hidden');
-      selectList.classList.remove('visible');
-      selectButton.focus();
-    }
-  });
+  document.addEventListener('click', (event) => {
+    if (
+      event.target !== selectButton &&
+      event.target !== selectList &&
+      event.target !== sortLabel
+      ) {
+        selectList.classList.add('hidden');
+        selectList.classList.remove('visible');
+        selectButton.setAttribute('aria-expanded', 'false');
+      }
+    });
 
   selectItems.forEach((item) => {
     item.setAttribute('tabindex', '0');
