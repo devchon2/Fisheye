@@ -81,8 +81,8 @@ class LightBox {
       'src',
       `./assets/images/${this.photographer}/${mediaSrc}`
     );
-    mediaElement.setAttribute('aria-labelledby', 'LightboxInTitle');
-
+    mediaElement.setAttribute('alt', mediaTitle);
+      this.lightboxMediaContainer.setAttribute('aria-labelledby', mediaTitle);
     this.lightboxMediaContainer.appendChild(mediaElement);
     this.lightboxMediaContainer.appendChild(titleBlock);
 
