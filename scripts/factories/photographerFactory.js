@@ -143,7 +143,10 @@ function photographerFactory(data) {
     const contactButton = document.createElement('button');
     contactButton.classList.add('contact_button');
     contactButton.textContent = 'Contactez-moi';
-    contactButton.setAttribute('aria-label', 'Contact me');
+    contactButton.setAttribute('aria-label', 'Contactez moi');
+    contactButton.setAttribute('aria-haspopup', 'dialog');
+    contactButton.setAttribute('aria-expanded', 'false');
+    
     UserInfosContainer.appendChild(UserInfosText);
     UserInfosContainer.appendChild(portraitContainer);
     UserInfosContainer.appendChild(contactButton);

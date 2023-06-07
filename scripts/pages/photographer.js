@@ -104,6 +104,7 @@ function displayData(photograph, medias) {
       selectList.classList.add('hidden');
       selectList.classList.remove('visible');
       selectButton.setAttribute('aria-expanded', 'false');
+      selectButton.setAttribute('aria-haspopup', 'true')
 
       // Vide le container des médias et le slider de la lightbox
       MediasContainer.innerHTML = '';
@@ -112,6 +113,16 @@ function displayData(photograph, medias) {
       selectButton.focus();
       console.log(selectList.classList);
     });
+
+item.addEventListener('mouseover', () => {
+  item.focus();
+  const hoveredID = item.id;
+  const hoveredOption = item.textContent;
+  const sortedMedias = sortMedia(hoveredID, Usermedias);
+  sortLabel.textContent = hoveredOption;
+  MediasContainer.innerHTML = '';
+  displayData(photographer, sortedMedias);
+});
 
     item.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
@@ -135,7 +146,6 @@ function displayData(photograph, medias) {
       } else if (event.key === 'Escape') {
         selectList.classList.add('hidden');
         selectList.classList.remove('visible');
-        selectButton.setAttribute('aria-expanded', 'false');
         selectButton.focus();
       }else if (event.key === 'ArrowDown') {
         event.preventDefault();
@@ -182,6 +192,9 @@ function displayData(photograph, medias) {
       '.photographContainer .contact_button'
     );
     contactbtn.addEventListener('click', displayModal); // Affiche le formulaire de contact lors du click du bouton
+    if(displayModal){
+      contactbtn.setAttribute('aria-expanded', 'true');
+    };
     Resume.appendChild(TotalLikes);
   }
 

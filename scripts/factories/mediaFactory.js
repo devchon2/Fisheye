@@ -81,7 +81,7 @@ class Image extends Media {
     const mediaLink = document.createElement('a');
     mediaLink.classList.add('media-link');
     mediaLink.id = this.id;
-    mediaLink.setAttribute('aria-label', `${this.title}, ClosedUp View`);
+    mediaLink.setAttribute('aria-label', `${this.title}, Vue rapprochée`);
     mediaLink.setAttribute('tabindex', '0');
     mediaLink.setAttribute('role', 'button');
     mediaLink.setAttribute('type', 'image/jpg');
@@ -111,12 +111,12 @@ class Image extends Media {
     const mediaLikes = document.createElement('p');
     mediaLikes.classList.add('media-likes');
     mediaLikes.textContent = `${this.likes} `;
-    mediaLikes.setAttribute('role', 'button');
+    mediaLikes.setAttribute('aria-label', `${this.likes} likes`);
 
     const mediaLikesIcon = document.createElement('i');
     mediaLikesIcon.classList.add('far', 'fa-heart');
     mediaLikes.appendChild(mediaLikesIcon);
-    mediaLikes.setAttribute('aria-label', 'likes');
+    
 
     mediaLikes.addEventListener('click', (e) => {
       e.stopPropagation(); // Ajoutez cette ligne pour empêcher la propagation de l'événement
@@ -128,7 +128,7 @@ class Image extends Media {
         mediaLikes.textContent = `${newLikes} `;
         const totalLikes = document.querySelector('.TotalLikes');
         totalLikes.innerHTML = `${Number(totalLikes.textContent) + 1
-          } <i aria-label='likes' class='fas fa-heart' aria-hidden='true'></i>`;
+          } <i aria-label=' ${totalLikes.textContent} likes' class='fas fa-heart' aria-hidden='true'></i>`;
         mediaLikes.appendChild(mediaLikesIcon);
       } else {
         const newLikes = this.decreaseLikes();
@@ -139,7 +139,7 @@ class Image extends Media {
         mediaLikes.textContent = `${newLikes} `;
         const totalLikes = document.querySelector('.TotalLikes');
         totalLikes.innerHTML = `${Number(totalLikes.textContent) - 1
-          } <i aria-label='likes' class='fas fa-heart' aria-hidden='true'></i>`;
+          } <i aria-label='${totalLikes.textcontent} likes' class='fas fa-heart' aria-hidden='true'></i>`;
         mediaLikes.appendChild(mediaLikesIcon);
       }
     });
@@ -225,7 +225,7 @@ class Video extends Media {
     // Création du lien du container
     const mediaLink = document.createElement('a');
     mediaLink.classList.add('media-link');
-    mediaLink.setAttribute('aria-label', `${this.title}, ClosedUp View`);
+    mediaLink.setAttribute('aria-label', `${this.title}, Vue rapprochée`);
     mediaLink.setAttribute('tabindex', '0');
     mediaLink.setAttribute('role', 'button');
     mediaLink.id = this.id;
@@ -254,9 +254,9 @@ class Video extends Media {
     // Création du nombre de likes du media
     const mediaLikes = document.createElement('p');
     mediaLikes.classList.add('media-likes');
-    mediaLikes.textContent = `${this.likes} `;
-    mediaLikes.setAttribute('aria-label','likes');
-    mediaLikes.setAttribute('role','button');
+    mediaLikes.innerHTML = `${this.likes} `;
+    mediaLikes.setAttribute('aria-label',`${this.likes} likes`);
+    mediaLikes.setAttribute('aria-atomic','true');
     const mediaLikesIcon = document.createElement('i');
     mediaLikesIcon.classList.add('far', 'fa-heart');
     mediaLikes.appendChild(mediaLikesIcon);
@@ -267,16 +267,17 @@ class Video extends Media {
         mediaLikes.classList.add('liked');
         mediaLikesIcon.classList.remove('far');
         mediaLikesIcon.classList.add('fas');
-        mediaLikes.textContent = `${newLikes} `;
+        mediaLikes.innerHTML = `${newLikes} `;
         const totalLikes = document.querySelector('.TotalLikes');
         totalLikes.innerHTML = `${Number(totalLikes.textContent) + 1
-          } <i aria-label='likes' class='fas fa-heart' aria-hidden='true'></i>`;
+          } <i aria-label='${totalLikes.textcontent} likes' class='fas fa-heart'></i>`;
         mediaLikes.appendChild(mediaLikesIcon);
       } else {
         const newLikes = this.decreaseLikes();
         mediaLikes.classList.remove('liked');
         mediaLikesIcon.classList.remove('fas');
         mediaLikesIcon.classList.add('far');
+        mediaLikesIcon.setAttribute('aria-hidden', 'false');
         mediaLikes.textContent = `${newLikes} `;
         const totalLikes = document.querySelector('.TotalLikes');
         totalLikes.innerHTML = `${Number(totalLikes.textContent) - 1

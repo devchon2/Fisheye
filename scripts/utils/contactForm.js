@@ -13,6 +13,7 @@ const form = document.querySelector('form.reserve');
 const modalTitle = document.getElementById('modalTitle');
 const modalTitleValidation = document.getElementById('modalTitle_Validate');
 
+
 // Récupération des valeurs des éléments du formulaire
 const inputFirstName = document.forms.reserve.first;
 const inputLastName = document.forms.reserve.last;
@@ -80,8 +81,14 @@ document.forms.reserve.addEventListener('submit', (e) => {
  * Affiche la modale.
  */
 function displayModal() {
-  BGmodal.setAttribute('aria-hidden', 'false');
+  const contactbtn = document.querySelector(
+    '.photographContainer .contact_button'
+  );
+  if (contactbtn){
+  contactbtn.setAttribute('aria-expanded', 'true');}
+    BGmodal.setAttribute('aria-hidden', 'false');
   Body.setAttribute('aria-hidden', 'true');
+  
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' || e.key === 27) {
       closeForm();
@@ -137,6 +144,11 @@ function closeForm() {
       validate();
     });
   }, 100);
+  const contactbtn = document.querySelector(
+    '.photographContainer .contact_button'
+  );
+  if (contactbtn){
+  contactbtn.setAttribute('aria-expanded', 'false');}
 }
 
 /**
