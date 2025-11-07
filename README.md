@@ -133,7 +133,7 @@ npm start # si défini
 MIT (ajouter `LICENSE` si absent).
 
 ## 📫 Contact
-Rachid Chon — `cgpt1euro@rchon-dev.fr`
+Rachid Chon — `rchon@rchon-dev.fr`
 
 ---
 
@@ -194,6 +194,7 @@ npx http-server -c-1 .
 MIT.
 
 ## 📫 Contact
-Rachid Chon — `cgpt1euro@rchon-dev.fr`
+Rachid Chon — `rchon@rchon-dev.fr`
 
 </details>
+
